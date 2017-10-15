@@ -1,0 +1,48 @@
+language: bash
+sudo: required
+cache:
+  directories:
+  - "$HOME/.m2/repository"
+  - "$HOME/.sonar/cache"
+
+before_install:
+#ignore gitflow commits except version tag
+- |
+  if [[ "${TRAVIS_COMMIT_MESSAGE}" == "[gitflow]"* ]] && [[ "${TRAVIS_BRANCH}" != v[0-9]* ]]; then
+    travis_terminate 0
+  fi
+
+before_script:
+- cp .travis.settings.xml $HOME/.m2/settings.xml
+script:
+- |
+  if [[ "${TRAVIS_BRANCH}" == release-* ]]; then
+    QUALIFIER=-frozen-${TRAVIS_BUILD_NUMBER}
+  elif [[ "${TRAVIS_BRANCH}" == "development" ]]; then
+    QUALIFIER=-dev-${TRAVIS_BUILD_NUMBER}
+  elif [[ "${TRAVIS_BRANCH}" == v[0-9]* ]]; then
+    QUALIFIER=""
+  else
+    QUALIFIER=-${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}
+  fi && ./.travis.scripts/mvn.sh build-helper:parse-version versions:set -DgenerateBackupPoms=false -DnewVersion='${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}'${QUALIFIER}
+- "./.travis.scripts/mvn.sh -Dmaven.site.skip=true clean verify -B -e -V"
+after_success:
+- |
+  if [[ "${TRAVIS_BRANCH}" == v[0-9]* ]] || [[ "${TRAVIS_BRANCH}" == release-* ]] || [[ "${TRAVIS_BRANCH}" == "development" ]]; then
+    ./.travis.scripts/mvn.sh sonar:sonar
+  fi
+- |
+  if [[ "${TRAVIS_BRANCH}" == v[0-9]* ]]; then
+    ./.travis.scripts/mvn.sh -P github-site site  fi
+deploy:
+  provider: script
+  script: "./.travis.scripts/mvn.sh -Dmaven.site.skip=true -P stage-devel-nexus deploy"
+  script: "./.travis.scripts/mvn.sh -Dmaven.site.skip=true -P stage-devel-bintray deploy"
+  skip_cleanup: true
+  on:
+    all_branches: true
+branches:
+  except: # web site and version tag
+  - gh-pages
+  - master
+#  - /^v[0-9]/

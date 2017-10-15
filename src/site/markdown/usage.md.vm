@@ -1,0 +1,15 @@
+# Java Test
+
+Usage
+-----
+
+GroupID : ${project.groupId}
+
+ArtifactId : ${project.artifactId}
+                
+Project Version : ${project.version}
+
+mvn package
+mvn exec:java
+mvn site
+mvn site -P github-site

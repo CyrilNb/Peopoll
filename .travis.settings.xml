@@ -1,0 +1,61 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+			      https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>bintray-dptinfoutln-public</id>
+            <username>brunoe</username>
+            <password>${env.BINTRAY_API_KEY}</password>
+        </server>
+
+        <server>
+            <id>lsis-nexus</id>
+            <!-- ATTENTION UTILISER L'EMAIL UTLN -->
+            <username>${env.UTLN_EMAIL}</username>
+            <password>${env.UTLN_PASSWORD}</password>
+        </server>
+
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>https://sonar.lsis.univ-tln.fr</sonar.host.url>
+                <!-- generate a token in https://sonar.lsis.univ-tln.fr/account/security -->
+                <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+            </properties>
+        </profile>
+        <profile>
+            <id>bintray</id>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-dptinfoutln-public</id>
+                    <name>bintray</name>
+                    <url>https://dl.bintray.com/dptinfoutln/public</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-dptinfoutln-public</id>
+                    <name>bintray-plugins</name>
+                    <url>https://dl.bintray.com/dptinfoutln/public</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>bintray</activeProfile>
+    </activeProfiles>
+
+</settings>

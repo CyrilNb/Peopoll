@@ -1,0 +1,10 @@
+# Java Test
+
+Utilisation
+    -----
+
+GroupID : ${project.groupId}
+
+ArtifactId : ${project.artifactId}
+                
+Project Version : ${project.version}

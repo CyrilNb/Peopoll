@@ -1,0 +1,23 @@
+# A java hello world for C.I 
+<Description>
+
+
+
+
+
+
+
+
+
+
+
+Describe and show how to run the tests with code examples.
+
+
+Let people know how they can dive into the project,
+include important links to things like issue trackers, irc, twitter accounts if applicable.
+
+
+A short snippet describing the license (MIT, Apache, etc.)
+
+A simple java program to test continuous integration with maven, docker, github, jenkins and nexus.

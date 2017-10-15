@@ -1,0 +1,68 @@
+<project>
+    <!-- skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.6</version>
+    </skin -->
+    <custom>
+        <fluidoSkin>
+            <topBarEnabled>true</topBarEnabled>
+            <!--topBarIcon>
+                <name>Maven Fluido Skin</name>
+                <alt>Maven Fluido Skin</alt>
+                <src>/images/topbar-logo.png</src>
+                <href>/index.html</href>
+            </topBarIcon-->
+            <topBarContainerStyle>width: 90%;</topBarContainerStyle>
+            <navBarStyle>navbar-inverse</navBarStyle>
+            <sideBarEnabled>false</sideBarEnabled>
+            <!--googleSearch>
+                <sitesearch>${project.url}</sitesearch>
+            </googleSearch-->
+
+            <gitHub>
+                <projectId>emmanuelbruno/helloworld</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>gray</ribbonColor>
+            </gitHub>
+
+            <!--profile>(pre-release|sandbox|retired)</profile-->
+            <!--profile>pre-release</profile-->
+        </fluidoSkin>
+    </custom>
+
+    <body>
+        <menu name="Overview">
+            <item name="Readme" href="readme.html"/>
+            <item name="Usage" href="usage.html"/>
+            <item name="Team" href="team-list.html"/>
+            <item name="Summary" href="project-summary.html"/>
+            <item name="Structure" href="index.html"/>
+        </menu>
+
+        <menu name="Documentation">
+            <item name="Sources" href="source-repository.html"/>
+            <item name="Javadoc" href="apidocs/index.html"/>
+            <item name="Testdoc" href="testapidocs/index.html"/>
+        </menu>
+
+        <menu name="Documentation">
+            <item name="Dependencies" href="dependency-info.html"/>
+            <item name="Convergence" href="dependency-convergence.html"/>
+            <item name="Plugins" href="plugins.html"/>
+            <!--item name="Plu" href="plugin-management.html"/-->
+        </menu>
+
+        <menu name="Activity">
+            <item name="Changelog" href="changelog.html"/>
+            <item name="Files" href="file-activity.html"/>
+            <item name="Developpers" href="dev-activity.html"/>
+            <item name="C.I." href="integration.html"/>
+            <item name="Issues" href="issue-tracking.html"/>
+        </menu>
+
+        <!-- menu ref="parent" /-->
+        <!-- menu ref="modules" /-->
+        <!-- menu ref="reports"/ -->
+    </body>
+</project>
