@@ -42,7 +42,7 @@
     </parent>
 
     <!-- ADAPTER les coordonnées -->
-    <groupId>fr.univtln.cniobe283</groupId>
+    <groupId>fr.univtln.cniobechoudayer</groupId>
     <artifactId>Peopoll</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -59,21 +59,32 @@
         <url>http://www.univ-tln.fr</url>
     </organization>
 
-    <!--developers>
+    <developers>
         <developer>
-            <id>emmanuelbruno</id>
-            <name>Emmanuel Bruno</name>
-            <email>bruno@univ-tln.fr</email>
-            <url>http://bruno.univ-tln.fr</url>
+            <id>cyrilniobe</id>
+            <name>Cyril Niobé</name>
+            <email>cyril-niobe@etud.univ-tln.fr</email>
+            <url>http://cyrilniobe.ovh</url>
             <organization>Université de Toulon</organization>
             <organizationUrl>http://www.univ-tln.fr</organizationUrl>
             <roles>
-                <role>architect</role>
-                <role>developer</role>
+                <role>student</role>
             </roles>
             <timezone>Europe/Paris</timezone>
         </developer>
-    </developers-->
+        <developer>
+            <id>corentinhoudayer</id>
+            <name>Corentin Houdayer</name>
+            <email>corentin-houdayer@etud.univ-tln.fr</email>
+            <url></url>
+            <organization>Université de Toulon</organization>
+            <organizationUrl>http://www.univ-tln.fr</organizationUrl>
+            <roles>
+                <role>student</role>
+            </roles>
+            <timezone>Europe/Paris</timezone>
+        </developer>
+    </developers>
     <!-- ADAPTER les métadonnées -->
 
     <build>
