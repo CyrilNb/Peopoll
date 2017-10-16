@@ -1,4 +1,4 @@
-package fr.univtln.cniobe283;
+package fr.univtln.cniobechoudayer;
 
 import org.apache.log4j.PatternLayout;
 import org.slf4j.Logger;
