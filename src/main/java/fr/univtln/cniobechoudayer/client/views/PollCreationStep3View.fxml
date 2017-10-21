@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.Step3Controller">
    <children>
       <VBox prefHeight="400.0" prefWidth="640.0">
          <children>
@@ -108,16 +108,16 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="591.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="nextStepArrow" fitHeight="36.0" fitWidth="35.0" layoutX="591.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Assets/png/checked.png" />
+                        <Image url="@../../../../../../../../resources/checked.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Assets/png/003-home.png" />
+                              <Image url="@../../../../../../../../resources/003-home.png" />
                            </image>
                         </ImageView>
                         <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 3/3" wrappingWidth="150.13671875">
@@ -127,9 +127,9 @@
                         </Text>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="14.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="previousStepArrow" fitHeight="36.0" fitWidth="35.0" layoutX="14.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Assets/png/001-left-arrow.png" />
+                        <Image url="@../../../../../../../../resources/001-left-arrow.png" />
                      </image>
                   </ImageView>
                </children>

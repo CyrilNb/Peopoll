@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.Step2Controller">
    <children>
       <VBox prefHeight="400.0" prefWidth="640.0">
          <children>
@@ -73,12 +73,12 @@
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <JFXTextField layoutX="134.0" layoutY="14.0" prefHeight="55.0" prefWidth="355.0" promptText="placeholder" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="nameCreatorTextField" layoutX="134.0" layoutY="14.0" prefHeight="55.0" prefWidth="355.0" promptText="placeholder" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField layoutX="134.0" layoutY="222.0" prefHeight="55.0" prefWidth="355.0" promptText="placeholder" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="mailCreatorTextField" layoutX="134.0" layoutY="222.0" prefHeight="55.0" prefWidth="355.0" promptText="placeholder" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -96,14 +96,14 @@
                   </Pane>
                   <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="591.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Assets/png/002-right-arrow.png" />
+                        <Image url="@../../../../../../../../resources/002-right-arrow.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Assets/png/003-home.png" />
+                              <Image url="@../../../../../../../../resources/003-home.png" />
                            </image>
                         </ImageView>
                         <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2/3" wrappingWidth="150.13671875">
@@ -113,9 +113,9 @@
                         </Text>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="14.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="previousStepArrow" fitHeight="36.0" fitWidth="35.0" layoutX="14.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Assets/png/001-left-arrow.png" />
+                        <Image url="@../../../../../../../../resources/001-left-arrow.png" />
                      </image>
                   </ImageView>
                </children>
