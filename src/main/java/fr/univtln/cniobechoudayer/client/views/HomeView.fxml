@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.CardPane?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
@@ -9,13 +8,14 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -60,19 +60,7 @@
          <children>
             <Pane layoutX="31.0" layoutY="71.0" prefHeight="297.0" prefWidth="578.0" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <CardPane id="pollCreateActionPoll" layoutX="204.0" layoutY="118.0" prefHeight="148.0" prefWidth="170.0">
-                      <Label id="titlePollCreateAction" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="170.0" style="-fx-padding:10;" text="CREATE A POLL">
-                        <font>
-                           <Font name="Ubuntu Regular" size="18.0" />
-                        </font>
-                     </Label>
-                     <JFXButton id="buttonPollCreateAction" alignment="CENTER" contentDisplay="CENTER" prefHeight="81.0" prefWidth="156.0" text="+">
-                        <font>
-                           <Font name="System Bold" size="38.0" />
-                        </font>
-                     </JFXButton>
-                  </CardPane>
-                  <JFXTextField id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" prefHeight="65.0" prefWidth="451.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #555555; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
+                  <JFXTextField id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" prefHeight="65.0" prefWidth="451.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #555555; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" text="CREATE A POLL" unFocusColor="#ffffff00">
                      <font>
                         <Font name="Ubuntu Regular" size="25.0" />
                      </font>
@@ -85,6 +73,28 @@
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </JFXButton>
+                  <SplitPane dividerPositions="0.5" layoutX="209.0" layoutY="126.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="177.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                               <Label id="titlePollCreateAction" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="175.0" style="-fx-padding:10;" text="CREATE A POLL" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Ubuntu Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <JFXButton id="buttonPollCreateAction" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="175.0" text="+" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="38.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
                </children>
             </Pane>
             <Pane prefHeight="65.0" prefWidth="640.0" style="-fx-background-color: #555555;">
