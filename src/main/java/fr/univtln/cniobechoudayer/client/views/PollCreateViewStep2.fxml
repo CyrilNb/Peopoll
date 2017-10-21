@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="640.0">
+         <children>
+            <MenuBar VBox.vgrow="NEVER">
+               <menus>
+                  <Menu mnemonicParsing="false" text="File">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem mnemonicParsing="false" text="Open…" />
+                        <Menu mnemonicParsing="false" text="Open Recent" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Save As…" />
+                        <MenuItem mnemonicParsing="false" text="Revert" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Preferences…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Quit" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Edit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" />
+                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Cut" />
+                        <MenuItem mnemonicParsing="false" text="Copy" />
+                        <MenuItem mnemonicParsing="false" text="Paste" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Select All" />
+                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
+                     <children>
+                        <Label layoutX="52.0" layoutY="14.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Name" textFill="WHITE">
+                           <font>
+                              <Font name="Ubuntu Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="52.0" layoutY="222.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Mail" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Ubuntu Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField layoutX="134.0" layoutY="14.0" prefHeight="55.0" prefWidth="355.0" promptText="placeholder" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                           <font>
+                              <Font name="Ubuntu Regular" size="24.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField layoutX="134.0" layoutY="222.0" prefHeight="55.0" prefWidth="355.0" promptText="placeholder" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                           <font>
+                              <Font name="Ubuntu Regular" size="24.0" />
+                           </font>
+                        </JFXTextField>
+                        <TextFlow layoutX="53.0" layoutY="101.0" prefHeight="89.0" prefWidth="434.0">
+                           <children>
+                              <TextArea editable="false" prefHeight="91.0" prefWidth="435.0" text="PLEASE TAKE CARE TO PUT A VALID EMAIL &#10;IN ORDER TO RECEIVE YOUR POLL &#10;SHARING AND MANAGEMENT CODES">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="18.0" />
+                                 </font>
+                              </TextArea>
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="591.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/png/002-right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Assets/png/003-home.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2/3" wrappingWidth="150.13671875">
+                           <font>
+                              <Font name="Ubuntu Regular" size="38.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="14.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/png/001-left-arrow.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</VBox>
