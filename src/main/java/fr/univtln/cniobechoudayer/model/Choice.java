@@ -10,39 +10,35 @@ public class Choice {
 
     /* private fields */
     private int idChoice;
+    private final int idPoll;
     private Date dateChoice;
-    private int heureDebut;
-    private int heureFin;
+    private int startingTime;
+    private int endingTime;
 
 
     /**
-     * Default constructor
-     */
-    public Choice(){
-        super();
-    }
-
-    /**
-     * Constructor
+     * Constructor with startingTime and endingTime
      * @param idChoice
      * @param dateChoice
-     * @param heureDebut
-     * @param heureFin
+     * @param startingTime
+     * @param endingTime
      */
-    public Choice(int idChoice, Date dateChoice, int heureDebut, int heureFin) {
+    public Choice(int idChoice,int idPoll, Date dateChoice, int startingTime, int endingTime) {
         this.idChoice = idChoice;
+        this.idPoll = idPoll;
         this.dateChoice = dateChoice;
-        this.heureDebut = heureDebut;
-        this.heureFin = heureFin;
+        this.startingTime = startingTime;
+        this.endingTime = endingTime;
     }
 
     /**
-     * Constructor
+     * Constructor with if no time limits are set
      * @param idChoice
      * @param dateChoice
      */
-    public Choice(int idChoice, Date dateChoice) {
+    public Choice(int idChoice,int idPoll, Date dateChoice) {
         this.idChoice = idChoice;
+        this.idPoll = idPoll;
         this.dateChoice = dateChoice;
     }
 
@@ -65,21 +61,21 @@ public class Choice {
     }
 
     /**
-     * Gets heureFin.
+     * Gets endingTime.
      *
-     * @return Value of heureFin.
+     * @return Value of endingTime.
      */
-    public int getHeureFin() {
-        return heureFin;
+    public int getEndingTime() {
+        return endingTime;
     }
 
     /**
-     * Gets heureDebut.
+     * Gets startingTime.
      *
-     * @return Value of heureDebut.
+     * @return Value of startingTime.
      */
-    public int getHeureDebut() {
-        return heureDebut;
+    public int getStartingTime() {
+        return startingTime;
     }
 
     /**
@@ -92,21 +88,30 @@ public class Choice {
     }
 
     /**
-     * Sets new heureFin.
+     * Sets new endingTime.
      *
-     * @param heureFin New value of heureFin.
+     * @param endingTime New value of endingTime.
      */
-    public void setHeureFin(int heureFin) {
-        this.heureFin = heureFin;
+    public void setEndingTime(int endingTime) {
+        this.endingTime = endingTime;
     }
 
     /**
-     * Sets new heureDebut.
+     * Sets new startingTime.
      *
-     * @param heureDebut New value of heureDebut.
+     * @param startingTime New value of startingTime.
      */
-    public void setHeureDebut(int heureDebut) {
-        this.heureDebut = heureDebut;
+    public void setStartingTime(int startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    /**
+     * Gets idPoll.
+     *
+     * @return Value of idPoll.
+     */
+    public int getIdPoll() {
+        return idPoll;
     }
 
     @Override
@@ -114,10 +119,12 @@ public class Choice {
         StringBuilder sb = new StringBuilder();
         sb.append("idChoice: ").append(this.idChoice)
                 .append(" dateChoice: ").append(this.dateChoice)
-                .append(" heureDebut: ").append(this.getHeureDebut())
-                .append(" heureFin: ").append(this.heureFin);
+                .append(" startingTime: ").append(this.startingTime)
+                .append(" endingTime: ").append(this.endingTime);
         return sb.toString();
     }
+
+
 }
 
 
