@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTimePicker;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 
 import javax.swing.text.html.ImageView;
 
