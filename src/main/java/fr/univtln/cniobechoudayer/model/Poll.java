@@ -1,65 +1,145 @@
 package fr.univtln.cniobechoudayer.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class which represents a Poll
  * Created by Cyril on 16/10/2017.
  */
 public class Poll {
+
     /**private fields**/
-    private int shareCode;
+    private int idPoll;
     private String managerCode;
     private String location;
     private String description;
     private String title;
-    private String managerMail;
+    private String mailCreator;
+    private String nameCreator;
     private boolean isLocked = false;
     private int nbMaxContributor;
     private Date finalDate;
 
-    /**
-     * Default constructor
-     */
-    public Poll() {
-    }
+    private List<Choice> choicesList;
+    private List<Comment> commentsList;
 
     /**
-     * Constructor
-     * @param shareCode
-     * @param managerCode
-     * @param location
-     * @param description
-     * @param title
-     * @param managerMail
-     * @param isLocked
-     * @param nbMaxContributor
-     * @param finalDate
+     * Constructor using PollBuilder to create a new instance
+     * @param pb pollbuilder
      */
-    public Poll(int shareCode, String managerCode, String location, String description, String title, String managerMail, boolean isLocked, int nbMaxContributor, Date finalDate) {
-        this.shareCode = shareCode;
-        this.managerCode = managerCode;
-        this.location = location;
-        this.description = description;
-        this.title = title;
-        this.managerMail = managerMail;
-        this.isLocked = isLocked;
-        this.nbMaxContributor = nbMaxContributor;
-        this.finalDate = finalDate;
+    public Poll(PollBuilder pb){
+        this.idPoll = pb.idPoll;
+        this.title = pb.title;
+        this.location = pb.location;
+        this.description = pb.description;
+        this.nameCreator = pb.nameCreator;
+        this.mailCreator = pb.mailCreator;
+        this.choicesList = pb.choicesList;
+        this.commentsList = pb.commentsList;
+        this.nbMaxContributor = pb.nbMaxContributor;
+        this.finalDate = pb.finalDate;
+        this.managerCode = pb.managerCode;
     }
 
-    /**
-     * Constructor
-     * @param shareCode
-     * @param managerCode
-     * @param title
-     * @param managerMail
+    /*
+    Use of builder pattern to make poll creation clear and flexible
+    as we have some optional parameters. Also to pass the poll object
+    through the creation steps, and add param on the fly.
      */
-    public Poll(int shareCode, String managerCode, String title, String managerMail) {
-        this.shareCode = shareCode;
-        this.managerCode = managerCode;
-        this.title = title;
-        this.managerMail = managerMail;
+    public static class PollBuilder {
+
+        private int idPoll;
+        private String managerCode;
+        private String location;
+        private String description;
+        private String title;
+        private String mailCreator;
+        private String nameCreator;
+        private boolean isLocked = false;
+        private int nbMaxContributor;
+        private Date finalDate;
+        private List<Choice> choicesList;
+        private List<Comment> commentsList;
+
+        /*
+        As a PollBuilder has two mandatory params at step1
+        when creating a PollBuilder, we assure to have those params
+         */
+        public PollBuilder(int idPoll, String title){
+            this.idPoll = idPoll;
+            this.title = title;
+        }
+
+        /* We can also have a constructor params and add
+        the mandatory params as if they were optionals
+        using the two methods below */
+
+        /*
+        public PollBuilder setID(int idPoll){
+            this.idPoll = idPoll;
+            return this;
+        }
+
+        public PollBuilder setTitle(String title){
+            this.title = title;
+            return this;
+        }*/
+
+
+        public PollBuilder setLocation(String location){
+            this.location = location;
+            return this;
+        }
+
+        public PollBuilder setDescription(String description){
+            this.description = description;
+            return this;
+        }
+
+        public PollBuilder setNameCreator(String nameCreator){
+            this.nameCreator = nameCreator;
+            return this;
+        }
+
+        public PollBuilder setMailCreator(String mailCreator){
+            this.mailCreator = mailCreator;
+            return this;
+        }
+
+        public PollBuilder setChoicesList(List<Choice> choicesList){
+            this.choicesList = choicesList;
+            return this;
+        }
+
+        public PollBuilder setCommentsList(List<Comment> commentsList){
+            this.commentsList = commentsList;
+            return this;
+        }
+
+        public PollBuilder setManagerCode(String managerCode) {
+            this.managerCode = managerCode;
+            return this;
+        }
+
+        public PollBuilder setNbMaxContributor(int nbMaxContributor) {
+            this.nbMaxContributor = nbMaxContributor;
+            return this;
+        }
+
+        public PollBuilder setFinalDate(Date finalDate){
+            this.finalDate = finalDate;
+            return this;
+        }
+
+        public PollBuilder setIsLocked(boolean isLocked){
+            this.isLocked = isLocked;
+            return this;
+        }
+
+        public Poll build(){
+            return new Poll(this);
+        }
     }
 
 
@@ -73,12 +153,12 @@ public class Poll {
     }
 
     /**
-     * Gets managerMail.
+     * Gets mailCreator.
      *
-     * @return Value of managerMail.
+     * @return Value of mailCreator.
      */
-    public String getManagerMail() {
-        return managerMail;
+    public String getMailCreator() {
+        return mailCreator;
     }
 
     /**
@@ -120,10 +200,10 @@ public class Poll {
     /**
      * Sets new private fields.
      *
-     * @param shareCode New value of private fields.
+     * @param idPoll New value of private fields.
      */
-    public void setShareCode(int shareCode) {
-        this.shareCode = shareCode;
+    public void setIdPoll(int idPoll) {
+        this.idPoll = idPoll;
     }
 
     /**
@@ -154,12 +234,12 @@ public class Poll {
     }
 
     /**
-     * Sets new managerMail.
+     * Sets new mailCreator.
      *
-     * @param managerMail New value of managerMail.
+     * @param mailCreator New value of mailCreator.
      */
-    public void setManagerMail(String managerMail) {
-        this.managerMail = managerMail;
+    public void setMailCreator(String mailCreator) {
+        this.mailCreator = mailCreator;
     }
 
     /**
@@ -194,8 +274,8 @@ public class Poll {
      *
      * @return Value of private fields.
      */
-    public int getShareCode() {
-        return shareCode;
+    public int getIdPoll() {
+        return idPoll;
     }
 
     /**
@@ -225,14 +305,68 @@ public class Poll {
         this.nbMaxContributor = nbMaxContributor;
     }
 
+    /**
+     * Gets nameCreator.
+     *
+     * @return Value of nameCreator.
+     */
+    public String getNameCreator() {
+        return nameCreator;
+    }
+
+    /**
+     * Sets new nameCreator.
+     *
+     * @param nameCreator New value of nameCreator.
+     */
+    public void setNameCreator(String nameCreator) {
+        this.nameCreator = nameCreator;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("shareCode: ").append(this.shareCode)
+        sb.append("idPoll: ").append(this.idPoll)
                 .append(" managerCode: ").append(this.managerCode)
                 .append(" title; ").append(this.title)
-                .append(" managerMail: ").append(this.managerMail);
+                .append(" mailCreator: ").append(this.mailCreator);
         return sb.toString();
+    }
+
+    /**
+     * Sets new choicesList.
+     *
+     * @param choicesList New value of choiceList.
+     */
+    public void setChoicesList(List<Choice> choicesList) {
+        this.choicesList = choicesList;
+    }
+
+    /**
+     * Gets choicesList.
+     *
+     * @return Value of choicesList.
+     */
+    public List<Choice> getChoicesList() {
+        return choicesList;
+    }
+
+    /**
+     * Gets commentsList.
+     *
+     * @return Value of commentsList.
+     */
+    public List<Comment> getCommentsList() {
+        return commentsList;
+    }
+
+    /**
+     * Sets new commentsList.
+     *
+     * @param commentsList New value of commentsList.
+     */
+    public void setCommentsList(List<Comment> commentsList) {
+        this.commentsList = commentsList;
     }
 }
 
