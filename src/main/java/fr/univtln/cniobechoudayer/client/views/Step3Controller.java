@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTimePicker;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 
 import javax.swing.text.html.ImageView;
 
@@ -30,6 +31,9 @@ public class Step3Controller {
     @FXML
     private ImageView homeButton;
 
+    @FXML
+    private Text titlePollText;
+
 
     public Step3Controller(){
 
@@ -37,6 +41,21 @@ public class Step3Controller {
 
     @FXML
     private void goBackHome(){
+
+    }
+
+    @FXML
+    private void validatePollCreation(){
+
+    }
+
+    @FXML
+    private void goToPreviousStep(){
+
+    }
+
+    @FXML
+    private void addTimeSlotToPoll(){
 
     }
 

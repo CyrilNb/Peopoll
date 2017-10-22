@@ -1,79 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.net.HomeViewController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Pane layoutX="31.0" layoutY="71.0" prefHeight="297.0" prefWidth="578.0" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <Pane id="pollCreateActionPoll" layoutX="204.0" layoutY="118.0" prefHeight="148.0" prefWidth="170.0">
+                  <Pane id="pollCreateActionPoll" layoutX="204.0" layoutY="118.0" prefHeight="148.0" prefWidth="170.0" style="-fx-background-color: #F2F2F2;">
                       <Label id="titlePollCreateAction" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="170.0" style="-fx-padding:10;" text="CREATE A POLL">
                         <font>
-                           <Font name="Ubuntu Regular" size="18.0" />
+                           <Font name="Ubuntu Bold" size="18.0" />
                         </font>
                      </Label>
-                     <JFXButton id="pollCreateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="53.0" prefHeight="81.0" prefWidth="156.0" text="+">
+                     <JFXButton id="pollCreateButton" fx:id="pollCreateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="53.0" onMouseClicked="#createPoll" prefHeight="81.0" prefWidth="156.0" text="+">
                         <font>
                            <Font name="System Bold" size="38.0" />
                         </font>
                      </JFXButton>
                   </Pane>
-                  <JFXTextField id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" prefHeight="65.0" prefWidth="451.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #555555; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
+                  <JFXTextField id="codeTextField" fx:id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" onKeyTyped="#isAccessCodeTextFieldEmpty" prefHeight="65.0" prefWidth="440.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #555555; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
                      <font>
                         <Font name="Ubuntu Regular" size="25.0" />
                      </font>
@@ -81,7 +36,7 @@
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </JFXTextField>
-                  <JFXButton id="searchCodeButton" layoutX="461.0" layoutY="24.0" prefHeight="65.0" prefWidth="92.0" style="-fx-background-color: #555555;" text="GO" textFill="WHITE">
+                  <JFXButton id="searchCodeButton" fx:id="searchCodeButton" disable="true" layoutX="464.0" layoutY="24.0" onMouseClicked="#searchPoll" prefHeight="65.0" prefWidth="89.0" style="-fx-background-color: #555555;" text="GO" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>

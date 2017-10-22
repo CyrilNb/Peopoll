@@ -17,7 +17,7 @@ public class Step1Controller {
     private JFXTextField infoPollTextField;
 
     @FXML
-    private ImageView nextStepImage;
+    private ImageView nextStepArrow;
 
     public Step1Controller(){
 
@@ -29,8 +29,11 @@ public class Step1Controller {
     @FXML
     private void nextStep(){
         if(titlePollTextField.getText().length() != 0 && titlePollTextField.getText() != null){
+            titlePollTextField.getStyleClass().add("text-input.error");
+        }else{
 
         }
     }
+
 
 }

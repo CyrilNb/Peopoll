@@ -3,18 +3,20 @@ package fr.univtln.cniobechoudayer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PatternLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 
 /**
  * Hello world!
  */
-public class App extends Application{
+public class App extends Application {
     @SuppressWarnings("unused")
     private static final Class[] shadeHack = {org.apache.log4j.RollingFileAppender.class,
             org.apache.log4j.ConsoleAppender.class,
@@ -32,6 +34,7 @@ public class App extends Application{
         /*
         Call and display the homeView
          */
+        launch(args);
 
     }
 
@@ -39,10 +42,12 @@ public class App extends Application{
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/HomeView.fxml"));
 
-        Scene scene = new Scene(root, 700, 400);
+        Scene scene = new Scene(root);
 
         primaryStage.setTitle("Peopoll");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+
 }
