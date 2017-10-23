@@ -103,6 +103,23 @@
                     </filters>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--suppress MavenModelInspection -->
+                    <!-- to start the server: mvn -Dcniobechoudayer.mainclass=fr.univtln.cniobechoudayer.server.MainServer exec:java -->
+                    <!-- to start the client: mvn -Dcniobechoudayer.mainclass=fr.univtln.cniobechoudayer.client.MainClient exec:java -->
+                    <mainClass>${cniobechoudayer.mainclass}</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

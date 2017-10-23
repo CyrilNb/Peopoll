@@ -67,7 +67,7 @@ public class ClientRequest implements Runnable{
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
             out.println("You are connected to Peopoll \n");
-            out.println("Type Exit to quit the server \n;");
+            out.println("Type Exit to quit the server \n");
             DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
             String test = in.readLine();
             if(!test.isEmpty()){
