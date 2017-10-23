@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,11 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-      <VBox prefHeight="400.0" prefWidth="640.0">
-        <children>
-          <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.PollController">
                <children>
                   <Pane layoutX="90.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0" style="-fx-background-color: #FFFFFF;">
                      <children>
@@ -27,34 +19,34 @@
                   </Pane>
                   <Pane layoutX="11.0" layoutY="70.0" prefHeight="291.0" prefWidth="68.0" style="-fx-background-color: #FFFFFF;">
                      <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="16.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="16.0" layoutY="232.0" onMouseClicked="#savePoll" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Assets/png/004-save.png" />
+                              <Image url="@../images/004-save.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="43.0" fitWidth="37.0" layoutX="16.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="43.0" fitWidth="37.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#defineFinalDate" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Assets/png/001-calendar.png" />
+                              <Image url="@../images/001-calendar.png" />
                            </image>
                            <viewport>
                               <Rectangle2D />
                            </viewport>
                         </ImageView>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="16.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="16.0" layoutY="123.0" onMouseClicked="#lockPoll" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Assets/png/005-unlocked.png" />
+                              <Image url="@../images/005-unlocked.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="27.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="27.0" layoutY="6.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Assets/png/003-home.png" />
+                        <Image url="@../images/003-home.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="571.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="571.0" layoutY="6.0" onMouseClicked="#accessAsOrga" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Assets/png/002-eye.png" />
+                        <Image url="@../images/002-eye.png" />
                      </image>
                   </ImageView>
                   <Text layoutX="91.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="480.13671875">
@@ -64,7 +56,3 @@
                   </Text>
                </children>
           </AnchorPane>
-        </children>
-      </VBox>
-  </children>
-</VBox>
