@@ -10,9 +10,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
-  <children>
-    <AnchorPane fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+
+    <AnchorPane fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController" fx:id="rootPane" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Pane layoutX="31.0" layoutY="71.0" prefHeight="297.0" prefWidth="578.0" style="-fx-background-color: #FFFFFF;">
                <children>
@@ -54,5 +53,3 @@
             </Pane>
          </children>
     </AnchorPane>
-  </children>
-</VBox>

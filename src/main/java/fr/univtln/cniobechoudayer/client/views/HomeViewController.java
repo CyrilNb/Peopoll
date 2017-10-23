@@ -36,9 +36,9 @@ public class HomeViewController extends VBox {
     Method to search a poll using a code when users click
      */
     @FXML
-    private void searchPoll(){
-        if(codeTextField.getText().length() == 0 || codeTextField.getText() == null){
-
+    private void searchPoll() throws IOException {
+        if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
+            loadScreen("PollCreationStep1View");
         }else{
 
         }
@@ -71,5 +71,16 @@ public class HomeViewController extends VBox {
             searchCodeButton.setDisable(true);
         }
     }
+
+    @FXML
+    public void loadScreen(String resource) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
+        System.out.println("Loading : /fxml/" + resource + ".fxml");
+        AnchorPane ap = loader.load();
+        rootPane.getChildren().setAll(ap);
+    }
+
+
+
 
 }

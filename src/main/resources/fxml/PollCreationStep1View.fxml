@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,11 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" >
-   <children>
-      <VBox prefHeight="400.0" prefWidth="640.0">
-         <children>
-            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.Step1Controller">
                <children>
                   <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
                      <children>
@@ -33,34 +30,51 @@
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titlePollTextField" layoutX="134.0" prefHeight="55.0" prefWidth="355.0" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField fx:id="titlePollTextField" layoutX="134.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
                         </JFXTextField>
-                        <JFXTextField fx:id="placePollTextField" layoutX="134.0" layoutY="64.0" prefHeight="55.0" prefWidth="355.0" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField fx:id="placePollTextField" layoutX="134.0" layoutY="64.0" prefHeight="55.0" prefWidth="355.0" promptText="Optional" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
                         </JFXTextField>
-                        <JFXTextField id="infoPollTextField" fx:id="infoPollTextField" layoutX="134.0" layoutY="127.0" prefHeight="155.0" prefWidth="355.0" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="infoPollTextField" fx:id="infoPollTextField" layoutX="134.0" layoutY="127.0" prefHeight="155.0" prefWidth="355.0" promptText="Optional" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
                         </JFXTextField>
                      </children>
                   </Pane>
-                  <ImageView id="nextStepArrow" fx:id="nextStepArrow" fitHeight="36.0" fitWidth="35.0" layoutX="591.0" layoutY="198.0" onMouseClicked="#nextStep" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/002-right-arrow.png" />
-                     </image>
-                  </ImageView>
+                  <Pane fx:id="nextStepArrow" onMouseClicked="#nextStep" layoutX="579.0" layoutY="183.0" prefHeight="65.0" prefWidth="68.0" visible="false">
+                     <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/002-right-arrow.png" />
+                        </image>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
+                     </ImageView>
+                  </Pane>
                   <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
                      <children>
-                        <ImageView id="backHomeButton" fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="backHomeButton" fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/003-home.png" />
                            </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                         </ImageView>
                         <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1/3" wrappingWidth="150.13671875">
                            <font>
@@ -71,7 +85,3 @@
                   </Pane>
                </children>
             </AnchorPane>
-         </children>
-      </VBox>
-   </children>
-</VBox>

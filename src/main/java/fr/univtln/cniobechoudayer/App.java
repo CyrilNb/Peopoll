@@ -1,5 +1,7 @@
 package fr.univtln.cniobechoudayer;
 
+import fr.univtln.cniobechoudayer.client.views.HomeViewController;
+import fr.univtln.cniobechoudayer.client.views.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -25,6 +27,8 @@ public class App extends Application {
     //Set the logger with the real class name.
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    private static MainController mc = new MainController();
+
     public static void main(String[] args) {
         BasicConfigurator.configure();
         logger.info("App started.");
@@ -40,7 +44,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/HomeView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
 
         Scene scene = new Scene(root);
 
@@ -48,6 +52,7 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
 
 }

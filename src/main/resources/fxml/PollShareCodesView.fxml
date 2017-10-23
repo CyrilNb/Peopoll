@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,11 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.PollShareController">
-   <children>
-      <VBox prefHeight="400.0" prefWidth="640.0">
-         <children>
-            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121" fx:controller="fr.univtln.cniobechoudayer.client.views.PollShareController">
                <children>
                   <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
                      <children>
@@ -50,19 +42,19 @@
                         </Pane>
                         <ImageView id="sendCodeMailButton" fitHeight="43.0" fitWidth="40.0" layoutX="222.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Assets/png/mail-black-envelope-symbol.png" />
+                              <Image url="@../images/mail.png" />
                            </image>
                         </ImageView>
                         <ImageView id="viewPollButton" fitHeight="43.0" fitWidth="40.0" layoutX="280.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Assets/png/002-eye.png" />
+                              <Image url="@../images/002-eye.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
                   <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
                      <children>
-                        <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 3/3" wrappingWidth="150.13671875">
+                        <Text fill="WHITE" layoutX="171.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Share your poll" textAlignment="CENTER" wrappingWidth="297.13671875">
                            <font>
                               <Font name="Ubuntu Regular" size="38.0" />
                            </font>
@@ -71,7 +63,3 @@
                   </Pane>
                </children>
             </AnchorPane>
-         </children>
-      </VBox>
-   </children>
-</VBox>
