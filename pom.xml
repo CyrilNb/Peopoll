@@ -10,7 +10,7 @@
         <!-- utln login for nexus (maven and docker ) repository on lsis -->
         <lsisnexus.login>cyril-niobe@etud.univ-tln.fr</lsisnexus.login>
         <!-- the default Main class -->
-        <app.main.class>fr.univtln.cniobe283.App</app.main.class>
+        <app.main.class>fr.univtln.cniobechoudayer.App</app.main.class>
     </properties>
     <!-- ADAPTER LES PROPRIETES SUIVANTES -->
 
@@ -103,6 +103,23 @@
                     </filters>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--suppress MavenModelInspection -->
+                    <!-- to start the server: mvn -Dcniobechoudayer.mainclass=fr.univtln.cniobechoudayer.server.MainServer exec:java -->
+                    <!-- to start the client: mvn -Dcniobechoudayer.mainclass=fr.univtln.cniobechoudayer.client.MainClient exec:java -->
+                    <mainClass>${cniobechoudayer.mainclass}</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -135,5 +152,22 @@
             <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 </project>
