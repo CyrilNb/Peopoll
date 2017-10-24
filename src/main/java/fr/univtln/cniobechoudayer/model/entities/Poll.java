@@ -1,15 +1,21 @@
 package fr.univtln.cniobechoudayer.model.entities;
 
-import fr.univtln.cniobechoudayer.model.interfaces.PollDAO;
 
+import fr.univtln.cniobechoudayer.model.Entity;
+import fr.univtln.cniobechoudayer.server.database.DatabaseManager;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Class which represents a Poll
  * Created by Cyril on 16/10/2017.
  */
-public class Poll implements PollDAO {
+public class Poll implements Entity {
 
     /**private fields**/
     private int idPoll;
@@ -26,11 +32,28 @@ public class Poll implements PollDAO {
     private List<Choice> choicesList;
     private List<Comment> commentsList;
 
+    private static Logger logger = Logger.getLogger(Poll.class.getName());
+
+
+    private static PreparedStatement findByID;
+    private static PreparedStatement findAll;
+
+    //L'initialisation des preparedstatments.
+    static {
+        try {
+            Connection connection = DatabaseManager.getConnection();
+            findByID = connection.prepareStatement("select ID_POLL, TITLE from PEOPOLL.POLLS where ID_POLL=?");
+            findAll = connection.prepareStatement("select ID_POLL, TITLE from PEOPOLL.POLLS");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Constructor using PollBuilder to create a new instance
      * @param pb pollbuilder
      */
-    public Poll(PollBuilder pb){
+    private Poll(PollBuilder pb){
         this.idPoll = pb.idPoll;
         this.title = pb.title;
         this.location = pb.location;
@@ -44,29 +67,11 @@ public class Poll implements PollDAO {
         this.managerCode = pb.managerCode;
     }
 
-    @Override
-    public List<Poll> findAll() {
-        return null;
-    }
 
-    @Override
-    public Poll findById() {
-        return null;
-    }
-
-    @Override
-    public boolean insertPoll(Poll poll) {
-        return false;
-    }
-
-    @Override
-    public boolean updatePoll(Poll poll) {
-        return false;
-    }
-
-    @Override
-    public boolean deletePoll(Poll poll) {
-        return false;
+    //Ce constructeur est utilisé en privé quand un poll est extrait de la BD
+    private Poll(int ID, String title) {
+        this.idPoll = ID;
+        this.title = title;
     }
 
     /*
@@ -75,7 +80,6 @@ public class Poll implements PollDAO {
     through the creation steps, and add param on the fly.
      */
     public static class PollBuilder {
-
         private int idPoll;
         private String managerCode;
         private String location;
@@ -395,6 +399,120 @@ public class Poll implements PollDAO {
     public void setCommentsList(List<Comment> commentsList) {
         this.commentsList = commentsList;
     }
+
+    //Cette méthode doit être appelée à la fin de l'application pour libérer les connexions
+    //des preparedstatments.
+    public static void dispose() throws PersistanceException {
+        try {
+            findByID.close();
+            findAll.close();
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+    //method to create a poll object from the result from the database
+    private static Poll createFromResultSet(ResultSet result) throws SQLException {
+        return new Poll(result.getInt("ID_POLL"), result.getString("TITLE"));
+    }
+
+    /**
+     * Method to retrieve all polls from the db
+     * @return list of all polls from the db
+     * @throws PersistanceException
+     */
+    public static List<Poll> findAll() throws PersistanceException {
+        try {
+            ResultSet result = findAll.executeQuery();
+            List<Poll> resultPolls = new ArrayList<>();
+            while (result.next()) {
+                Poll poll = createFromResultSet(result);
+                logger.info("find poll in the db: " + poll);
+                resultPolls.add(poll);
+            }
+            return resultPolls;
+        }catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+    /**
+     * Method to retrieve a specific poll from the db
+     * @param idPoll to retrieve
+     * @return the matching poll containing the idPoll specified
+     * @throws PersistanceException
+     */
+    public static Poll findById(int idPoll) throws PersistanceException{
+        try{
+            Poll poll;
+            findByID.setInt(1,idPoll);
+            ResultSet resultSet = findByID.executeQuery();
+            if(resultSet.next()){
+                poll = createFromResultSet(resultSet);
+                logger.finest("find poll in the db: " + poll);
+                return poll;
+            }else {
+                throw new PersistanceException("Poll " + idPoll + "not found");
+            }
+        }catch (Exception e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+
+    @Override
+    public void persist(Connection connection) throws PersistanceException {
+        try{
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO PEOPOLL.POLLS(TITLE, NAME_CREATOR,MAIL_CREATOR) VALUES ('" + title + "','" + nameCreator + "','" + mailCreator + "')");
+            logger.info("creation of the poll: " + this);
+        }catch (SQLException e){
+            throw  new PersistanceException(e);
+        }
+    }
+
+    /**
+     * Update the database from the instance data
+     * @param connection
+     * @throws PersistanceException
+     */
+    @Override
+    public void merge(Connection connection) throws PersistanceException {
+        try {
+            connection.createStatement().executeUpdate("UPDATE PEOPOLL.polls SET IS_LOCKED=' "+isLocked+" ' ;");
+            logger.info("merge of the poll : " + this);
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+    //Mise à jour de la base de données à partir de l'instance
+    //Cette méthode n'a pas été testée
+
+    /**
+     * Update the instance from the database data
+     * @param connection
+     * @throws PersistanceException
+     */
+    @Override
+    public void update(Connection connection) throws PersistanceException {
+        Poll poll = findById(this.idPoll);
+        this.title = poll.title;
+        this.mailCreator = poll.mailCreator;
+        this.nameCreator = poll.nameCreator;
+        logger.info("update of the poll: " + this);
+    }
+
+    @Override
+    public void remove(Connection connection) throws PersistanceException {
+        try {
+            connection.createStatement().executeUpdate("DELETE FROM PEOPOLL.POLLS WHERE ID=\'" + idPoll + "\'");
+            logger.info("deletion of the poll: " + this);
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
 }
 
 //TODO equals haschode compare

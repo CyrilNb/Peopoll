@@ -1,7 +1,10 @@
 package fr.univtln.cniobechoudayer.model.entities;
 
-import fr.univtln.cniobechoudayer.model.interfaces.ChoiceDAO;
 
+import fr.univtln.cniobechoudayer.model.Entity;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
+
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +12,7 @@ import java.util.List;
  * Class which represent a choice
  * Created by Cyril on 16/10/2017.
  */
-public class Choice implements ChoiceDAO {
+public class Choice implements Entity{
 
     /* private fields */
     private int idChoice;
@@ -128,29 +131,34 @@ public class Choice implements ChoiceDAO {
     }
 
 
-    @Override
-    public List<Choice> findAll() {
+    public static List<Choice> findAll() {
         return null;
     }
 
-    @Override
-    public Choice findById() {
+
+    public static Choice findById() {
         return null;
     }
 
+
     @Override
-    public boolean insertChoice(Choice choice) {
-        return false;
+    public void persist(Connection connection) throws PersistanceException {
+
     }
 
     @Override
-    public boolean updateChoice(Choice choice) {
-        return false;
+    public void merge(Connection connection) throws PersistanceException {
+
     }
 
     @Override
-    public boolean deleteChoice(Choice choice) {
-        return false;
+    public void update(Connection connection) throws PersistanceException {
+
+    }
+
+    @Override
+    public void remove(Connection connection) throws PersistanceException {
+
     }
 }
 

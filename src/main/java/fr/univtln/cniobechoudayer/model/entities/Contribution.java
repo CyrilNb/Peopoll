@@ -1,14 +1,16 @@
 package fr.univtln.cniobechoudayer.model.entities;
 
-import fr.univtln.cniobechoudayer.model.interfaces.ContributionDAO;
+import fr.univtln.cniobechoudayer.model.Entity;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
+import java.sql.Connection;
 import java.util.List;
 
 /**
  * Class which represent a contribution made by someone
  * Created by Cyril on 16/10/2017.
  */
-public class Contribution implements ContributionDAO {
+public class Contribution implements Entity {
     /** private fields**/
     private int idContribution;
     private String nameContributor;
@@ -65,7 +67,6 @@ public class Contribution implements ContributionDAO {
         return idContribution;
     }
 
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -74,29 +75,33 @@ public class Contribution implements ContributionDAO {
         return sb.toString();
     }
 
-    @Override
-    public List<Contribution> findAll() {
+    public static List<Contribution> findAll() {
         return null;
     }
 
-    @Override
-    public Contribution findById() {
+    public static Contribution findById() {
         return null;
     }
 
+
     @Override
-    public boolean insertContribution(Contribution contribution) {
-        return false;
+    public void persist(Connection connection) throws PersistanceException {
+
     }
 
     @Override
-    public boolean updateContribution(Contribution contribution) {
-        return false;
+    public void merge(Connection connection) throws PersistanceException {
+
     }
 
     @Override
-    public boolean deleteContribution(Contribution contribution) {
-        return false;
+    public void update(Connection connection) throws PersistanceException {
+
+    }
+
+    @Override
+    public void remove(Connection connection) throws PersistanceException {
+
     }
 }
 
