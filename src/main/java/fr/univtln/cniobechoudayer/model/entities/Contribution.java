@@ -1,10 +1,14 @@
-package fr.univtln.cniobechoudayer.model;
+package fr.univtln.cniobechoudayer.model.entities;
+
+import fr.univtln.cniobechoudayer.model.interfaces.ContributionDAO;
+
+import java.util.List;
 
 /**
  * Class which represent a contribution made by someone
  * Created by Cyril on 16/10/2017.
  */
-public class Contribution {
+public class Contribution implements ContributionDAO {
     /** private fields**/
     private int idContribution;
     private String nameContributor;
@@ -68,6 +72,31 @@ public class Contribution {
         sb.append("idContribution: ").append(this.idContribution)
                 .append(" nameContributor: ").append(this.nameContributor);
         return sb.toString();
+    }
+
+    @Override
+    public List<Contribution> findAll() {
+        return null;
+    }
+
+    @Override
+    public Contribution findById() {
+        return null;
+    }
+
+    @Override
+    public boolean insertContribution(Contribution contribution) {
+        return false;
+    }
+
+    @Override
+    public boolean updateContribution(Contribution contribution) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteContribution(Contribution contribution) {
+        return false;
     }
 }
 

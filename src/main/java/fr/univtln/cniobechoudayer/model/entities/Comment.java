@@ -1,12 +1,15 @@
-package fr.univtln.cniobechoudayer.model;
+package fr.univtln.cniobechoudayer.model.entities;
+
+import fr.univtln.cniobechoudayer.model.interfaces.CommentDAO;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class which represents a comment
  * Created by Cyril on 16/10/2017.
  */
-public class Comment {
+public class Comment implements CommentDAO{
 
     /* private fields */
     private int idComment;
@@ -107,6 +110,31 @@ public class Comment {
                 .append(" nameAuthor: ").append(this.nameAuthor)
                 .append(" content: ").append(this.content);
         return sb.toString();
+    }
+
+    @Override
+    public List<Comment> findAll() {
+        return null;
+    }
+
+    @Override
+    public Comment findById() {
+        return null;
+    }
+
+    @Override
+    public boolean insertComment(Comment comment) {
+        return false;
+    }
+
+    @Override
+    public boolean updateComment(Comment comment) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteComment(Comment comment) {
+        return false;
     }
 
     //TODO equals haschode compare

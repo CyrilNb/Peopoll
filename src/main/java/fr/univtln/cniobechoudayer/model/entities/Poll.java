@@ -1,4 +1,6 @@
-package fr.univtln.cniobechoudayer.model;
+package fr.univtln.cniobechoudayer.model.entities;
+
+import fr.univtln.cniobechoudayer.model.interfaces.PollDAO;
 
 import java.util.Date;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
  * Class which represents a Poll
  * Created by Cyril on 16/10/2017.
  */
-public class Poll {
+public class Poll implements PollDAO {
 
     /**private fields**/
     private int idPoll;
@@ -40,6 +42,31 @@ public class Poll {
         this.nbMaxContributor = pb.nbMaxContributor;
         this.finalDate = pb.finalDate;
         this.managerCode = pb.managerCode;
+    }
+
+    @Override
+    public List<Poll> findAll() {
+        return null;
+    }
+
+    @Override
+    public Poll findById() {
+        return null;
+    }
+
+    @Override
+    public boolean insertPoll(Poll poll) {
+        return false;
+    }
+
+    @Override
+    public boolean updatePoll(Poll poll) {
+        return false;
+    }
+
+    @Override
+    public boolean deletePoll(Poll poll) {
+        return false;
     }
 
     /*

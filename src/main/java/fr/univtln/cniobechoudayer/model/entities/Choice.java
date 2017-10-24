@@ -1,12 +1,15 @@
-package fr.univtln.cniobechoudayer.model;
+package fr.univtln.cniobechoudayer.model.entities;
+
+import fr.univtln.cniobechoudayer.model.interfaces.ChoiceDAO;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class which represent a choice
  * Created by Cyril on 16/10/2017.
  */
-public class Choice {
+public class Choice implements ChoiceDAO {
 
     /* private fields */
     private int idChoice;
@@ -125,6 +128,30 @@ public class Choice {
     }
 
 
+    @Override
+    public List<Choice> findAll() {
+        return null;
+    }
+
+    @Override
+    public Choice findById() {
+        return null;
+    }
+
+    @Override
+    public boolean insertChoice(Choice choice) {
+        return false;
+    }
+
+    @Override
+    public boolean updateChoice(Choice choice) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteChoice(Choice choice) {
+        return false;
+    }
 }
 
 
