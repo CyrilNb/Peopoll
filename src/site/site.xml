@@ -8,7 +8,7 @@
         <fluidoSkin>
             <topBarEnabled>true</topBarEnabled>
             <!--topBarIcon>
-                <name>Maven Fluido Skin</name>
+             authorNamename>Maven Fluido SkauthorNamename>
                 <alt>Maven Fluido Skin</alt>
                 <src>/images/topbar-logo.png</src>
                 <href>/index.html</href>
@@ -21,7 +21,7 @@
             </googleSearch-->
 
             <gitHub>
-                <projectId>emmanuelbruno/helloworld</projectId>
+                <projectId>cyrilnb/peopoll</projectId>
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>gray</ribbonColor>
             </gitHub>
@@ -50,7 +50,7 @@
             <item name="Dependencies" href="dependency-info.html"/>
             <item name="Convergence" href="dependency-convergence.html"/>
             <item name="Plugins" href="plugins.html"/>
-            <!--item name="Plu" href="plugin-management.html"/-->
+            <!--iname="Plu" href="plugin-management.html"/-->
         </menu>
 
         <menu name="Activity">
