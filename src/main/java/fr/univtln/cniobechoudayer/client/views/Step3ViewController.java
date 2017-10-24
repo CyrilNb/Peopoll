@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
-public class Step3Controller {
+public class Step3ViewController {
 
     @FXML
     private AnchorPane rootView;
@@ -42,7 +42,7 @@ public class Step3Controller {
     private Text titlePollText;
 
 
-    public Step3Controller(){
+    public Step3ViewController(){
 
     }
 

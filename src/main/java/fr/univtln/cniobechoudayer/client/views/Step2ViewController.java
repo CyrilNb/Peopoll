@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Step2Controller {
+public class Step2ViewController {
 
     @FXML
     private AnchorPane rootView;
@@ -32,7 +32,7 @@ public class Step2Controller {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    public Step2Controller(){
+    public Step2ViewController(){
 
     }
 

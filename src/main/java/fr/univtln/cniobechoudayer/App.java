@@ -1,18 +1,15 @@
 package fr.univtln.cniobechoudayer;
 
-import fr.univtln.cniobechoudayer.client.views.HomeViewController;
-import fr.univtln.cniobechoudayer.client.views.MainController;
+import fr.univtln.cniobechoudayer.client.views.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PatternLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 
 /**
@@ -27,7 +24,7 @@ public class App extends Application {
     //Set the logger with the real class name.
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private static MainController mc = new MainController();
+    private static MainViewController mc = new MainViewController();
 
     public static void main(String[] args) {
         BasicConfigurator.configure();

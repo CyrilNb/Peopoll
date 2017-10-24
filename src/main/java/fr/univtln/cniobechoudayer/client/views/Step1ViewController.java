@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
-public class Step1Controller {
+public class Step1ViewController {
 
     @FXML
     private AnchorPane rootView;
@@ -26,7 +26,7 @@ public class Step1Controller {
     @FXML
     private Pane nextStepArrow;
 
-    public Step1Controller(){
+    public Step1ViewController(){
 
     }
 

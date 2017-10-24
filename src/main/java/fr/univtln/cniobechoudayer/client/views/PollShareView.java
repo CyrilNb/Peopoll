@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 import javax.swing.text.html.ImageView;
 import java.awt.*;
 
-public class PollShareController {
+public class PollShareView {
 
     @FXML
     private Text accessCodeText;
