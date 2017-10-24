@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.Cursor?>
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121" fx:controller="fr.univtln.cniobechoudayer.client.views.PollShareViewController">
+               <children>
+                  <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
+                     <children>
+                        <Text layoutX="186.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCESS CODE">
+                           <font>
+                              <Font name="Ubuntu Regular" size="26.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="142.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MANAGEMENT CODE">
+                           <font>
+                              <Font name="Ubuntu Regular" size="26.0" />
+                           </font>
+                        </Text>
+                        <Pane layoutX="73.0" layoutY="37.0" prefHeight="70.0" prefWidth="393.0" style="-fx-background-color: #FFFFFF;">
+                           <children>
+                              <Text id="accessCodeText" layoutX="156.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                 <font>
+                                    <Font name="BebasNeue" size="53.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="74.0" layoutY="157.0" prefHeight="70.0" prefWidth="393.0" style="-fx-background-color: #FFFFFF;">
+                           <children>
+                              <Text id="managementCodeText" layoutX="156.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                 <font>
+                                    <Font name="BebasNeue" size="53.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <ImageView id="sendCodeMailButton" fitHeight="43.0" fitWidth="40.0" layoutX="222.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/mail.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="viewPollButton" fitHeight="43.0" fitWidth="40.0" layoutX="280.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/002-eye.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/003-home.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="171.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Share your poll" textAlignment="CENTER" wrappingWidth="297.13671875">
+                           <font>
+                              <Font name="Ubuntu Regular" size="38.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
+         <children>
+            <Pane layoutX="31.0" layoutY="71.0" prefHeight="297.0" prefWidth="578.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <Pane id="pollCreateActionPoll" layoutX="204.0" layoutY="118.0" prefHeight="148.0" prefWidth="170.0" style="-fx-background-color: #F2F2F2;">
+                      <Label id="titlePollCreateAction" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="170.0" style="-fx-padding:10;" text="CREATE A POLL">
+                        <font>
+                           <Font name="Ubuntu Bold" size="18.0" />
+                        </font>
+                     </Label>
+                     <JFXButton id="pollCreateButton" fx:id="pollCreateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="53.0" onMouseClicked="#createPoll" prefHeight="81.0" prefWidth="156.0" style="-fx-background-color: #555555;" text="+" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="38.0" />
+                        </font>
+                     </JFXButton>
+                  </Pane>
+                  <JFXTextField id="codeTextField" fx:id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" onKeyTyped="#isAccessCodeTextFieldEmpty" prefHeight="65.0" prefWidth="440.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #555555; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
+                     <font>
+                        <Font name="Ubuntu Regular" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </JFXTextField>
+                  <JFXButton id="searchCodeButton" fx:id="searchCodeButton" disable="true" layoutX="464.0" layoutY="24.0" onMouseClicked="#searchPoll" prefHeight="65.0" prefWidth="89.0" style="-fx-background-color: #555555;" text="GO" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Pane prefHeight="65.0" prefWidth="640.0" style="-fx-background-color: #555555;">
+               <children>
+                  <Text id="mainTitle" fill="WHITE" layoutX="230.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PEOPOLL">
+                     <font>
+                        <Font name="Ubuntu Bold" size="39.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+    </AnchorPane>
