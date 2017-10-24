@@ -1,7 +1,8 @@
 package fr.univtln.cniobechoudayer.model.entities;
 
-import fr.univtln.cniobechoudayer.model.interfaces.CommentDAO;
-
+import fr.univtln.cniobechoudayer.model.Entity;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Class which represents a comment
  * Created by Cyril on 16/10/2017.
  */
-public class Comment implements CommentDAO{
+public class Comment implements Entity{
 
     /* private fields */
     private int idComment;
@@ -112,29 +113,33 @@ public class Comment implements CommentDAO{
         return sb.toString();
     }
 
-    @Override
-    public List<Comment> findAll() {
+    public static List<Comment> findAll() {
         return null;
     }
 
-    @Override
-    public Comment findById() {
+    public static Comment findById() {
         return null;
     }
 
+
     @Override
-    public boolean insertComment(Comment comment) {
-        return false;
+    public void persist(Connection connection) throws PersistanceException {
+
     }
 
     @Override
-    public boolean updateComment(Comment comment) {
-        return false;
+    public void merge(Connection connection) throws PersistanceException {
+
     }
 
     @Override
-    public boolean deleteComment(Comment comment) {
-        return false;
+    public void update(Connection connection) throws PersistanceException {
+
+    }
+
+    @Override
+    public void remove(Connection connection) throws PersistanceException {
+
     }
 
     //TODO equals haschode compare
