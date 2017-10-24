@@ -1,17 +1,23 @@
 package fr.univtln.cniobechoudayer.client.views;
 
 import com.jfoenix.controls.JFXTextField;
+import fr.univtln.cniobechoudayer.model.entities.Poll;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Step2ViewController {
+public class Step2ViewController implements Initializable{
 
     @FXML
     private AnchorPane rootView;
@@ -28,12 +34,14 @@ public class Step2ViewController {
     @FXML
     private JFXTextField nameCreatorTextField;
 
+    private HashMap currentPoll;
+
     //Regex pattern to check email
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    public Step2ViewController(){
-
+    public Step2ViewController(HashMap currentPoll){
+        this.currentPoll = currentPoll;
     }
 
     /*
@@ -108,4 +116,8 @@ public class Step2ViewController {
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }

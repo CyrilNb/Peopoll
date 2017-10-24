@@ -1,5 +1,6 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+import fr.univtln.cniobechoudayer.model.entities.Poll;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,10 +12,16 @@ import java.util.ResourceBundle;
 
 public class PollViewController implements Initializable {
 
+    private Poll pollToDisplay;
+
     @FXML
     private AnchorPane rootView;
 
-    /*
+
+    public PollViewController(Poll pollToDisplay){
+        this.pollToDisplay = pollToDisplay;
+    }
+    /**
     Method to go back to homeview
      */
     @FXML
@@ -22,7 +29,7 @@ public class PollViewController implements Initializable {
         loadScreen("HomeView");
     }
 
-    /*
+    /**
     Method to define the final date / choice
      */
     @FXML
@@ -30,7 +37,7 @@ public class PollViewController implements Initializable {
 
     }
 
-    /*
+    /**
     Save the current state of the poll
      */
     @FXML
@@ -38,7 +45,7 @@ public class PollViewController implements Initializable {
 
     }
 
-    /*
+    /**
     Lock the poll (disable grid)
      */
     @FXML
@@ -46,7 +53,7 @@ public class PollViewController implements Initializable {
 
     }
 
-    /*
+    /**
     Get management access (left bar)
      */
     @FXML
@@ -60,7 +67,7 @@ public class PollViewController implements Initializable {
 
     }
 
-    /*
+    /**
     Method to load any view from PollViewController
      */
     @FXML
