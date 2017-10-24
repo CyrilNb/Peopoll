@@ -123,8 +123,8 @@ public class Comment implements Entity{
 
 
     @Override
-    public void persist(Connection connection) throws PersistanceException {
-
+    public int persist(Connection connection) throws PersistanceException {
+        return 1;
     }
 
     @Override

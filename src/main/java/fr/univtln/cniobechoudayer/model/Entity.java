@@ -8,7 +8,7 @@ import java.sql.Connection;
  * Created by Cyril on 24/10/2017.
  */
 public interface Entity {
-    public void persist(Connection connection) throws PersistanceException;
+    public int persist(Connection connection) throws PersistanceException; //return the id of the Entity persisted
 
     public void merge(Connection connection) throws PersistanceException;
 

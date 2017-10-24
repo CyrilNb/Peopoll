@@ -3,6 +3,7 @@ package fr.univtln.cniobechoudayer.client.views;
 import com.jfoenix.controls.*;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.controllers.PollController;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -14,6 +15,7 @@ import javafx.stage.*;
 import java.io.IOException;
 
 /**
+ * Controller of the HomeView
  * Created by Corentin on 21/10/2017.
  */
 public class HomeViewController extends VBox {
@@ -23,6 +25,12 @@ public class HomeViewController extends VBox {
 
     @FXML
     private JFXTextField codeTextField;
+    @FXML
+    private JFXTextField titlePollTextField;
+    @FXML
+    private JFXTextField nameCreatorTextField;
+    @FXML
+    private JFXTextField mailCreatorTextField;
 
     @FXML
     private JFXButton pollCreateButton;
@@ -37,25 +45,30 @@ public class HomeViewController extends VBox {
     }
 
     /**
-    Method to search a poll using a code when users click
+     * Method to search a poll using a code when a user click
      */
     @FXML
     private void searchPoll() throws IOException {
         if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
-            Poll searchedPoll = pollController.searchPollByCode(codeTextField.getText());
+            Poll searchedPoll = null;
+            try {
+                searchedPoll = pollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
+            } catch (PersistanceException e) {
+                e.printStackTrace();
+            }
             if(searchedPoll != null){
                 loadScreen("PollView", searchedPoll);
             }
         }else{
-
+            //error msg
         }
     }
 
     /**
-    Method to display poll creation view
+     * Method to display poll creation view
      */
     @FXML
-    private void createPoll() throws IOException {
+    private void displayPollCreationView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/PollCreationStep1View.fxml"));
         Pane cmdPane = fxmlLoader.load();
         try {

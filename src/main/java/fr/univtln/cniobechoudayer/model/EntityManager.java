@@ -36,11 +36,12 @@ public class EntityManager extends Observable{
         //deleteObserver(ModelBibliotheque.getInstance());
     }
 
-    public void persist(Entity entity) throws PersistanceException {
+    public int persist(Entity entity) throws PersistanceException {
         if (connection==null) throw new PersistanceException("Entity manager without connection.");
-        entity.persist(connection);
+        int returnedId = entity.persist(connection);
         setChanged();
         notifyObservers(entity.getClass());
+        return returnedId;
     }
 
     public void merge(Entity entity) throws PersistanceException {

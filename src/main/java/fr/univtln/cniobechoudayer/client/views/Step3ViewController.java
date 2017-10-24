@@ -3,6 +3,7 @@ package fr.univtln.cniobechoudayer.client.views;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTimePicker;
+import fr.univtln.cniobechoudayer.server.controllers.PollController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -41,6 +42,10 @@ public class Step3ViewController {
     @FXML
     private Text titlePollText;
 
+    private PollController pollController;
+
+    private int idPollCreated;
+
 
     public Step3ViewController(){
 
@@ -53,6 +58,9 @@ public class Step3ViewController {
 
     @FXML
     private void validatePollCreation() throws IOException {
+        // type de retour int ici car on veut en retour l'ID du nouveau poll créé (pour pouvoir l'afficher à la fin de la creation)
+        // RECUPERER ICI LES PARAMETRES DE CHAQUE ETAPES
+        //idPollCreated = pollController.createPoll(titlePollTextField.getText(),nameCreatorTextField.getText(),mailCreatorTextField.getText());
         loadScreen("PollShareCodesView");
     }
 
@@ -73,6 +81,5 @@ public class Step3ViewController {
         AnchorPane ap = loader.load();
         rootView.getChildren().setAll(ap);
     }
-
 
 }
