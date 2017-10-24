@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,23 +10,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.Step2ViewController">
                <children>
                   <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
                      <children>
-                        <Label layoutX="52.0" layoutY="14.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Name" textFill="WHITE">
+                        <Label layoutX="52.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Name" textFill="WHITE">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="52.0" layoutY="222.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Mail" textAlignment="CENTER" textFill="WHITE">
+                        <Label layoutX="52.0" layoutY="118.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Mail" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <JFXTextField id="nameCreatorTextField" fx:id="nameCreatorTextField" layoutX="134.0" layoutY="14.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="nameCreatorTextField" fx:id="nameCreatorTextField" layoutX="134.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -35,7 +33,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
                         </JFXTextField>
-                        <JFXTextField id="mailCreatorTextField" fx:id="mailCreatorTextField" layoutX="134.0" layoutY="222.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="mailCreatorTextField" fx:id="mailCreatorTextField" layoutX="134.0" layoutY="118.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -43,15 +41,19 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
                         </JFXTextField>
-                        <TextFlow layoutX="53.0" layoutY="101.0" prefHeight="89.0" prefWidth="434.0">
-                           <children>
-                              <TextArea editable="false" prefHeight="91.0" prefWidth="435.0" text="PLEASE TAKE CARE TO PUT A VALID EMAIL &#10;IN ORDER TO RECEIVE YOUR POLL &#10;SHARING AND MANAGEMENT CODES">
-                                 <font>
-                                    <Font name="Ubuntu Bold" size="18.0" />
-                                 </font>
-                              </TextArea>
-                           </children>
-                        </TextFlow>
+                         <Label layoutX="52.0" layoutY="229.0" prefHeight="55.0" prefWidth="150.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Nb People" textAlignment="CENTER" textFill="WHITE">
+                             <font>
+                                 <Font name="Ubuntu Regular" size="24.0" />
+                             </font>
+                         </Label>
+                         <JFXTextField id="nbMaxPeopleField" fx:id="nbMaxPeopleField" layoutX="184.0" layoutY="229.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="305.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                             <font>
+                                 <Font name="Ubuntu Regular" size="24.0" />
+                             </font>
+                             <cursor>
+                                 <Cursor fx:constant="TEXT" />
+                             </cursor>
+                         </JFXTextField>
                      </children>
                   </Pane>
                   <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
