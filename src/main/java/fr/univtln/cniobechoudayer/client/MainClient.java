@@ -1,5 +1,11 @@
 package fr.univtln.cniobechoudayer.client;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +16,7 @@ import java.net.Socket;
  * MainClient class which contain the main method called by the execution of the client
  * Created by Cyril on 21/10/2017.
  */
-public class MainClient {
+public class MainClient extends Application{
 
     /**
      * main method
@@ -39,5 +45,18 @@ public class MainClient {
         in.close();
         pingSocket.close();
 
+        launch(args);
+
     }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
+
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Peopoll");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 }
