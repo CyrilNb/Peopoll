@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PollController implements Initializable {
+public class PollViewController implements Initializable {
 
     @FXML
     private AnchorPane rootView;
@@ -61,7 +61,7 @@ public class PollController implements Initializable {
     }
 
     /*
-    Method to load any view from PollController
+    Method to load any view from PollViewController
      */
     @FXML
     public void loadScreen(String resource) throws IOException {

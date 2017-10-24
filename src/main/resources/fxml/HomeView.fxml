@@ -10,8 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-    <AnchorPane fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController" fx:id="rootPane" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+<AnchorPane fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
          <children>
             <Pane layoutX="31.0" layoutY="71.0" prefHeight="297.0" prefWidth="578.0" style="-fx-background-color: #FFFFFF;">
                <children>
@@ -21,7 +20,7 @@
                            <Font name="Ubuntu Bold" size="18.0" />
                         </font>
                      </Label>
-                     <JFXButton id="pollCreateButton" fx:id="pollCreateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="53.0" onMouseClicked="#createPoll" prefHeight="81.0" prefWidth="156.0" text="+">
+                     <JFXButton id="pollCreateButton" fx:id="pollCreateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="53.0" onMouseClicked="#createPoll" prefHeight="81.0" prefWidth="156.0" style="-fx-background-color: #555555;" text="+" textFill="WHITE">
                         <font>
                            <Font name="System Bold" size="38.0" />
                         </font>
