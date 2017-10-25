@@ -69,14 +69,7 @@ public class HomeViewController extends VBox {
      */
     @FXML
     private void displayPollCreationView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/PollCreationStep1View.fxml"));
-        Pane cmdPane = fxmlLoader.load();
-        try {
-            rootPane.getChildren().clear();
-            rootPane.getChildren().add(cmdPane);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        loadScreen("PollCreationStep1View");
     }
 
 

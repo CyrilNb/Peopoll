@@ -46,7 +46,7 @@
                                  <Font name="Ubuntu Regular" size="24.0" />
                              </font>
                          </Label>
-                         <JFXTextField id="nbMaxPeopleField" fx:id="nbMaxPeopleField" layoutX="184.0" layoutY="229.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="305.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                         <JFXTextField id="nbMaxPeopleField" fx:id="nbMaxPeopleField" layoutX="184.0" layoutY="229.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="305.0" promptText="Optional" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                              <font>
                                  <Font name="Ubuntu Regular" size="24.0" />
                              </font>
@@ -66,7 +66,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                         </ImageView>
-                        <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2/3" wrappingWidth="150.13671875">
+                        <Text fill="WHITE" layoutX="219.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2/3" wrappingWidth="202.13671875">
                            <font>
                               <Font name="Ubuntu Regular" size="38.0" />
                            </font>

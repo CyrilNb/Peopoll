@@ -16,7 +16,7 @@ public class Choice implements Entity{
 
     /* private fields */
     private int idChoice;
-    private final int idPoll;
+    private int idPoll;
     private Date dateChoice;
     private int startingTime;
     private int endingTime;
@@ -24,14 +24,11 @@ public class Choice implements Entity{
 
     /**
      * Constructor with startingTime and endingTime
-     * @param idChoice
      * @param dateChoice
      * @param startingTime
      * @param endingTime
      */
-    public Choice(int idChoice,int idPoll, Date dateChoice, int startingTime, int endingTime) {
-        this.idChoice = idChoice;
-        this.idPoll = idPoll;
+    public Choice(Date dateChoice, int startingTime, int endingTime) {
         this.dateChoice = dateChoice;
         this.startingTime = startingTime;
         this.endingTime = endingTime;
@@ -39,12 +36,9 @@ public class Choice implements Entity{
 
     /**
      * Constructor with if no time limits are set
-     * @param idChoice
      * @param dateChoice
      */
-    public Choice(int idChoice,int idPoll, Date dateChoice) {
-        this.idChoice = idChoice;
-        this.idPoll = idPoll;
+    public Choice(Date dateChoice) {
         this.dateChoice = dateChoice;
     }
 
@@ -112,6 +106,22 @@ public class Choice implements Entity{
     }
 
     /**
+     * Sets new idChoice
+     * @param idChoice
+     */
+    public void setIdChoice(int idChoice) {
+        this.idChoice = idChoice;
+    }
+
+    /**
+     * Sets idPoll
+     * @param idPoll
+     */
+    public void setIdPoll(int idPoll) {
+        this.idPoll = idPoll;
+    }
+
+    /**
      * Gets idPoll.
      *
      * @return Value of idPoll.
@@ -119,6 +129,8 @@ public class Choice implements Entity{
     public int getIdPoll() {
         return idPoll;
     }
+
+
 
     @Override
     public String toString() {

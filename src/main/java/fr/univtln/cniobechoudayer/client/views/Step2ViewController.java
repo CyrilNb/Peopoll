@@ -90,8 +90,9 @@ public class Step2ViewController implements Initializable{
     public void loadScreen(String resource, HashMap currentPoll) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
         System.out.println("Loading : /fxml/" + resource + ".fxml");
-        if(resource == "PollCreationStep1View")
+        if(resource == "PollCreationStep1View"){
             loader.setController(new Step1ViewController(currentPoll));
+        }
         else if(resource == "PollCreationStep3View")
             loader.setController(new Step3ViewController(currentPoll));
         AnchorPane ap = loader.load();
