@@ -121,6 +121,6 @@ public class Step1ViewController implements Initializable {
                 infoPollTextField.setText(currentPoll.get("Info"));
             }
         }
-
+        checkFields();
     }
 }

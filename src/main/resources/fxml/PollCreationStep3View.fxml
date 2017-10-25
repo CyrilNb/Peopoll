@@ -20,24 +20,19 @@
                      <children>
                         <Pane prefHeight="291.0" prefWidth="257.0" style="-fx-background-color: #FFFFFF;">
                            <children>
-                              <Text layoutX="6.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add  time slots to your poll">
-                                 <font>
-                                    <Font name="Ubuntu Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                              <JFXTimePicker id="startPollPicker" fx:id="startPollPicker" layoutX="10.0" layoutY="137.0">
+                              <JFXTimePicker id="startPollPicker" fx:id="startPollPicker" layoutX="10.0" layoutY="137.0" onMouseClicked="#checkFields">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXTimePicker>
-                              <JFXTimePicker id="endPollPicker" fx:id="endPollPicker" layoutX="10.0" layoutY="210.0">
+                              <JFXTimePicker id="endPollPicker" fx:id="endPollPicker" layoutX="10.0" layoutY="210.0" onMouseClicked="#checkFields">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXTimePicker>
-                              <JFXDatePicker id="dayPollPicker" fx:id="dayPollPicker" layoutX="10.0" layoutY="64.0">
+                              <JFXDatePicker id="dayPollPicker" fx:id="dayPollPicker" layoutX="10.0" layoutY="64.0" onAction="#checkFields" onMouseClicked="#checkFields">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXDatePicker>
-                              <JFXButton id="addTimeSlotButton" layoutX="50.0" layoutY="260.0" onMouseClicked="#addTimeSlotToPoll" text="ADD TO MY POLL">
+                              <JFXButton id="addTimeSlotButton" fx:id="addTimeSlotButton" layoutX="50.0" layoutY="260.0" onMouseClicked="#addTimeSlotToPoll" text="ADD TO MY POLL">
                                  <font>
                                     <Font name="Ubuntu Bold" size="16.0" />
                                  </font>
@@ -85,7 +80,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                         </ImageView>
-                        <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 3/3" wrappingWidth="150.13671875">
+                        <Text fill="WHITE" layoutX="225.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 3/3" wrappingWidth="190.99999904632568">
                            <font>
                               <Font name="Ubuntu Regular" size="38.0" />
                            </font>
