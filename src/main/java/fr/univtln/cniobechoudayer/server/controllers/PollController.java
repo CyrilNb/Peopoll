@@ -11,6 +11,7 @@ import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 public class PollController {
 
     public static Poll searchPollByCode(int codePoll) throws PersistanceException {
+        EntityManager entityManager = EntityManager.getInstance();
         Poll foundPoll;
         try {
             foundPoll = Poll.findById(codePoll);
@@ -20,7 +21,10 @@ public class PollController {
                 return null;
             }
         } catch (PersistanceException e) {
+            e.getException().printStackTrace();
             return null;
+        }finally {
+            entityManager.dispose();
         }
     }
 
@@ -33,7 +37,5 @@ public class PollController {
         System.out.println("exit createPoll from PollController");
         return returnedID;
     }
-
-
 
 }

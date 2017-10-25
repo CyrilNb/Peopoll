@@ -23,7 +23,7 @@ import java.util.List;
  * Controller of the HomeView
  * Created by Corentin on 21/10/2017.
  */
-public class HomeViewController extends VBox {
+public class HomeViewController {
 
     @FXML
     private AnchorPane rootPane;
@@ -36,12 +36,11 @@ public class HomeViewController extends VBox {
     private JFXTextField nameCreatorTextField;
     @FXML
     private JFXTextField mailCreatorTextField;
-
     @FXML
     private JFXButton pollCreateButton;
-
     @FXML
     private JFXButton searchCodeButton;
+
 
     private PollController pollController = new PollController();
 
@@ -53,14 +52,26 @@ public class HomeViewController extends VBox {
      * Method to search a poll using a code when a user click
      */
     @FXML
-    private void searchPoll() throws IOException {
+    public void searchPoll() throws IOException {
+        //for testing:
+        /*try {
+            Poll searchedPoll = pollController.searchPollByCode(11);
+            System.out.println(searchedPoll);
+        } catch (PersistanceException e) {
+            e.printStackTrace();
+        }
+        /*for testing too:
+        if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
+
+        /*private void searchPoll() throws IOException {
         List<Choice> listChoice = new ArrayList<>();
         listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear())));
         listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear()), 1502, 1403));
         listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear()), 1604, 5811));
 
-        loadScreen("PollView", new Poll.PollBuilder("test","corentin", "mail").setManagerCode("4444").setChoicesList(listChoice).build());
-        /*if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
+        loadScreen("PollView", new Poll.PollBuilder("test","corentin", "mail").setManagerCode("4444").setChoicesList(listChoice).build());*/
+
+        if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
             Poll searchedPoll = null;
             try {
                 searchedPoll = pollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
@@ -72,7 +83,7 @@ public class HomeViewController extends VBox {
             }
         }else{
             //error msg
-        }*/
+        }
     }
 
     /**
@@ -127,8 +138,4 @@ public class HomeViewController extends VBox {
         AnchorPane ap = loader.load();
         rootPane.getChildren().setAll(ap);
     }
-
-
-
-
 }

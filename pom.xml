@@ -10,10 +10,9 @@
         <!-- utln login for nexus (maven and docker ) repository on lsis -->
         <lsisnexus.login>cyril-niobe@etud.univ-tln.fr</lsisnexus.login>
         <!-- the default Main class -->
-        <app.main.class>fr.univtln.cniobechoudayer.clientserver.MainClient</app.main.class>
+        <app.main.class>fr.univtln.cniobechoudayer.server.Test</app.main.class>
     </properties>
     <!-- ADAPTER LES PROPRIETES SUIVANTES -->
-
     <repositories>
         <repository>
             <snapshots>
@@ -95,7 +94,7 @@
                 <configuration>
                     <filters>
                         <filter>
-                            <artifact>fr.univtln.bruno.test.helloworld:app</artifact>
+                            <artifact>fr.univtln.cniobechoudayer.server.Test</artifact>
                             <includes>
                                 <include>**</include>
                             </includes>
