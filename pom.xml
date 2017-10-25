@@ -10,7 +10,7 @@
         <!-- utln login for nexus (maven and docker ) repository on lsis -->
         <lsisnexus.login>cyril-niobe@etud.univ-tln.fr</lsisnexus.login>
         <!-- the default Main class -->
-        <app.main.class>fr.univtln.cniobechoudayer.server.MainServer</app.main.class>
+        <app.main.class>fr.univtln.cniobechoudayer.server.MainClient</app.main.class>
     </properties>
     <!-- ADAPTER LES PROPRIETES SUIVANTES -->
 

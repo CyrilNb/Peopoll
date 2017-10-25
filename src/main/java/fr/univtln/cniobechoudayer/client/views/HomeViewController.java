@@ -87,7 +87,12 @@ public class HomeViewController extends VBox {
     @FXML
     private void isAccessCodeTextFieldEmpty(){
         if(codeTextField.getText().length() > 0){
-            searchCodeButton.setDisable(false);
+            try{
+                Integer.parseInt(codeTextField.getText());
+                searchCodeButton.setDisable(false);
+            }catch(Exception e){
+            }
+
         }else{
             searchCodeButton.setDisable(true);
         }

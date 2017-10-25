@@ -162,5 +162,6 @@ public class Step2ViewController implements Initializable{
                 nbMaxPeopleField.setText(currentPoll.get("NBMAX"));
             }
         }
+        checkFields();
     }
 }

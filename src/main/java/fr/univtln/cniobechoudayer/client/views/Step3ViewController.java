@@ -55,10 +55,6 @@ public class Step3ViewController implements Initializable{
     private HashMap<String, String> currentPoll;
 
 
-    public Step3ViewController(){
-
-    }
-
     /**
      * constructor retrieving previous data
      * @param passedPoll is the current poll in creation
