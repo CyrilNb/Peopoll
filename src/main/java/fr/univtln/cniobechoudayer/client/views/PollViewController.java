@@ -1,29 +1,27 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
+import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
-import fr.univtln.cniobechoudayer.model.entities.Contribution;
-import fr.univtln.cniobechoudayer.model.entities.Poll;
-import fr.univtln.cniobechoudayer.server.controllers.ChoiceController;
-import fr.univtln.cniobechoudayer.server.controllers.PollController;
+import fr.univtln.cniobechoudayer.server.controllers.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
+import javafx.scene.control.*;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class PollViewController implements Initializable {
 
@@ -134,13 +132,16 @@ public class PollViewController implements Initializable {
         listContributions.add(new Contribution("Cyril"));
         listContributions.add(new Contribution("Goddamn"));
         listContributions.add(new Contribution("C'est la merde"));
-        setGridViewRows(listContributions.size());
+        setGridViewRows(listContributions.size() + 1);
         System.out.println("Taille de listChoices : " + listChoices.size());
         System.out.println("Taille de listContributions : " + listContributions.size());
         setRatioContributors(pollToDisplay.getNbMaxContributor());
 
         bindGridViewColumns();
         bindGridViewRows();
+        addBlankAddRow();
+
+        setView();
     }
 
     /**
@@ -161,6 +162,7 @@ public class PollViewController implements Initializable {
      */
     private void setGridViewRows(int rows){
         for(int i=0; i < rows; i++){
+            System.out.println("ajout row");
             gridContributions.addRow(i);
         }
     }
@@ -171,6 +173,10 @@ public class PollViewController implements Initializable {
      */
     private void setRatioContributors(int nbMax){
         gridContributions.add(new Text(listContributions.size() + " / " + nbMax), 0, 0);
+    }
+
+    private void addBlankAddRow(){
+        gridContributions.addRow(listContributions.size()+2, new Text("ADD "));
     }
 
     private void bindGridViewColumns(){
@@ -187,15 +193,20 @@ public class PollViewController implements Initializable {
     }
 
     private void bindGridViewRows(){
-        for(int i = 0; i == listContributions.size(); i++){
-            Contribution currentContribution = listContributions.get(i);
-            TextField txtField = new TextField(currentContribution.getNameContributor());
-            for(int j = 0; j == listChoices.size(); j++){
-                if(i > 0){
-                    gridContributions.add(txtField, i, j);
-                    Checkbox checkbox = new Checkbox();
-                    //TODO add checkbox in colsn
-                }
+        for(int i = 0; i < (listContributions.size()+1); i++){
+            if(i > 0){
+            Contribution currentContribution = listContributions.get(i-1);
+            TextField txtField = new TextField();
+            txtField.setText(currentContribution.getNameContributor());
+            System.out.println(txtField.getText());
+            System.out.println("adding textfields");
+            gridContributions.addRow(i, txtField);
+            for(int j = 1; j < (listChoices.size()+1); j++){
+                JFXCheckBox checkbox = new JFXCheckBox();
+                //TODO center checkboxes
+                gridContributions.add(checkbox, j, i);
+            }
+
             }
         }
     }
@@ -209,6 +220,9 @@ public class PollViewController implements Initializable {
 
         ColumnConstraints colConst = new ColumnConstraints();
         colConst.setPercentWidth(100 / (listChoices.size() + 2));
+
+        RowConstraints rowConstraints = new RowConstraints();
+        rowConstraints.setPercentHeight(100 / listContributions.size()+2);
 
         gridContributions.getColumnConstraints().add(colConst);
     }
