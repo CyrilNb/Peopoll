@@ -48,8 +48,6 @@ public class Step3ViewController implements Initializable{
     @FXML
     private Text titlePollText;
 
-    private PollController pollController;
-
     private int idPollCreated;
 
     private HashMap<String, String> currentPoll;
@@ -57,10 +55,10 @@ public class Step3ViewController implements Initializable{
 
     /**
      * constructor retrieving previous data
-     * @param passedPoll is the current poll in creation
+     * @param passedArgsPoll is the current poll in creation
      */
-    public Step3ViewController(HashMap passedPoll){
-        this.currentPoll = passedPoll;
+    public Step3ViewController(HashMap passedArgsPoll){
+        this.currentPoll = passedArgsPoll;
     }
 
     @FXML
@@ -69,9 +67,8 @@ public class Step3ViewController implements Initializable{
     }
 
     @FXML
-    private int validatePollCreation() throws IOException, PersistanceException {
-
-        //Parse NBMAX
+    public int validatePollCreation() throws IOException, PersistanceException {
+        System.out.println("entered validatePllCreation");
         int nbMax;
         try {
             nbMax = Integer.parseInt(currentPoll.get("NBMAX"));
@@ -79,8 +76,9 @@ public class Step3ViewController implements Initializable{
             nbMax = 0;
         }
 
-        idPollCreated = pollController.createPoll(currentPoll.get("Title"), currentPoll.get("Location"), currentPoll.get("Info"), currentPoll.get("Creator"), currentPoll.get("Mail"), nbMax);
+        idPollCreated = PollController.createPoll(currentPoll.get("Title"), currentPoll.get("Location"), currentPoll.get("Info"), currentPoll.get("Creator"), currentPoll.get("Mail"), nbMax);
         loadScreen("PollShareCodesView", idPollCreated);
+        System.out.println("exit validatePllCreation");
         return 1;
     }
 

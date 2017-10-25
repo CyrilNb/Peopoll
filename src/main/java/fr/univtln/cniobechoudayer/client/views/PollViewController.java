@@ -32,7 +32,6 @@ public class PollViewController implements Initializable {
 
     private List<Contribution> listContributions;
 
-
     @FXML
     private AnchorPane rootView;
 
