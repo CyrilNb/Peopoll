@@ -140,7 +140,7 @@ public class Step3ViewController implements Initializable{
     }
 
     public void bindListViewChoices(Choice choice){
-        timeSlotsListView.getItems().add(choice.getDateChoice() + " " + choice.getStartingTime() + " " + choice.getEndingTime());
+        timeSlotsListView.getItems().add(choice.toString());
     }
 
     @FXML

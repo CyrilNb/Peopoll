@@ -161,8 +161,11 @@ public class PollViewController implements Initializable {
             Contribution currentContribution = listContributions.get(i);
             TextField txtField = new TextField(currentContribution.getNameContributor());
             for(int j = 0; j == listDates.size(); j++){
-                Checkbox checkbox = new Checkbox();
-
+                if(i > 0){
+                    //gridContributions.add(txtField, i, j);
+                    Checkbox checkbox = new Checkbox();
+                    //TODO add checkbox in colsn
+                }
             }
         }
     }
