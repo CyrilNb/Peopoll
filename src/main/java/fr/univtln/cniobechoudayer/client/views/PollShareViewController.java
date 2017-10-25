@@ -1,5 +1,8 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+import fr.univtln.cniobechoudayer.model.entities.Poll;
+import fr.univtln.cniobechoudayer.server.controllers.PollController;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,8 +32,10 @@ public class PollShareViewController implements Initializable{
     @FXML
     private ImageView viewPollButton;
 
-    public PollShareViewController(int codePoll){
+    private Poll currentPoll;
 
+    public PollShareViewController(int codePoll) throws PersistanceException {
+        this.currentPoll = PollController.searchPollByCode(codePoll);
     }
 
     /*
@@ -38,7 +43,7 @@ public class PollShareViewController implements Initializable{
      */
     @FXML
     private void goBackHome() throws IOException {
-        loadScreen("HomeView");
+        loadScreen("HomeViewfind");
     }
 
     /*
@@ -54,6 +59,7 @@ public class PollShareViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        accessCodeText.setText(String.valueOf(currentPoll.getIdPoll()));
+        managementCodeText.setText(String.valueOf(currentPoll.getManagerCode()));
     }
 }

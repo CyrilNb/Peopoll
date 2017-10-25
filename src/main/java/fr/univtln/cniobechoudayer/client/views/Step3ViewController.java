@@ -58,9 +58,6 @@ public class Step3ViewController implements Initializable{
     @FXML
     private JFXButton addTimeSlotButton;
 
-    private PollController pollController;
-
-    private ChoiceController choiceController = new ChoiceController();
 
     private int idPollCreated;
 
@@ -109,7 +106,7 @@ public class Step3ViewController implements Initializable{
         Instant ins = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date dayDate = Date.from(ins);
 
-        Choice addedChoice = choiceController.createChoice(dayDate, currentStartingTime, currentEndingTime);
+        Choice addedChoice = ChoiceController.createChoice(dayDate, currentStartingTime, currentEndingTime);
 
         bindListViewChoices(addedChoice);
         clearView();
@@ -171,7 +168,7 @@ public class Step3ViewController implements Initializable{
      * @throws IOException
      */
     @FXML
-    public void loadScreen(String resource, int idPoll) throws IOException {
+    public void loadScreen(String resource, int idPoll) throws IOException, PersistanceException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
         loader.setController(new PollShareViewController(idPoll));
         AnchorPane ap = loader.load();
