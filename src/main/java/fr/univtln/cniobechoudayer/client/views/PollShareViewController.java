@@ -1,15 +1,21 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+import fr.univtln.cniobechoudayer.model.entities.Poll;
+import fr.univtln.cniobechoudayer.server.controllers.PollController;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PollShareViewController {
+public class PollShareViewController implements Initializable{
 
     @FXML
     private AnchorPane rootView;
@@ -26,8 +32,10 @@ public class PollShareViewController {
     @FXML
     private ImageView viewPollButton;
 
-    public PollShareViewController(int codePoll){
+    private Poll currentPoll;
 
+    public PollShareViewController(int codePoll) throws PersistanceException {
+        this.currentPoll = PollController.searchPollByCode(codePoll);
     }
 
     /*
@@ -35,7 +43,7 @@ public class PollShareViewController {
      */
     @FXML
     private void goBackHome() throws IOException {
-        loadScreen("HomeView");
+        loadScreen("HomeViewfind");
     }
 
     /*
@@ -47,5 +55,11 @@ public class PollShareViewController {
         System.out.println("Loading : /fxml/" + resource + ".fxml");
         AnchorPane ap = loader.load();
         rootView.getChildren().setAll(ap);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        accessCodeText.setText(String.valueOf(currentPoll.getIdPoll()));
+        managementCodeText.setText(String.valueOf(currentPoll.getManagerCode()));
     }
 }

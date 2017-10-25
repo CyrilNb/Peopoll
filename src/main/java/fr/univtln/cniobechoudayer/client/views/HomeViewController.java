@@ -1,6 +1,7 @@
 package fr.univtln.cniobechoudayer.client.views;
 
 import com.jfoenix.controls.*;
+import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.controllers.PollController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
@@ -13,6 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Controller of the HomeView
@@ -49,13 +54,23 @@ public class HomeViewController {
     @FXML
     public void searchPoll() throws IOException {
         //for testing:
-        try {
+        /*try {
             Poll searchedPoll = pollController.searchPollByCode(11);
             System.out.println(searchedPoll);
         } catch (PersistanceException e) {
             e.printStackTrace();
         }
-        /*
+        /*for testing too:
+        if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
+
+        /*private void searchPoll() throws IOException {
+        List<Choice> listChoice = new ArrayList<>();
+        listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear())));
+        listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear()), 1502, 1403));
+        listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear()), 1604, 5811));
+
+        loadScreen("PollView", new Poll.PollBuilder("test","corentin", "mail").setManagerCode("4444").setChoicesList(listChoice).build());*/
+
         if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
             Poll searchedPoll = null;
             try {
@@ -68,7 +83,7 @@ public class HomeViewController {
             }
         }else{
             //error msg
-        }*/
+        }
     }
 
     /**

@@ -13,7 +13,7 @@ public class ChoiceController {
         return Collections.emptyList();
     }
 
-    public Choice createChoice(Date dateChoice, int startingTime, int endingTime){
+    public static Choice createChoice(Date dateChoice, int startingTime, int endingTime){
         return new Choice(dateChoice, startingTime, endingTime);
     }
 
