@@ -2,14 +2,17 @@ package fr.univtln.cniobechoudayer.client.views;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PollShareViewController {
+public class PollShareViewController implements Initializable{
 
     @FXML
     private AnchorPane rootView;
@@ -47,5 +50,10 @@ public class PollShareViewController {
         System.out.println("Loading : /fxml/" + resource + ".fxml");
         AnchorPane ap = loader.load();
         rootView.getChildren().setAll(ap);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
     }
 }

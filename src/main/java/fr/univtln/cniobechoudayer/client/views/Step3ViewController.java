@@ -153,7 +153,7 @@ public class Step3ViewController implements Initializable{
     /**
      Method to loadScreen with parameters
      @param resource is the view
-     @param currentPoll in creation to share its data through the steps
+     @param currentPoll in creation to sharfinalDatee its data through the steps
      */
     @FXML
     public void loadScreen(String resource, HashMap currentPoll) throws IOException {

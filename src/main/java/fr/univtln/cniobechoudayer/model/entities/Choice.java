@@ -136,19 +136,27 @@ public class Choice implements Entity{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getFormattedDate(this.dateChoice))
-                .append("Start : " + getFormattedDate(this.getStartingTime()))
-                .append("End : " + getFormattedDate(this.getStartingTime()));
+        sb.append(getFormattedDate(this.dateChoice) + " | ")
+                .append(getFormattedDate(this.getStartingTime(), true))
+                .append(" | " + getFormattedDate(this.getEndingTime(), false));
         return sb.toString();
     }
 
-    private String getFormattedDate(int time){
+    private String getFormattedDate(int time, boolean isStart){
+        System.out.println(time);
         String timeString = String.valueOf(time);
         String finalDate = "";
         if(time != 0) {
-            String part1 = timeString.substring(0, 1);
-            String part2 = timeString.substring(2, 3);
-            finalDate = part1+":"+part2;
+            String part1 = timeString.substring(0, 2);
+            System.out.println(part1);
+            String part2 = timeString.substring(2,4);
+            System.out.println(part2);
+            if(isStart){
+                finalDate = "Start : ";
+            }else{
+                finalDate = "End : ";
+            }
+            finalDate += part1+":"+part2;
 
         }else{
             finalDate = "";
