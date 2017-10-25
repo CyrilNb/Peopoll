@@ -1,5 +1,6 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+import fr.univtln.cniobechoudayer.client.net.SendEmail;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.controllers.PollController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
@@ -61,5 +62,10 @@ public class PollShareViewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         accessCodeText.setText(String.valueOf(currentPoll.getIdPoll()));
         managementCodeText.setText(String.valueOf(currentPoll.getManagerCode()));
+    }
+
+    @FXML
+    public void sendEmailToUser(){
+        SendEmail.sendEmail(currentPoll);
     }
 }

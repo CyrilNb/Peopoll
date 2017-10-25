@@ -1,6 +1,7 @@
 package fr.univtln.cniobechoudayer.client.views;
 
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
@@ -50,6 +51,9 @@ public class PollViewController implements Initializable {
     @FXML
     private Text titlePollText;
 
+    @FXML
+    private JFXComboBox choicesComboBox;
+
 
     public PollViewController(Poll pollToDisplay){
         this.pollToDisplay = pollToDisplay;
@@ -68,7 +72,18 @@ public class PollViewController implements Initializable {
 
     @FXML
     private void defineFinalDate(){
+        if(gridContributions.isVisible()){
+            gridContributions.setVisible(false);
+            choicesComboBox.setVisible(true);
+        }else{
+            gridContributions.setVisible(true);
+            choicesComboBox.setVisible(false);
+        }
+    }
 
+    @FXML
+    private void datesComboBoxSelected(){
+        //TODO when user select a value, update selected date
     }
 
     /**
@@ -84,7 +99,13 @@ public class PollViewController implements Initializable {
      */
     @FXML
     private void lockPoll(){
-
+        if(gridContributions.isDisable()){
+            gridContributions.setDisable(false);
+            pollToDisplay.setIsLocked(false);
+        }else{
+            gridContributions.setDisable(true);
+            pollToDisplay.setIsLocked(true);
+        }
     }
 
     /**
@@ -117,6 +138,8 @@ public class PollViewController implements Initializable {
         }
         bindGridView();
         //TODO bind listContributions from DB
+
+        bindDatesComboBox();
 
         setView();
     }
@@ -172,7 +195,10 @@ public class PollViewController implements Initializable {
      * @param nbMax
      */
     private void setRatioContributors(int nbMax){
-        gridContributions.add(new Text(listContributions.size() + " / " + nbMax), 0, 0);
+        if(nbMax != 0)
+            gridContributions.add(new Text(listContributions.size() + " / " + nbMax), 0, 0);
+        else
+            gridContributions.add(new Text(String.valueOf(listContributions.size())), 0, 0);
     }
 
     private void addBlankAddRow(){
@@ -211,6 +237,12 @@ public class PollViewController implements Initializable {
         }
     }
 
+    private void bindDatesComboBox(){
+        for (Choice choice: listChoices) {
+            choicesComboBox.getItems().add(choice);
+        }
+    }
+
     private void setView(){
         /**
          * center value in GridPane
@@ -225,6 +257,12 @@ public class PollViewController implements Initializable {
         rowConstraints.setPercentHeight(100 / listContributions.size()+2);
 
         gridContributions.getColumnConstraints().add(colConst);
+
+        choicesComboBox.setVisible(false);
+
+        if(pollToDisplay.isIsLocked()){
+            gridContributions.setDisable(true);
+        }
     }
 
 
