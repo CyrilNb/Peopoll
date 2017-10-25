@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,11 +13,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.PollViewController">
                <children>
                   <Pane layoutX="90.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <GridPane gridLinesVisible="true" layoutX="135.0" layoutY="60.0" prefHeight="172.0" prefWidth="228.0">
+            <GridPane fx:id="gridContributions" gridLinesVisible="true" layoutX="135.0" layoutY="60.0" prefHeight="172.0" prefWidth="228.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,24 +32,28 @@
                   </Pane>
                   <Pane layoutX="11.0" layoutY="70.0" prefHeight="291.0" prefWidth="68.0" style="-fx-background-color: #FFFFFF;">
                      <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="16.0" layoutY="232.0" onMouseClicked="#savePoll" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="43.0" fitWidth="37.0" layoutX="16.0" layoutY="240.0" onMouseClicked="#savePoll" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/004-save.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="43.0" fitWidth="37.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#defineFinalDate" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/001-calendar.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                        </ImageView>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="16.0" layoutY="123.0" onMouseClicked="#lockPoll" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/005-unlocked.png" />
-                           </image>
-                        </ImageView>
+            <Pane fx:id="managerPane" prefHeight="198.0" prefWidth="68.0" visible="false">
+               <children>
+                              <ImageView fitHeight="43.0" fitWidth="37.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#defineFinalDate" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/001-calendar.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                              <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="124.0" onMouseClicked="#lockPoll" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/005-unlocked.png" />
+                                 </image>
+                              </ImageView>
+               </children>
+            </Pane>
                      </children>
                   </Pane>
                   <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="27.0" layoutY="6.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
@@ -56,7 +61,7 @@
                         <Image url="@../images/003-home.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="571.0" layoutY="6.0" onMouseClicked="#accessAsOrga" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="571.0" layoutY="6.0" onMouseClicked="#accessAsOrga" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../images/002-eye.png" />
                      </image>
@@ -66,5 +71,10 @@
                         <Font name="Ubuntu Regular" size="38.0" />
                      </font>
                   </Text>
+      <JFXTextField fx:id="managerCodeTextField" layoutX="388.0" layoutY="14.0" onKeyReleased="#accessAsOrga" onKeyTyped="#accessAsOrga" prefHeight="39.0" prefWidth="228.0" promptText="Enter your manager code">
+         <font>
+            <Font name="Ubuntu Bold" size="18.0" />
+         </font>
+      </JFXTextField>
                </children>
           </AnchorPane>
