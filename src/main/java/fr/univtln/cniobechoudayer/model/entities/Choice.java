@@ -2,12 +2,16 @@ package fr.univtln.cniobechoudayer.model.entities;
 
 
 import fr.univtln.cniobechoudayer.model.Entity;
+import fr.univtln.cniobechoudayer.server.database.DatabaseManager;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Class which represent a choice
@@ -22,6 +26,19 @@ public class Choice implements Entity{
     private int startingTime;
     private int endingTime;
 
+    private static Logger logger = Logger.getLogger(Poll.class.getName());
+
+    private static PreparedStatement findAllByIdPoll;
+
+    //L'initialisation des preparedstatments.
+    static {
+        try {
+            Connection connection = DatabaseManager.getConnection();
+            findAllByIdPoll = connection.prepareStatement("select ID_CHOICE,DATE_CHOICE,STARTING_TIME,ENDING_TIME,ID_POLL from PEOPOLL.CHOICES where ID_POLL=?");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Constructor with startingTime and endingTime
@@ -29,18 +46,45 @@ public class Choice implements Entity{
      * @param startingTime
      * @param endingTime
      */
-    public Choice(Date dateChoice, int startingTime, int endingTime) {
+    public Choice(Date dateChoice, int startingTime, int endingTime, int idPoll) {
         this.dateChoice = dateChoice;
         this.startingTime = startingTime;
         this.endingTime = endingTime;
     }
 
     /**
+     * Constructor used when retrieve from the db with startingTime and endingTime
+     * @param dateChoice
+     * @param startingTime
+     * @param endingTime
+     */
+    public Choice(int idChoice,Date dateChoice, int startingTime, int endingTime, int idPoll) {
+        this.idChoice = idChoice;
+        this.dateChoice = dateChoice;
+        this.startingTime = startingTime;
+        this.endingTime = endingTime;
+        this.idPoll = idPoll;
+    }
+
+    /**
      * Constructor with if no time limits are set
      * @param dateChoice
-     */
-    public Choice(Date dateChoice) {
+     * @param idPoll
+     * */
+    public Choice(Date dateChoice,int idPoll) {
         this.dateChoice = dateChoice;
+        this.idPoll = idPoll;
+    }
+
+    /**
+     * Constructor used when retrieve from the db if no time limits are set
+     * @param dateChoice
+     * @param idPoll
+     */
+    public Choice(int idChoice, Date dateChoice,int idPoll) {
+        this.idChoice = idChoice;
+        this.dateChoice = dateChoice;
+        this.idPoll = idPoll;
     }
 
     /**
@@ -132,13 +176,22 @@ public class Choice implements Entity{
     }
 
 
-
-    @Override
-    public String toString() {
+    public String displayChoiceInIHM(){
         StringBuilder sb = new StringBuilder();
         sb.append(getFormattedDate(this.dateChoice) + " | ")
                 .append(getFormattedDate(this.getStartingTime(), true))
                 .append(" | " + getFormattedDate(this.getEndingTime(), false));
+        return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("idChoice: ").append(this.idChoice)
+                .append(" dateChoice: ").append(this.dateChoice)
+                .append(" StartingTime: ").append(this.startingTime)
+                .append(" EndingTime: ").append(this.endingTime)
+                .append(" idPoll: ").append(this.idPoll);
         return sb.toString();
     }
 
@@ -172,13 +225,50 @@ public class Choice implements Entity{
     }
 
 
-    public static List<Choice> findAll() {
-        return null;
+    //method to create a choice object from the result of the database
+    private static Choice createFromResultSet(ResultSet result) throws SQLException {
+
+        int idChoice = result.getInt("ID_CHOICE");
+        Date dateChoice= result.getDate("DATE_CHOICE");
+        int startingTime = result.getInt("STARTING_TIME");
+
+        if(result.wasNull()) {
+            startingTime = -1;
+        }
+
+        int endingTime = result.getInt("ENDING_TIME");
+        if(result.wasNull()){
+            endingTime = -1;
+        }
+        int idPoll = result.getInt("ID_POLL");
+
+
+        if(startingTime == -1){
+            return new Choice(idChoice,dateChoice,idPoll);
+        }else{
+            return new Choice(idChoice,dateChoice,startingTime,endingTime,idPoll);
+        }
     }
 
-
-    public static Choice findById() {
-        return null;
+    /**
+     * Method to retrieve all choices contained in a specific poll
+     * @return list of all choices from the db
+     * @throws PersistanceException
+     */
+    public static List<Choice> findAllByIdPoll(int idPoll) throws PersistanceException {
+        try{
+            findAllByIdPoll.setInt(1,idPoll);
+            List<Choice> resultsChoices = new ArrayList<>();
+            ResultSet resultSet = findAllByIdPoll.executeQuery();
+            while(resultSet.next()){
+                Choice choice = createFromResultSet(resultSet);
+                logger.finest("find choice in the db: " + choice);
+                resultsChoices.add(choice);
+            }
+            return resultsChoices;
+        }catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
     }
 
 

@@ -106,7 +106,7 @@ public class Step3ViewController implements Initializable{
         Instant ins = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date dayDate = Date.from(ins);
 
-        Choice addedChoice = ChoiceController.createChoice(dayDate, currentStartingTime, currentEndingTime);
+        Choice addedChoice = ChoiceController.createChoice(dayDate, currentStartingTime, currentEndingTime,idPollCreated);
 
         bindListViewChoices(addedChoice);
         clearView();
@@ -137,7 +137,7 @@ public class Step3ViewController implements Initializable{
     }
 
     public void bindListViewChoices(Choice choice){
-        timeSlotsListView.getItems().add(choice.toString());
+        timeSlotsListView.getItems().add(choice.displayChoiceInIHM());
     }
 
     @FXML

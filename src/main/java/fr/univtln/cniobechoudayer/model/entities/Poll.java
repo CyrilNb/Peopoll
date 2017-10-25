@@ -34,7 +34,6 @@ public class Poll implements Entity {
 
     private static Logger logger = Logger.getLogger(Poll.class.getName());
 
-
     private static PreparedStatement findByID;
     private static PreparedStatement findAll;
 
@@ -432,7 +431,7 @@ public class Poll implements Entity {
         }
     }
 
-    //method to create a poll object from the result from the database
+    //method to create a poll object from the result of the database
     private static Poll createFromResultSet(ResultSet result) throws SQLException {
         return new Poll(result.getInt("ID_POLL"),result.getString("TITLE"),result.getString("MANAGER_CODE"),result.getString("LOCATION"),result.getString("DESCRIPTION"),result.getString("MAIL_CREATOR"),result.getString("NAME_CREATOR"),result.getBoolean("IS_LOCKED"),result.getInt("NB_MAX_CONTRIBUTOR"),result.getDate("FINAL_DATE"));
 

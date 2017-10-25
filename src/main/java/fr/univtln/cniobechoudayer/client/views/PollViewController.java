@@ -215,7 +215,7 @@ public class PollViewController implements Initializable {
         for(int i = 0; i < listChoices.size(); i++){
             Choice currentChoice = listChoices.get(i);
             System.out.println(currentChoice);
-            Text txt = new Text(currentChoice.toString());
+            Text txt = new Text(currentChoice.displayChoiceInIHM());
             txt.setWrappingWidth(100);
             gridContributions.addColumn(i+1, txt);
         }

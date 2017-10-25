@@ -3,10 +3,14 @@ package fr.univtln.cniobechoudayer.server;
 
 import fr.univtln.cniobechoudayer.client.views.HomeViewController;
 import fr.univtln.cniobechoudayer.client.views.Step3ViewController;
+import fr.univtln.cniobechoudayer.model.entities.Choice;
+import fr.univtln.cniobechoudayer.server.controllers.ChoiceController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +21,7 @@ public class Test {
     public static void main(String[] args) {
 
         //test insert
+        /*
         HashMap<String,String> mapArgs = new HashMap<>();
         mapArgs.put("Title","TestTitre");
         mapArgs.put("Location","DTC");
@@ -33,7 +38,7 @@ public class Test {
             e.printStackTrace();
         } catch (PersistanceException e) {
             e.printStackTrace();
-        }
+        }*/
 
         /*
         //test searchById for a poll:
@@ -48,6 +53,18 @@ public class Test {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+
+        //test choice findall
+        try {
+            ChoiceController choiceController = new ChoiceController();
+            List<Choice> list = choiceController.getAllChoicesFor(11);
+            for (Choice choice :list
+                 ) {
+                System.out.println(choice);
+            }
+        } catch (PersistanceException e) {
+            e.printStackTrace();
+        }
 
     }
 }
