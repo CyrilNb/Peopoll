@@ -132,16 +132,19 @@ public class PollViewController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        titlePollText.setText(pollToDisplay.getTitle());
-        if(pollToDisplay.isIsLocked()){
-            //TODO change image
-        }
-        bindGridView();
-        //TODO bind listContributions from DB
+        if(pollToDisplay != null){
+            titlePollText.setText(pollToDisplay.getTitle());
+            if(pollToDisplay.isIsLocked()){
+                //TODO change image
+            }
+            bindGridView();
+            //TODO bind listContributions from DB
 
         bindDatesComboBox();
-
         setView();
+        }else{
+            System.out.println("PollToDisplay null");
+        }
     }
 
     /**
