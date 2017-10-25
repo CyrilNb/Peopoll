@@ -25,22 +25,26 @@ public class DatabaseManager {
     /**
      * The Constant url.
      */
-    private static final String url = System.getProperty("database.url");
+    //private static final String url = System.getProperty("database.url");
+    private static final String url = "jdbc:h2:tcp://localhost/~/peopoll";
 
     /**
      * The Constant user.
      */
-    private static final String user = System.getProperty("database.user");
+    //private static final String user = System.getProperty("database.user");
+    private static final String user = "root";
 
     /**
      * The Constant password.
      */
-    private static final String password = System.getProperty("database.password");
+    //private static final String password = System.getProperty("database.password");
+    private static final String password = "root";
 
     /**
      * The Constant schema.
      */
-    private static final String schema = System.getProperty("database.schema");
+    //private static final String schema = System.getProperty("database.schema");
+    private static final String schema = "PEOPOLL";
 
 
     static {
@@ -61,6 +65,9 @@ public class DatabaseManager {
      * @throws SQLException the SQL exception
      */
     public static synchronized Connection getConnection() throws SQLException {
+        System.out.println(url);
+        System.out.println(user);
+        System.out.println(password);
         Connection connection = null;
         if (freeConnections.isEmpty()) {
                 connection = DriverManager.getConnection(url, user, password);

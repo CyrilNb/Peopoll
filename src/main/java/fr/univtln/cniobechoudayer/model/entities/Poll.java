@@ -470,18 +470,27 @@ public class Poll implements Entity {
         int returnedID;
         try{
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO PEOPOLL.POLLS(TITLE, NAME_CREATOR,MAIL_CREATOR) VALUES ('" + title + "','" + nameCreator + "','" + mailCreator + "')", Statement.RETURN_GENERATED_KEYS);
+            System.out.println("entré persists 1");
+            //statement.executeUpdate("INSERT INTO PEOPOLL.POLLS(MANAGER_CODE,LOCATION,DESCRIPTION,TITLE,MAIL_CREATOR,NAME_CREATOR,IS_LOCKED,NB_MAX_CONTRIBUTOR,FINAL_DATE) VALUES ('" + title + "','" + nameCreator + "','" + mailCreator + "')", Statement.RETURN_GENERATED_KEYS);
+            statement.executeUpdate("INSERT INTO PEOPOLL.POLLS(MANAGER_CODE,LOCATION,DESCRIPTION,TITLE,MAIL_CREATOR,NAME_CREATOR,IS_LOCKED,NB_MAX_CONTRIBUTOR,FINAL_DATE) VALUES ('MANAGE1','VICHY','DESCIRPTION','TITRE','cyril@gmail.com','cyril',0,4,'2017-10-23')", Statement.RETURN_GENERATED_KEYS);
+            System.out.println("entré persists 2");
             ResultSet resultSet = statement.getGeneratedKeys();
+            System.out.println("entré persists 3");
             if (resultSet.next()) {
+                System.out.println("entré persists 4");
                 returnedID = resultSet.getInt(1);
+                System.out.println("entré persists 5");
                 setIdPoll(returnedID);
+                System.out.println("entré persists 6");
                 logger.info("creation of the poll: " + this);
+                System.out.println("sorti try");
                 return returnedID;
             } else {
                 throw  new PersistanceException("The key of the poll could not be found.");
             }
         }catch (SQLException e){
-            throw  new PersistanceException(e);
+            System.out.println("exception");
+            throw new PersistanceException(e);
         }
     }
 

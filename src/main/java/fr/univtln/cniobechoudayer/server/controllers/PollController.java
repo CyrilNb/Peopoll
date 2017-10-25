@@ -10,7 +10,7 @@ import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
  */
 public class PollController {
 
-    public Poll searchPollByCode(int codePoll) throws PersistanceException {
+    public static Poll searchPollByCode(int codePoll) throws PersistanceException {
         Poll foundPoll;
         try {
             foundPoll = Poll.findById(codePoll);
@@ -24,10 +24,13 @@ public class PollController {
         }
     }
 
-    public int createPoll(String title, String location, String info, String nameCreator, String mailCreator, int nbMax) throws PersistanceException{
+    public static int createPoll(String title, String location, String info, String nameCreator, String mailCreator, int nbMax) throws PersistanceException{
+        System.out.println("enterd createPoll from PollController");
         EntityManager entityManager = EntityManager.getInstance();
         int returnedID = entityManager.persist(new Poll.PollBuilder(title,nameCreator,mailCreator).setLocation(location).setDescription(info).setNbMaxContributor(nbMax).build());
         entityManager.dispose();
+        System.out.println("returnedID= " +returnedID);
+        System.out.println("exit createPoll from PollController");
         return returnedID;
     }
 
