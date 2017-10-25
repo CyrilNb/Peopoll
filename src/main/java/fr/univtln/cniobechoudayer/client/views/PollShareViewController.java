@@ -26,6 +26,10 @@ public class PollShareViewController {
     @FXML
     private ImageView viewPollButton;
 
+    public PollShareViewController(int codePoll){
+
+    }
+
     /*
     Method to display HomeView
      */

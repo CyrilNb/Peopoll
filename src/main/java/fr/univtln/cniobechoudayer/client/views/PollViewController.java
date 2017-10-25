@@ -1,6 +1,7 @@
 package fr.univtln.cniobechoudayer.client.views;
 
 import fr.univtln.cniobechoudayer.model.entities.Poll;
+import fr.univtln.cniobechoudayer.server.controllers.PollController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +14,9 @@ import java.util.ResourceBundle;
 public class PollViewController implements Initializable {
 
     private Poll pollToDisplay;
+
+    private PollController pollController = new PollController();
+
 
     @FXML
     private AnchorPane rootView;
@@ -61,10 +65,16 @@ public class PollViewController implements Initializable {
 
     }
 
-
+    /**
+     * Set the view of poll
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if(pollToDisplay.isIsLocked()){
+            //TODO change image
+        }
     }
 
     /**

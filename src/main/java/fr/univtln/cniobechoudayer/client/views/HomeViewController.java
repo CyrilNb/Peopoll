@@ -38,7 +38,7 @@ public class HomeViewController extends VBox {
     @FXML
     private JFXButton searchCodeButton;
 
-    private PollController pollController;
+    private PollController pollController = new PollController();
 
     public HomeViewController(){
 

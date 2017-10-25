@@ -34,7 +34,10 @@ public class Step2ViewController implements Initializable{
     @FXML
     private JFXTextField nameCreatorTextField;
 
-    private HashMap currentPoll;
+    @FXML
+    private JFXTextField nbMaxPeopleField;
+
+    private HashMap<String, String> currentPoll;
 
     //Regex pattern to check email
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -44,12 +47,13 @@ public class Step2ViewController implements Initializable{
         this.currentPoll = currentPoll;
     }
 
-    /*
+    /**
     Method to go back to step 1
      */
     @FXML
     private void goToPreviousStep() throws IOException {
-        loadScreen("PollCreationStep1View");
+        saveFields();
+        loadScreen("PollCreationStep1View", currentPoll);
     }
 
     @FXML
@@ -57,16 +61,17 @@ public class Step2ViewController implements Initializable{
         loadScreen("HomeView");
     }
 
-    /*
+    /**
     Method to access step 3 of poll creation
      */
     @FXML
     private void goToNextStep() throws IOException {
-        loadScreen("PollCreationStep3View");
+        saveFields();
+        loadScreen("PollCreationStep3View", currentPoll);
     }
 
-    /*
-    Method to loadScreen for step2View
+    /**
+    Method to loadScreen for without parameters
      */
     @FXML
     public void loadScreen(String resource) throws IOException {
@@ -76,7 +81,24 @@ public class Step2ViewController implements Initializable{
         rootView.getChildren().setAll(ap);
     }
 
-    /*
+    /**
+    Method to loadScreen with parameters
+     @param resource is the view
+     @param currentPoll in creation to share its data through the steps
+     */
+    @FXML
+    public void loadScreen(String resource, HashMap currentPoll) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
+        System.out.println("Loading : /fxml/" + resource + ".fxml");
+        if(resource == "PollCreationStep1View")
+            loader.setController(new Step1ViewController(currentPoll));
+        else if(resource == "PollCreationStep3View")
+            loader.setController(new Step3ViewController(currentPoll));
+        AnchorPane ap = loader.load();
+        rootView.getChildren().setAll(ap);
+    }
+
+    /**
     Method to check email pattern
      */
     public static boolean isEmailValid(String emailStr) {
@@ -85,7 +107,7 @@ public class Step2ViewController implements Initializable{
         return matcher.find();
     }
 
-    /*
+    /**
     Method that checks field
      */
     @FXML
@@ -102,22 +124,43 @@ public class Step2ViewController implements Initializable{
 
         if(mailCreatorTextField.getText().length() > 0 && isEmailValid(mailCreatorTextField.getText())){
             isMailFieldCorrect = true;
-        }else{
-            //TODO display mail error
         }
 
         //If fields are correct, then display next step
         if(isNameFieldCorrect && isMailFieldCorrect){
             nextStepArrow.setVisible(true);
-            System.out.println("Fields valid");
         }else{
             nextStepArrow.setVisible(false);
-            System.out.println("Fields non valid");
         }
     }
 
+    /**
+     * Method to save field before accessing next step
+     */
+    private void saveFields(){
+            currentPoll.put("Creator", nameCreatorTextField.getText());
+            currentPoll.put("Mail", mailCreatorTextField.getText());
+            currentPoll.put("NBMAX", nbMaxPeopleField.getText());
+    }
+
+    /**
+     * Displaying data of the poll in creation
+     * if user come steps backward
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if(currentPoll != null){
+            if(currentPoll.containsKey("Creator")){
+                nameCreatorTextField.setText(currentPoll.get("Creator"));
+            }
+            if(currentPoll.containsKey("Mail")){
+                mailCreatorTextField.setText(currentPoll.get("Mail"));
+            }
+            if(currentPoll.containsKey("NBMAX") && !currentPoll.get("NBMAX").isEmpty()){
+                nbMaxPeopleField.setText(currentPoll.get("NBMAX"));
+            }
+        }
     }
 }

@@ -24,12 +24,13 @@ public class PollController {
         }
     }
 
-    public int createPoll(String title, String nameCreator, String mailCreator) throws PersistanceException{
+    public int createPoll(String title, String location, String info, String nameCreator, String mailCreator, int nbMax) throws PersistanceException{
         EntityManager entityManager = EntityManager.getInstance();
-        int returnedID = entityManager.persist(new Poll.PollBuilder(title,nameCreator,mailCreator).build());
+        int returnedID = entityManager.persist(new Poll.PollBuilder(title,nameCreator,mailCreator).setLocation(location).setDescription(info).setNbMaxContributor(nbMax).build());
         entityManager.dispose();
         return returnedID;
     }
+
 
 
 }

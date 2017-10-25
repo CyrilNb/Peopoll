@@ -47,6 +47,7 @@ public class Step1ViewController implements Initializable {
      */
     @FXML
     private void nextStep() throws IOException {
+        saveFields();
         loadScreen("PollCreationStep2View", (HashMap) currentPoll);
     }
 
@@ -72,15 +73,9 @@ public class Step1ViewController implements Initializable {
 
     @FXML
     private void saveFields(){
-        if(titlePollTextField.getText() != null){
             currentPoll.put("Title", titlePollTextField.getText());
-        }
-        if(placePollTextField.getText() != null){
             currentPoll.put("Location", placePollTextField.getText());
-        }
-        if(infoPollTextField.getText() != null){
             currentPoll.put("Info", infoPollTextField.getText());
-        }
     }
 
     /*
@@ -115,14 +110,17 @@ public class Step1ViewController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(currentPoll.containsKey("Title")){
-            titlePollTextField.setText(currentPoll.get("Title"));
+        if(currentPoll != null){
+            if(currentPoll.containsKey("Title")){
+                titlePollTextField.setText(currentPoll.get("Title"));
+            }
+            if(currentPoll.containsKey("Location") && !currentPoll.get("Location").isEmpty()){
+                placePollTextField.setText(currentPoll.get("Location"));
+            }
+            if(currentPoll.containsKey("Info") && !currentPoll.get("Info").isEmpty()){
+                infoPollTextField.setText(currentPoll.get("Info"));
+            }
         }
-        if(currentPoll.containsKey("Location")){
-            placePollTextField.setText(currentPoll.get("Location"));
-        }
-        if(currentPoll.containsKey("Info")){
-            infoPollTextField.setText(currentPoll.get("Info"));
-        }
+
     }
 }
