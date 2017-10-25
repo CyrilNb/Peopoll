@@ -89,7 +89,6 @@ public class Step3ViewController implements Initializable{
         }catch(Exception e){
             nbMax = 0;
         }
-
         idPollCreated = PollController.createPoll(currentPoll.get("Title"), currentPoll.get("Location"), currentPoll.get("Info"), currentPoll.get("Creator"), currentPoll.get("Mail"), nbMax);
         loadScreen("PollShareCodesView", idPollCreated);
         System.out.println("exit validatePllCreation");

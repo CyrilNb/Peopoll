@@ -1,6 +1,7 @@
 package fr.univtln.cniobechoudayer.server;
 
 
+import fr.univtln.cniobechoudayer.client.views.HomeViewController;
 import fr.univtln.cniobechoudayer.client.views.Step3ViewController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
@@ -15,6 +16,8 @@ import java.util.Map;
 public class Test {
     public static void main(String[] args) {
 
+        //test insert
+        /*
         HashMap<String,String> mapArgs = new HashMap<>();
         mapArgs.put("Title","TestTitre");
         mapArgs.put("Location","DTC");
@@ -31,12 +34,23 @@ public class Test {
             e.printStackTrace();
         } catch (PersistanceException e) {
             e.printStackTrace();
+        }*/
+
+        //test searchById for a poll:
+        try {
+            Class.forName(org.h2.Driver.class.getName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        //test here read from the db
-        //test here update from the db
 
-        System.out.println("test");
+        HomeViewController homeViewController = new HomeViewController();
+        try {
+            homeViewController.searchPoll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }
