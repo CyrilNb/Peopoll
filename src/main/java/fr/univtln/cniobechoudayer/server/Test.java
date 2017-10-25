@@ -17,7 +17,6 @@ public class Test {
     public static void main(String[] args) {
 
         //test insert
-        /*
         HashMap<String,String> mapArgs = new HashMap<>();
         mapArgs.put("Title","TestTitre");
         mapArgs.put("Location","DTC");
@@ -34,23 +33,21 @@ public class Test {
             e.printStackTrace();
         } catch (PersistanceException e) {
             e.printStackTrace();
-        }*/
+        }
 
+        /*
         //test searchById for a poll:
         try {
             Class.forName(org.h2.Driver.class.getName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
         HomeViewController homeViewController = new HomeViewController();
         try {
             homeViewController.searchPoll();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
+        }*/
 
     }
 }

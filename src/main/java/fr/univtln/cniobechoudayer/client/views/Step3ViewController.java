@@ -23,7 +23,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Step3ViewController implements Initializable{
@@ -61,7 +60,7 @@ public class Step3ViewController implements Initializable{
 
     private int idPollCreated;
 
-    private HashMap<String, String> currentPoll;
+    private HashMap<String, String> mapArgsNewPoll;
 
 
     /**
@@ -69,7 +68,7 @@ public class Step3ViewController implements Initializable{
      * @param passedArgsPoll is the current poll in creation
      */
     public Step3ViewController(HashMap passedArgsPoll){
-        this.currentPoll = passedArgsPoll;
+        this.mapArgsNewPoll = passedArgsPoll;
     }
 
     @FXML
@@ -82,11 +81,12 @@ public class Step3ViewController implements Initializable{
         System.out.println("entered validatePllCreation");
         int nbMax;
         try {
-            nbMax = Integer.parseInt(currentPoll.get("NBMAX"));
+            nbMax = Integer.parseInt(mapArgsNewPoll.get("NBMAX"));
         }catch(Exception e){
             nbMax = 0;
         }
-        idPollCreated = PollController.createPoll(currentPoll.get("Title"), currentPoll.get("Location"), currentPoll.get("Info"), currentPoll.get("Creator"), currentPoll.get("Mail"), nbMax);
+        idPollCreated = PollController.createPoll(mapArgsNewPoll.get("Title"), mapArgsNewPoll.get("Location"), mapArgsNewPoll.get("Info"), mapArgsNewPoll.get("Creator"), mapArgsNewPoll.get("Mail"), nbMax,false);
+        System.out.println("blblblblbl:" + idPollCreated);
         loadScreen("PollShareCodesView", idPollCreated);
         System.out.println("exit validatePllCreation");
         return 1;
@@ -94,7 +94,7 @@ public class Step3ViewController implements Initializable{
 
     @FXML
     private void goToPreviousStep() throws IOException {
-        loadScreen("PollCreationStep2View", currentPoll);
+        loadScreen("PollCreationStep2View", mapArgsNewPoll);
     }
 
     @FXML
@@ -176,7 +176,7 @@ public class Step3ViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        titlePollText.setText(currentPoll.get("Title"));
+        titlePollText.setText(mapArgsNewPoll.get("Title"));
         addTimeSlotButton.setDisable(true);
     }
 

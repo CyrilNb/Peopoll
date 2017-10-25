@@ -28,13 +28,11 @@ public class PollController {
         }
     }
 
-    public static int createPoll(String title, String location, String info, String nameCreator, String mailCreator, int nbMax) throws PersistanceException{
-        System.out.println("enterd createPoll from PollController");
+    public static int createPoll(String title, String location, String info, String nameCreator, String mailCreator, int nbMax, boolean isLocked) throws PersistanceException{
         EntityManager entityManager = EntityManager.getInstance();
-        int returnedID = entityManager.persist(new Poll.PollBuilder(title,nameCreator,mailCreator).setLocation(location).setDescription(info).setNbMaxContributor(nbMax).build());
+        String managerCode = Character.toString(title.charAt(0)) + Character.toString(nameCreator.charAt(0));
+        int returnedID = entityManager.persist(new Poll.PollBuilder(title,nameCreator,mailCreator).setLocation(location).setDescription(info).setNbMaxContributor(nbMax).setIsLocked(isLocked).setManagerCode(managerCode).build());
         entityManager.dispose();
-        System.out.println("returnedID= " +returnedID);
-        System.out.println("exit createPoll from PollController");
         return returnedID;
     }
 

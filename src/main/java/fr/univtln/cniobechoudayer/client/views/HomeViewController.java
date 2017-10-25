@@ -49,6 +49,7 @@ public class HomeViewController {
     }
 
     /**
+    /**
      * Method to search a poll using a code when a user click
      */
     @FXML
