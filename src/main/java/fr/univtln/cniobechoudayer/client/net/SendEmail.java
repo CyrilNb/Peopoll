@@ -44,7 +44,7 @@ public class SendEmail {
                 msg.setRecipients(Message.RecipientType.TO,
                         InternetAddress.parse(poll.getMailCreator(),false));
                 msg.setSubject("Your codes to manage your new poll : " + poll.getTitle());
-                msg.setText("Hi ! \n Here are your codes, take care to keep them safe ! \n<b>Access code : <\\b>" + poll.getIdPoll() + " \n<b>Management code : <\\b>" + poll.getManagerCode());
+                msg.setText("Hi !\nHere are your codes, take care to keep them safe !\nAccess code : " + poll.getIdPoll() + "\n<b>Management code : " + poll.getManagerCode());
                 msg.setSentDate(new Date());
                 Transport.send(msg);
                 System.out.println("Message sent.");

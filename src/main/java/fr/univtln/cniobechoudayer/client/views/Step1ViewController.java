@@ -1,5 +1,6 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import javafx.fxml.FXML;

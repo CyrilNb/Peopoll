@@ -142,7 +142,7 @@ public class Step3ViewController implements Initializable{
             @Override
             protected void updateItem(Choice item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty ? "" : String.valueOf(item.getDateChoice() + " Start : " + Choice.getFormattedDate(item.getStartingTime(), true) + " End : " + Choice.getFormattedDate(item.getEndingTime(), false)));
+                setText(empty ? "" : String.valueOf(item.getDateChoice() + " " + Choice.getFormattedDate(item.getStartingTime(), true) + " " + Choice.getFormattedDate(item.getEndingTime(), false)));
             }
 
         };

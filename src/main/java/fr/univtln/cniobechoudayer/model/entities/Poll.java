@@ -473,7 +473,7 @@ public class Poll implements Entity {
                 logger.finest("find poll in the db: " + poll);
                 return poll;
             }else {
-                throw new PersistanceException("Poll " + idPoll + "not found");
+                return null;
             }
         }catch (Exception e) {
             throw new PersistanceException(e);
