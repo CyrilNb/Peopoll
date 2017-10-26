@@ -54,7 +54,7 @@
                               </ImageView>
                               <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="12.0" layoutY="124.0" onMouseClicked="#lockPoll" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/005-unlocked.png" />
+                                    <Image url="@../images/006-padlock.png" />
                                  </image>
                               </ImageView>
                </children>

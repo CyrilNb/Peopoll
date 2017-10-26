@@ -15,22 +15,22 @@
                <children>
                   <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
                      <children>
-                        <Label layoutX="52.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Title" textFill="WHITE">
+                        <Label layoutX="52.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #3498db; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Title" textFill="WHITE">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="52.0" layoutY="64.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Place" textAlignment="CENTER" textFill="WHITE">
+                        <Label layoutX="52.0" layoutY="64.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #3498db; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Place" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="52.0" layoutY="127.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Info" textAlignment="CENTER" textFill="WHITE">
+                        <Label layoutX="52.0" layoutY="127.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #3498db; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Info" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titlePollTextField" layoutX="134.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField fx:id="titlePollTextField" layoutX="134.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #3498db; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -38,7 +38,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
                         </JFXTextField>
-                        <JFXTextField fx:id="placePollTextField" layoutX="134.0" layoutY="64.0" prefHeight="55.0" prefWidth="355.0" promptText="Optional" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField fx:id="placePollTextField" layoutX="134.0" layoutY="64.0" prefHeight="55.0" prefWidth="355.0" promptText="Optional" style="-fx-border-color: #3498db; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -46,7 +46,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
                         </JFXTextField>
-                        <JFXTextField id="infoPollTextField" fx:id="infoPollTextField" layoutX="134.0" layoutY="127.0" prefHeight="155.0" prefWidth="355.0" promptText="Optional" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="infoPollTextField" fx:id="infoPollTextField" layoutX="134.0" layoutY="127.0" prefHeight="155.0" prefWidth="355.0" promptText="Optional" style="-fx-border-color: #3498db; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -66,7 +66,7 @@
                         </cursor>
                      </ImageView>
                   </Pane>
-                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
+                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #2980b9; -fx-padding: 10px;">
                      <children>
                         <ImageView id="backHomeButton" fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
                            <image>
