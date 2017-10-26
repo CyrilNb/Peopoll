@@ -3,8 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="379.0" prefWidth="647.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
                <children>
                   <Pane layoutX="90.0" layoutY="70.0" prefHeight="291.0" prefWidth="276.0" style="-fx-background-color: #FFFFFF;">
          <children>
@@ -71,7 +71,7 @@
                         <Image url="@../images/002-eye.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="locationPollText" layoutX="90.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="287.13671875">
+                  <Text fx:id="titlePollText" layoutX="90.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="287.13671875">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -93,7 +93,7 @@
       </Text>
        <Pane layoutX="388.0" layoutY="70.0" prefHeight="270.0" prefWidth="213.0" style="-fx-background-color: #FFFFFF;">
            <children>
-               <JFXTreeTableView fx:id="treeTableViewComments" layoutY="27.0" prefHeight="243.0" prefWidth="213.0" />
+               <TreeTableView fx:id="treeTableViewComments" layoutY="27.0" prefHeight="243.0" prefWidth="213.0" />
                <Text layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" wrappingWidth="86.00830078125" />
            </children>
        </Pane>

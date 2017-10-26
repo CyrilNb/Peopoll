@@ -1,9 +1,6 @@
 package fr.univtln.cniobechoudayer.client.views;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.*;
@@ -16,8 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 
@@ -73,6 +70,9 @@ public class PollViewController implements Initializable {
     @FXML
     private JFXButton addRowGridPane;
 
+    @FXML
+    private TreeTableView treeTableViewComments;
+
 
     public PollViewController(Poll pollToDisplay){
         this.pollToDisplay = pollToDisplay;
@@ -107,7 +107,7 @@ public class PollViewController implements Initializable {
     }
 
     /**
-    Save the current state of the poll
+     * Save the current state of the poll
      */
     @FXML
     private void savePoll() throws SQLException, PersistanceException, IOException {
@@ -122,7 +122,7 @@ public class PollViewController implements Initializable {
     }
 
     /**
-    Lock the poll (disable grid)
+     * Lock the poll (disable grid)
      */
     @FXML
     private void lockPoll(){
@@ -136,7 +136,7 @@ public class PollViewController implements Initializable {
     }
 
     /**
-    Grant management access (left bar)
+     * Grant management access (left bar)
      */
     @FXML
     private void accessAsOrga(){
@@ -163,7 +163,6 @@ public class PollViewController implements Initializable {
             titlePollText.setText(pollToDisplay.getTitle());
             locationPollText.setText(pollToDisplay.getLocation());
             infoPollText.setText(pollToDisplay.getDescription());
-
             if(pollToDisplay.isIsLocked()){
                 //TODO change image
             }
@@ -185,7 +184,9 @@ public class PollViewController implements Initializable {
                 listChoices = ChoiceController.getAllChoicesByPoll(idPoll);
                 listContributions = ContributionController.getAllContributionsByPoll(idPoll);
                 listComments = CommentController.getAllCommentsByPoll(idPoll);
+                System.out.println("listcomment: " + listComments);
                 bindGridView();
+                initTreeTableViewComments(listComments);
             } catch (PersistanceException e) {
                 e.printStackTrace();
                 System.out.println("cant bind grid view");
@@ -214,6 +215,31 @@ public class PollViewController implements Initializable {
             System.out.println("PollToDisplay null");
         }
     }
+
+    private void initTreeTableViewComments(List<Comment> listComments){
+        treeTableViewComments = new TreeTableView<Comment>();
+
+        TreeTableColumn<Comment,String> authorColumn = new TreeTableColumn<>("Author");
+        TreeTableColumn<Comment,String> contentColum = new TreeTableColumn<>("Comment");
+        TreeTableColumn<Comment,Date> dateColumn = new TreeTableColumn<>("Publication date");
+
+        treeTableViewComments.getColumns().addAll(authorColumn,contentColum,dateColumn);
+
+        Comment notUsedCommentRoot = new Comment();
+        TreeItem<Comment> root = new TreeItem<>(notUsedCommentRoot);
+        treeTableViewComments.setRoot(root);
+        treeTableViewComments.setShowRoot(false);
+        for (Comment comment:listComments) {
+            TreeItem<Comment> item = new TreeItem<>(comment);
+            root.getChildren().add(item);
+        }
+
+        authorColumn.setCellValueFactory(new TreeItemPropertyValueFactory<Comment,String>("nameAuthor"));
+        contentColum.setCellValueFactory(new TreeItemPropertyValueFactory<Comment,String>("content"));
+        dateColumn.setCellValueFactory(new TreeItemPropertyValueFactory<Comment,Date>("content"));
+
+    }
+
 
     /**
      * Setting up the view

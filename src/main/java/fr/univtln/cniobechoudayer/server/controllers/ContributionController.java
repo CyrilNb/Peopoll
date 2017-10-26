@@ -3,7 +3,6 @@ package fr.univtln.cniobechoudayer.server.controllers;
 import fr.univtln.cniobechoudayer.model.EntityManager;
 import fr.univtln.cniobechoudayer.model.entities.Contribution;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,9 +11,7 @@ import java.util.List;
 public class ContributionController {
 
     public static int save(String nameContributor, int idPoll, int idChoice, boolean delete) throws SQLException, PersistanceException {
-
         int createdContrib = -1;
-
         EntityManager em = EntityManager.getInstance();
         Contribution contribution = Contribution.findByParams(nameContributor, idPoll, idChoice);
         if(nameContributor != null){
@@ -34,22 +31,15 @@ public class ContributionController {
         return createdContrib;
     }
 
-    public static int createContribution(String nameContribution, int idPoll, int idChoice) throws SQLException, PersistanceException {
-        EntityManager em = EntityManager.getInstance();
-        int idCreatedContribution = em.persist(new Contribution(nameContribution, idPoll, idChoice));
-        em.dispose();
-        return idCreatedContribution;
-    }
-
     public static List<Contribution> getAllContributionsByPoll(int idPoll) throws PersistanceException, SQLException {
         EntityManager em = EntityManager.getInstance();
-        List<Contribution> lc = new ArrayList<>();
-        lc = Contribution.findAllByIdPoll(idPoll);
+        List<Contribution> listContribution = new ArrayList<>();
+        listContribution = Contribution.findAllByIdPoll(idPoll);
         em.dispose();
-        if(lc == null){
+        if(listContribution == null){
             return Collections.emptyList();
         }else{
-            return lc;
+            return listContribution;
         }
     }
 

@@ -85,7 +85,7 @@ public class Test {
                  ) {
                 System.out.println(item.getIdComment());
                 //test remove comment
-                CommentController.removeCommentInDb(item);
+                //CommentController.removeCommentInDb(item);
             }
         } catch (PersistanceException e) {
             e.printStackTrace();

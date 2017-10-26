@@ -42,18 +42,19 @@ public class HomeViewController {
     private JFXButton searchCodeButton;
 
 
-    private PollController pollController = new PollController();
-
     public HomeViewController(){
 
     }
 
+     /**
+     * Method to display a poll using a code
+     */
     @FXML
-    public void displayPollView(){
+    public void displayPollView() throws IOException{
         Poll pollToDisplay = null;
         if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
             try {
-                pollToDisplay = pollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
+                pollToDisplay = PollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
             } catch (PersistanceException e) {
                 e.printStackTrace();
             }
@@ -70,39 +71,6 @@ public class HomeViewController {
         }
     }
 
-    /**
-    /**
-     * Method to search a poll using a code when a user click
-     */
-    @FXML
-    public Poll searchPoll(int idPoll) throws IOException {
-        //for testing:
-        /*try {
-            Poll searchedPoll = pollController.searchPollByCode(11);
-            System.out.println(searchedPoll);
-        } catch (PersistanceException e) {
-            e.printStackTrace();
-        }
-        /*for testing too:
-        if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
-
-        /*private void searchPoll() throws IOException {
-        List<Choice> listChoice = new ArrayList<>();
-        listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear())));
-        listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear()), 1502, 1403));
-        listChoice.add(new Choice(new Date(Calendar.getInstance().getWeekYear()), 1604, 5811));
-
-        loadScreen("PollView", new Poll.PollBuilder("test","corentin", "mail").setManagerCode("4444").setChoicesList(listChoice).build());*/
-
-        Poll poll;
-        try {
-            poll = pollController.searchPollByCode(idPoll);
-            return poll;
-        } catch (PersistanceException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /**
      * Method to display poll creation view
