@@ -23,6 +23,7 @@ public class MainClient extends Application{
      * @param args
      */
     public static void main(String[] args) throws IOException{
+        /*
         int serverPort = 8080;
         String host = "localhost";
 
@@ -44,7 +45,7 @@ public class MainClient extends Application{
         //out.close();
         in.close();
         pingSocket.close();
-
+        */
         launch(args);
 
     }

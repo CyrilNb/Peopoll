@@ -1,5 +1,6 @@
 package fr.univtln.cniobechoudayer.server.controllers;
 
+import fr.univtln.cniobechoudayer.model.Entity;
 import fr.univtln.cniobechoudayer.model.EntityManager;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
@@ -34,6 +35,12 @@ public class PollController {
         int returnedID = entityManager.persist(new Poll.PollBuilder(title,nameCreator,mailCreator).setLocation(location).setDescription(info).setNbMaxContributor(nbMax).setIsLocked(isLocked).setManagerCode(managerCode).build());
         entityManager.dispose();
         return returnedID;
+    }
+
+    public static void lockPoll(Poll poll) throws PersistanceException {
+        EntityManager entityManager = EntityManager.getInstance();
+        entityManager.merge(poll);
+        entityManager.dispose();
     }
 
 }

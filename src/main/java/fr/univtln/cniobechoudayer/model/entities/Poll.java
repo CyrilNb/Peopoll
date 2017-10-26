@@ -515,7 +515,9 @@ public class Poll implements Entity {
     @Override
     public void merge(Connection connection) throws PersistanceException {
         try {
-            connection.createStatement().executeUpdate("UPDATE PEOPOLL.POLLS SET IS_LOCKED=' "+isLocked+" ' WHERE ID_POLL=' "+idPoll+"';");
+            String query = "UPDATE PEOPOLL.POLLS SET IS_LOCKED='"+isLocked+"' WHERE ID_POLL='"+idPoll+"';";
+            System.out.println(query);
+            connection.createStatement().executeUpdate(query);
             logger.info("merge of the poll : " + this);
         } catch (SQLException e) {
             throw new PersistanceException(e);
