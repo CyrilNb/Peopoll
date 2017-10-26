@@ -48,12 +48,34 @@ public class HomeViewController {
 
     }
 
+    @FXML
+    public void displayPollView(){
+        Poll pollToDisplay = null;
+        if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
+            try {
+                pollToDisplay = pollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
+            } catch (PersistanceException e) {
+                e.printStackTrace();
+            }
+
+        }else{
+            //error msg
+        }
+        if(pollToDisplay != null){
+            try {
+                loadScreen("PollView", pollToDisplay);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
     /**
      * Method to search a poll using a code when a user click
      */
     @FXML
-    public void searchPoll() throws IOException {
+    public Poll searchPoll(int idPoll) throws IOException {
         //for testing:
         /*try {
             Poll searchedPoll = pollController.searchPollByCode(11);
@@ -72,18 +94,13 @@ public class HomeViewController {
 
         loadScreen("PollView", new Poll.PollBuilder("test","corentin", "mail").setManagerCode("4444").setChoicesList(listChoice).build());*/
 
-        if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
-            Poll searchedPoll = null;
-            try {
-                searchedPoll = pollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
-            } catch (PersistanceException e) {
-                e.printStackTrace();
-            }
-            if(searchedPoll != null){
-                loadScreen("PollView", searchedPoll);
-            }
-        }else{
-            //error msg
+        Poll poll;
+        try {
+            poll = pollController.searchPollByCode(idPoll);
+            return poll;
+        } catch (PersistanceException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

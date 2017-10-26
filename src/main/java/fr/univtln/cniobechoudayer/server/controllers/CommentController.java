@@ -32,4 +32,10 @@ public class CommentController {
         entityManager.persist(comment);
         entityManager.dispose();
     }
+
+    public static void removeCommentInDb(Comment comment) throws PersistanceException{
+        EntityManager entityManager = EntityManager.getInstance();
+        entityManager.remove(comment);
+        entityManager.dispose();
+    }
 }
