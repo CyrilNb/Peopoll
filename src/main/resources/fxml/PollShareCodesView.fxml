@@ -59,7 +59,7 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
+                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #2980b9; -fx-padding: 10px;">
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
                            <image>

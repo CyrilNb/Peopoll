@@ -12,9 +12,13 @@ import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
+
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.net.URL;
@@ -132,6 +136,20 @@ public class Step3ViewController implements Initializable{
         endPollPicker.getEditor().clear();
     }
 
+    public void setView(){
+        Callback<ListView<Choice>, ListCell<Choice>> factory = lv -> new ListCell<Choice>() {
+
+            @Override
+            protected void updateItem(Choice item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : String.valueOf(item.getDateChoice() + " Start : " + Choice.getFormattedDate(item.getStartingTime(), true) + " End : " + Choice.getFormattedDate(item.getEndingTime(), false)));
+            }
+
+        };
+
+        timeSlotsListView.setCellFactory(factory);
+    }
+
     public int getDateFromRawValue(JFXTimePicker picker){
         int finalValue = 0;
         if(picker.getValue() != null) {
@@ -195,6 +213,7 @@ public class Step3ViewController implements Initializable{
              staticListCreatedChoices) {
             bindListViewChoices(item);
         }
+        setView();
     }
 
     public void checkFields(){

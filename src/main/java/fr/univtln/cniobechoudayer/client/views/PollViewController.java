@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +43,8 @@ public class PollViewController implements Initializable {
     private int numberAdds = 0;
 
     private int numberImportedContributions = 0;
+
+    private boolean isOrga = false;
 
     @FXML
     private AnchorPane rootView;
@@ -95,9 +98,11 @@ public class PollViewController implements Initializable {
         if(gridContributions.isVisible()){
             gridContributions.setVisible(false);
             choicesComboBox.setVisible(true);
+            addRowGridPane.setVisible(false);
         }else{
             gridContributions.setVisible(true);
             choicesComboBox.setVisible(false);
+            addRowGridPane.setVisible(true);
         }
     }
 
@@ -155,7 +160,7 @@ public class PollViewController implements Initializable {
 
     private void setViewPoll(){
         if(pollToDisplay.isIsLocked()){
-            lockPoll();
+            gridContributions.setDisable(true);
         }
         titlePollText.setText(pollToDisplay.getTitle());
         locationPollText.setText(pollToDisplay.getLocation());
@@ -202,7 +207,7 @@ public class PollViewController implements Initializable {
             numberImportedContributions = listContributions.size();
 
 
-        bindDatesComboBox();
+        bindFinalDateComboBox();
         setViewGridPane();
 
         addRowGridPane.setOnAction(new EventHandler<ActionEvent>() {
@@ -400,10 +405,25 @@ public class PollViewController implements Initializable {
     /**
      * Method that binds the combobox to define date
      */
-    private void bindDatesComboBox(){
+    private void bindFinalDateComboBox(){
+
         for (Choice choice: listChoices) {
             choicesComboBox.getItems().add(choice);
+
         }
+
+        Callback<ListView<Choice>, ListCell<Choice>> factory = lv -> new ListCell<Choice>() {
+
+            @Override
+            protected void updateItem(Choice item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : String.valueOf(item.getDateChoice() + " Start : " + Choice.getFormattedDate(item.getStartingTime(), true) + " End : " + Choice.getFormattedDate(item.getEndingTime(), false)));
+            }
+
+        };
+
+        choicesComboBox.setCellFactory(factory);
+        choicesComboBox.setButtonCell(factory.call(null));
     }
 
     /**
@@ -591,4 +611,6 @@ public class PollViewController implements Initializable {
 
         return 1;
     }
+
+
 }
