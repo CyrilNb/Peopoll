@@ -55,6 +55,7 @@ public class HomeViewController {
         if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
             try {
                 pollToDisplay = PollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
+                System.out.println(pollToDisplay);
             } catch (PersistanceException e) {
                 e.printStackTrace();
             }

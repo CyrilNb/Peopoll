@@ -184,7 +184,6 @@ public class PollViewController implements Initializable {
                 listChoices = ChoiceController.getAllChoicesByPoll(idPoll);
                 listContributions = ContributionController.getAllContributionsByPoll(idPoll);
                 listComments = CommentController.getAllCommentsByPoll(idPoll);
-                System.out.println("listcomment: " + listComments);
                 bindGridView();
                 initTreeTableViewComments(listComments);
             } catch (PersistanceException e) {
@@ -200,16 +199,16 @@ public class PollViewController implements Initializable {
         bindDatesComboBox();
         setView();
 
-            addRowGridPane.setOnAction(new EventHandler<ActionEvent>() {
-                @Override public void handle(ActionEvent e) {
-                    gridContributions.addRow(listContributions.size()+1, new TextField());
-                    for(int i = 0; i < listChoices.size(); i++){
-                        gridContributions.add(new JFXCheckBox(), i+1, listContributions.size()+1);
-                        numberAdds++;
-                    }
-                    listContributions.add(new Contribution());
+        addRowGridPane.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                gridContributions.addRow(listContributions.size()+1, new TextField());
+                for(int i = 0; i < listChoices.size(); i++){
+                    gridContributions.add(new JFXCheckBox(), i+1, listContributions.size()+1);
+                    numberAdds++;
                 }
-            });
+                listContributions.add(new Contribution());
+            }
+        });
 
         }else{
             System.out.println("PollToDisplay null");
@@ -217,7 +216,6 @@ public class PollViewController implements Initializable {
     }
 
     private void initTreeTableViewComments(List<Comment> listComments){
-        treeTableViewComments = new TreeTableView<Comment>();
 
         TreeTableColumn<Comment,String> authorColumn = new TreeTableColumn<>("Author");
         TreeTableColumn<Comment,String> contentColum = new TreeTableColumn<>("Comment");

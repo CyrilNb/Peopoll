@@ -53,7 +53,7 @@ public class MainClient extends Application{
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,1200,750);
         primaryStage.setTitle("Peopoll");
         primaryStage.setScene(scene);
         primaryStage.show();
