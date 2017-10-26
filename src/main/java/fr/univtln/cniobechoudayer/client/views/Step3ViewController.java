@@ -189,6 +189,7 @@ public class Step3ViewController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         titlePollText.setText(mapArgsNewPoll.get("Title"));
+        timeSlotsListView.getItems().removeAll();
         addTimeSlotButton.setDisable(true);
         for (Choice item:
              staticListCreatedChoices) {

@@ -117,6 +117,7 @@ public class PollViewController implements Initializable {
         listContributions = Contribution.findAll();
         System.out.println(listContributions.size());*/
         saveDataPoll();
+        saveStatePoll();
         //loadScreen("PollView", pollToDisplay);
 
     }
@@ -152,6 +153,15 @@ public class PollViewController implements Initializable {
         }
     }
 
+    private void setViewPoll(){
+        if(pollToDisplay.isIsLocked()){
+            lockPoll();
+        }
+        titlePollText.setText(pollToDisplay.getTitle());
+        locationPollText.setText(pollToDisplay.getLocation());
+        infoPollText.setText(pollToDisplay.getDescription());
+    }
+
     /**
      * Set the view of poll
      * @param location
@@ -160,12 +170,8 @@ public class PollViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(pollToDisplay != null){
-            titlePollText.setText(pollToDisplay.getTitle());
-            locationPollText.setText(pollToDisplay.getLocation());
-            infoPollText.setText(pollToDisplay.getDescription());
-            if(pollToDisplay.isIsLocked()){
-                //TODO change image
-            }
+
+            setViewPoll();
 
             try {
                 listChoices = ChoiceController.getAllChoicesByPoll(pollToDisplay.getIdPoll());
@@ -198,7 +204,7 @@ public class PollViewController implements Initializable {
 
 
         bindDatesComboBox();
-        setView();
+        setViewGridPane();
 
             addRowGridPane.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
@@ -255,7 +261,7 @@ public class PollViewController implements Initializable {
         bindGridViewRows();
         addBlankAddRow();
 
-        setView();
+        setViewGridPane();
     }
 
     /**
@@ -456,6 +462,14 @@ public class PollViewController implements Initializable {
     }
 
     /**
+     * Method to save the state of the current poll
+     * @throws PersistanceException
+     */
+    private void saveStatePoll() throws PersistanceException {
+        PollController.lockPoll(pollToDisplay);
+    }
+
+    /**
      * Method to get the node in a specific cell
      * @param gridPane
      * @param col
@@ -497,7 +511,7 @@ public class PollViewController implements Initializable {
     /**
      * Method to set up the view and components settings
      */
-    private void setView(){
+    private void setViewGridPane(){
         /**
          * center value in GridPane
          */
