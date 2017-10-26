@@ -14,6 +14,8 @@ public class Contribution implements Entity {
     /** private fields**/
     private int idContribution;
     private String nameContributor;
+    private int idPoll;
+    private int idChoice;
 
     /** Constructor **/
     public Contribution(String nameContributor) {
@@ -24,6 +26,14 @@ public class Contribution implements Entity {
     public Contribution(int idContribution, String nameContributor) {
         this.idContribution = idContribution;
         this.nameContributor = nameContributor;
+    }
+
+    /** Constructor **/
+    public Contribution(int idContribution, String nameContributor, int idPoll, int idChoice) {
+        this.idContribution = idContribution;
+        this.nameContributor = nameContributor;
+        this.idPoll = idPoll;
+        this.idChoice = idChoice;
     }
 
     /** Default constructor **/
@@ -66,6 +76,23 @@ public class Contribution implements Entity {
     public int getIdContribution() {
         return idContribution;
     }
+
+    public int getIdPoll() {
+        return idPoll;
+    }
+
+    public void setIdPoll(int idPoll) {
+        this.idPoll = idPoll;
+    }
+
+    public int getIdChoice() {
+        return idChoice;
+    }
+
+    public void setIdChoice(int idChoice) {
+        this.idChoice = idChoice;
+    }
+
 
     @Override
     public String toString() {
