@@ -76,7 +76,6 @@ public class Comment implements Entity{
     }
 
 
-
     /**
      * Gets idComment.
      *
@@ -159,6 +158,7 @@ public class Comment implements Entity{
             ResultSet resultSet = findAllByIdPoll.executeQuery();
             while(resultSet.next()){
                 Comment comment = createFromResultSet(resultSet);
+                System.out.println("comment créée from db: " + comment);
                 logger.finest("find comment in the db: " + comment);
                 resultsComment.add(comment);
             }
