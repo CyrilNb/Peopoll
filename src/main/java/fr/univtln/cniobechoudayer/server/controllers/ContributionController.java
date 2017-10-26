@@ -12,23 +12,27 @@ import java.util.List;
 
 public class ContributionController {
 
-    public static void save(String nameContributor, int idPoll, int idChoice) throws SQLException, PersistanceException {
+    public static int save(String nameContributor, int idPoll, int idChoice, boolean delete) throws SQLException, PersistanceException {
 
-        EntityManager entityManager = EntityManager.getInstance();
-        System.out.println("trying to save");
-        System.out.println("cont created" + createContribution(nameContributor, idPoll, idChoice));
-        int idContribution;
-    /*
-        try{
-            idContribution = Contribution.findById();
-        }catch (PersistanceException e){
-            System.out.println(e);
+        int createdContrib = -1;
+
+        EntityManager em = EntityManager.getInstance();
+        Contribution contribution = Contribution.findByParams(nameContributor, idPoll, idChoice);
+        if(nameContributor != null){
+            if(delete){
+                createdContrib = contribution.getIdContribution();
+                System.out.println("Contribution to delete : " + contribution);
+                em.remove(contribution);
+            }else{
+                if(contribution.getNameContributor() == null) {
+                    int idCreatedContribution = em.persist(new Contribution(nameContributor, idPoll, idChoice));
+                    System.out.println("Created contribution : " + idCreatedContribution);
+                    createdContrib = idCreatedContribution;
+                }
+            }
         }
-*/
-
-        //TODO if null then insert in db otherwise just update using the returned idContribution
-        //if(idContrib (==) null) -> Contribution.persist(new Contribution(nameContributor, idPoll, idChoice))
-        // if(idContrib (!=) null -> Contribution.merge(idContribution, nameContributor, idPoll, idChoice)
+        em.dispose();
+        return createdContrib;
     }
 
     public static int createContribution(String nameContribution, int idPoll, int idChoice) throws SQLException, PersistanceException {
@@ -42,11 +46,19 @@ public class ContributionController {
         EntityManager em = EntityManager.getInstance();
         List<Contribution> lc = new ArrayList<>();
         lc = Contribution.findAllByIdPoll(idPoll);
+        em.dispose();
         if(lc == null){
             return Collections.emptyList();
         }else{
             return lc;
         }
+    }
+
+    public static Contribution getContributionBy(int idContribution) throws PersistanceException {
+        EntityManager em = EntityManager.getInstance();
+        Contribution ct = Contribution.findById(idContribution);
+        em.dispose();
+        return ct;
     }
 
 

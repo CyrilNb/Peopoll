@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Rectangle2D?>
@@ -18,7 +19,7 @@
                <children>
                   <Pane layoutX="90.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <GridPane fx:id="gridContributions" gridLinesVisible="true" prefHeight="172.0" prefWidth="228.0">
+            <GridPane fx:id="gridContributions" gridLinesVisible="true" layoutY="60.0" prefHeight="172.0" prefWidth="228.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,6 +31,7 @@
               </rowConstraints>
             </GridPane>
             <JFXComboBox fx:id="choicesComboBox" onMouseClicked="#datesComboBoxSelected" prefHeight="58.0" prefWidth="317.0" />
+            <JFXButton fx:id="addRowGridPane" layoutY="1.0" mnemonicParsing="false" text="Participer" />
          </children>
                   </Pane>
                   <Pane layoutX="11.0" layoutY="70.0" prefHeight="291.0" prefWidth="68.0" style="-fx-background-color: #FFFFFF;">

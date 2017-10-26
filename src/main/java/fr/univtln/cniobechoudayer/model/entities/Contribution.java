@@ -25,6 +25,7 @@ public class Contribution implements Entity {
     private static PreparedStatement findById;
     private static PreparedStatement findAll;
     private static PreparedStatement findAllByIdPoll;
+    private static PreparedStatement findByParams;
 
     //Init prepared statements
     static{
@@ -33,6 +34,7 @@ public class Contribution implements Entity {
             findById = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE ID_CONTRIBUTION=?");
             findAll = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS ");
             findAllByIdPoll = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE IDP=?");
+            findByParams = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE NAME_CONTRIBUTOR = ? AND IDP = ? AND IDC = ? ");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -141,7 +143,7 @@ public class Contribution implements Entity {
                 cont = createFromResultSet(rs);
                 return cont;
             }else{
-                throw new PersistanceException("contribution not found");
+                return null;
             }
         } catch (SQLException e) {
             throw new PersistanceException(e);
@@ -170,6 +172,24 @@ public class Contribution implements Entity {
                 lc.add(createFromResultSet(rs));
             }
             return lc;
+        }catch (SQLException e){
+            throw new PersistanceException(e);
+        }
+    }
+
+    public static Contribution findByParams(String nameContributor, int IDP, int IDC) throws SQLException, PersistanceException {
+        try{
+            Contribution c;
+            findByParams.setString(1, nameContributor);
+            findByParams.setInt(2, IDP);
+            findByParams.setInt(3, IDC);
+            ResultSet rs = findByParams.executeQuery();
+            if (rs.next()){
+                c = createFromResultSet(rs);
+            }else{
+                c = new Contribution();
+            }
+            return c;
         }catch (SQLException e){
             throw new PersistanceException(e);
         }
@@ -219,7 +239,7 @@ public class Contribution implements Entity {
     @Override
     public void remove(Connection connection) throws PersistanceException {
         try{
-            String query = "DELETE FROM PEOPOLL.CONTRIBUTION WHERE ID_CONTRIBUTION=\'" + idContribution + "\'";
+            String query = "DELETE FROM PEOPOLL.CONTRIBUTIONS WHERE ID_CONTRIBUTION=\'" + idContribution + "\'";
             System.out.println(query);
             connection.createStatement().executeUpdate(query);
             logger.info(this + " delete");
