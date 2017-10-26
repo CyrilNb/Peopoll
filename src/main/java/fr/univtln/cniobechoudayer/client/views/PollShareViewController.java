@@ -60,8 +60,10 @@ public class PollShareViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        accessCodeText.setText(String.valueOf(currentPoll.getIdPoll()));
-        managementCodeText.setText(String.valueOf(currentPoll.getManagerCode()));
+        if(currentPoll != null){
+            accessCodeText.setText(String.valueOf(currentPoll.getIdPoll()));
+            managementCodeText.setText(String.valueOf(currentPoll.getManagerCode()));
+        }
     }
 
     @FXML

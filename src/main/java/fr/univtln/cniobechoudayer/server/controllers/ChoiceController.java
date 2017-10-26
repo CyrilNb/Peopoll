@@ -2,6 +2,7 @@ package fr.univtln.cniobechoudayer.server.controllers;
 
 import fr.univtln.cniobechoudayer.model.EntityManager;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
+import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.util.Collections;
@@ -28,8 +29,11 @@ public class ChoiceController {
         }
     }
 
-    public static Choice createChoice(Date dateChoice, int startingTime, int endingTime,int idPoll){
-        return new Choice(dateChoice, startingTime, endingTime,idPoll);
+    public static void createChoiceInDB(Date dateChoice, int startingTime, int endingTime,int idPoll) throws PersistanceException{
+        EntityManager entityManager = EntityManager.getInstance();
+        Choice newChoice = new Choice(dateChoice,startingTime,endingTime,idPoll);
+        entityManager.persist(newChoice);
+        entityManager.dispose();
     }
 
 }

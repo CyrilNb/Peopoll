@@ -503,7 +503,6 @@ public class Poll implements Entity {
                 throw  new PersistanceException("The key of the poll could not be found.");
             }
         }catch (SQLException e){
-            System.out.println("exception");
             throw new PersistanceException(e);
         }
     }
@@ -516,7 +515,7 @@ public class Poll implements Entity {
     @Override
     public void merge(Connection connection) throws PersistanceException {
         try {
-            connection.createStatement().executeUpdate("UPDATE PEOPOLL.polls SET IS_LOCKED=' "+isLocked+" ' ;");
+            connection.createStatement().executeUpdate("UPDATE PEOPOLL.POLLS SET IS_LOCKED=' "+isLocked+" ' WHERE ID_POLL=' "+idPoll+"';");
             logger.info("merge of the poll : " + this);
         } catch (SQLException e) {
             throw new PersistanceException(e);
@@ -540,7 +539,7 @@ public class Poll implements Entity {
     @Override
     public void remove(Connection connection) throws PersistanceException {
         try {
-            connection.createStatement().executeUpdate("DELETE FROM PEOPOLL.POLLS WHERE ID=\'" + idPoll + "\'");
+            connection.createStatement().executeUpdate("DELETE FROM PEOPOLL.POLLS WHERE ID_POLL=\'" + idPoll + "\'");
             logger.info("deletion of the poll: " + this);
         } catch (SQLException e) {
             throw new PersistanceException(e);

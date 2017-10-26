@@ -5,12 +5,10 @@ import fr.univtln.cniobechoudayer.model.Entity;
 import fr.univtln.cniobechoudayer.server.database.DatabaseManager;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -29,12 +27,14 @@ public class Choice implements Entity{
     private static Logger logger = Logger.getLogger(Poll.class.getName());
 
     private static PreparedStatement findAllByIdPoll;
+    private static PreparedStatement findById;
 
     //L'initialisation des preparedstatments.
     static {
         try {
             Connection connection = DatabaseManager.getConnection();
             findAllByIdPoll = connection.prepareStatement("select ID_CHOICE,DATE_CHOICE,STARTING_TIME,ENDING_TIME,ID_POLL from PEOPOLL.CHOICES where ID_POLL=?");
+            findById = connection.prepareStatement("select ID_CHOICE,DATE_CHOICE,STARTING_TIME,ENDING_TIME,ID_POLL FROM PEOPOLL.CHOICES WHERE ID_CHOICE=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,6 +47,19 @@ public class Choice implements Entity{
      * @param endingTime
      */
     public Choice(Date dateChoice, int startingTime, int endingTime, int idPoll) {
+        this.dateChoice = dateChoice;
+        this.startingTime = startingTime;
+        this.endingTime = endingTime;
+        this.idPoll = idPoll;
+    }
+
+    /**
+     * Constructor with startingTime and endingTime
+     * @param dateChoice
+     * @param startingTime
+     * @param endingTime
+     */
+    public Choice(Date dateChoice, int startingTime, int endingTime) {
         this.dateChoice = dateChoice;
         this.startingTime = startingTime;
         this.endingTime = endingTime;
@@ -250,6 +263,18 @@ public class Choice implements Entity{
         }
     }
 
+    //Cette méthode doit être appelée à la fin de l'application pour libérer les connexions
+    //des preparedstatments.
+    public static void dispose() throws PersistanceException {
+        try {
+            findAllByIdPoll.close();
+            findById.close();
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+
     /**
      * Method to retrieve all choices contained in a specific poll
      * @return list of all choices from the db
@@ -271,25 +296,71 @@ public class Choice implements Entity{
         }
     }
 
+    public static Choice findById(int idChoice) throws PersistanceException{
+        try{
+            Choice choice;
+            findById.setInt(1,idChoice);
+            ResultSet resultSet = findById.executeQuery();
+            if(resultSet.next()){
+                choice = createFromResultSet(resultSet);
+                logger.finest("find choice in the db: " + choice);
+                return choice;
+            }else{
+                throw new PersistanceException("Choice " + idChoice + "not found in db");
+            }
+        }catch (SQLException e){
+            throw new PersistanceException(e);
+        }
+    }
 
     @Override
     public int persist(Connection connection) throws PersistanceException {
-        return 1;
+        int returnedID;
+        try{
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO PEOPOLL.CHOICES(DATE_CHOICE,STARTING_TIME,ENDING_TIME,ID_POLL) VALUES ('" + dateChoice + "','" + startingTime + "','" + endingTime + "','" + idPoll + "')", Statement.RETURN_GENERATED_KEYS);
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                returnedID = resultSet.getInt(1);
+                setIdChoice(returnedID);
+                logger.info("creation of the choice: " + this);
+                return returnedID;
+            } else {
+                throw  new PersistanceException("The key of the choice could not be found.");
+            }
+        }catch (SQLException e){
+            throw new PersistanceException(e);
+        }
     }
 
     @Override
     public void merge(Connection connection) throws PersistanceException {
-
+        try {
+            connection.createStatement().executeUpdate("UPDATE PEOPOLL.CHOICES SET STARTING_TIME=' "+startingTime+" ',ENDING_TIME='"+endingTime+" ' ;");
+            logger.info("merge of the choice : " + this);
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
     }
 
     @Override
     public void update(Connection connection) throws PersistanceException {
-
+        Choice choice = findById(this.idChoice);
+        this.dateChoice = choice.dateChoice;
+        this.startingTime = choice.startingTime;
+        this.endingTime = choice.endingTime;
+        this.idPoll = choice.idPoll;
+        logger.info("update of the choice: " + this);
     }
 
     @Override
     public void remove(Connection connection) throws PersistanceException {
-
+        try {
+            connection.createStatement().executeUpdate("DELETE FROM PEOPOLL.CHOICES WHERE ID_CHOICE=\'" + idChoice + "\'");
+            logger.info("deletion of the choice: " + this);
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
     }
 }
 

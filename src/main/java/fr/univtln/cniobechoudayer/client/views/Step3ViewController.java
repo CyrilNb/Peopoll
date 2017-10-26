@@ -15,16 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Step3ViewController implements Initializable{
 
@@ -60,7 +57,11 @@ public class Step3ViewController implements Initializable{
 
 
     private int idPollCreated;
+    private int currentStartingTime; //get it from timePicker
+    private int currentEndingTime; //get it from timePicker
+    private java.sql.Date choiceSqlDate;
 
+    public static List<Choice> staticListCreatedChoices = new ArrayList<>();
     private HashMap<String, String> mapArgsNewPoll;
 
 
@@ -87,9 +88,21 @@ public class Step3ViewController implements Initializable{
             nbMax = 0;
         }
         idPollCreated = PollController.createPoll(mapArgsNewPoll.get("Title"), mapArgsNewPoll.get("Location"), mapArgsNewPoll.get("Info"), mapArgsNewPoll.get("Creator"), mapArgsNewPoll.get("Mail"), nbMax,false);
-        System.out.println("blblblblbl:" + idPollCreated);
+        System.out.println(idPollCreated);
+        try {
+            for (Choice choice: staticListCreatedChoices
+                 ) {
+                choice.setIdPoll(idPollCreated);
+                System.out.println("before insert");
+                ChoiceController.createChoiceInDB(choice.getDateChoice(), choice.getStartingTime(), choice.getEndingTime(),choice.getIdPoll());
+                System.out.println("after insert");
+            }
+        } catch (PersistanceException e) {
+            e.printStackTrace();
+        }
+
+
         loadScreen("PollShareCodesView", idPollCreated);
-        System.out.println("exit validatePllCreation");
         return 1;
     }
 
@@ -100,14 +113,16 @@ public class Step3ViewController implements Initializable{
 
     @FXML
     private void addTimeSlotToPoll(){
-        int currentStartingTime = getDateFromRawValue(startPollPicker);
-        int currentEndingTime = getDateFromRawValue(endPollPicker);
+        currentStartingTime = getDateFromRawValue(startPollPicker);
+        currentEndingTime = getDateFromRawValue(endPollPicker);
         LocalDate localDate = dayPollPicker.getValue();
         Instant ins = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date dayDate = Date.from(ins);
+        choiceSqlDate = convertUtilDateToSqlDate(dayDate);
 
-        Choice addedChoice = ChoiceController.createChoice(dayDate, currentStartingTime, currentEndingTime,idPollCreated);
-
+        Choice addedChoice = new Choice(choiceSqlDate,currentStartingTime,currentEndingTime);
+        System.out.println("addedchoice: " + addedChoice);
+        staticListCreatedChoices.add(addedChoice);
         bindListViewChoices(addedChoice);
         clearView();
 
@@ -137,7 +152,7 @@ public class Step3ViewController implements Initializable{
     }
 
     public void bindListViewChoices(Choice choice){
-        timeSlotsListView.getItems().add(choice.displayChoiceInIHM());
+        timeSlotsListView.getItems().add(choice);
     }
 
     @FXML
@@ -179,6 +194,10 @@ public class Step3ViewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         titlePollText.setText(mapArgsNewPoll.get("Title"));
         addTimeSlotButton.setDisable(true);
+        for (Choice item:
+             staticListCreatedChoices) {
+            bindListViewChoices(item);
+        }
     }
 
     public void checkFields(){
@@ -188,4 +207,10 @@ public class Step3ViewController implements Initializable{
             addTimeSlotButton.setDisable(true);
         }
     }
+
+    private static java.sql.Date convertUtilDateToSqlDate(java.util.Date uDate) {
+        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+        return sDate;
+    }
+
 }

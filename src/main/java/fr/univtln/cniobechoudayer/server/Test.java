@@ -33,7 +33,7 @@ public class Test {
         Step3ViewController step3ViewController = new Step3ViewController(mapArgs);
         try {
             int idpoll = step3ViewController.validatePollCreation();
-            System.out.println("TEST CREATION POLL AND PERSISTS SUCCEED");
+            System.out.println("TEST CREATION POLL AND PERSIST SUCCEED");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (PersistanceException e) {
@@ -54,8 +54,8 @@ public class Test {
             e.printStackTrace();
         }*/
 
-        //test choice findall
-        try {
+        //test choice findall()
+        /*try {
             ChoiceController choiceController = new ChoiceController();
             List<Choice> list = choiceController.getAllChoicesFor(11);
             for (Choice choice :list
@@ -64,7 +64,7 @@ public class Test {
             }
         } catch (PersistanceException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 }
