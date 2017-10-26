@@ -37,6 +37,8 @@ public class PollViewController implements Initializable {
 
     private int idPoll;
 
+    private List<String> namesAlreadyDisplayed = new ArrayList<>();
+
     @FXML
     private AnchorPane rootView;
 
@@ -215,10 +217,17 @@ public class PollViewController implements Initializable {
             gridContributions.add(new Text(String.valueOf(listContributions.size())), 0, 0);
     }
 
+    /**
+     * Method to add a Blank row
+     */
     private void addBlankAddRow(){
         gridContributions.addRow(listContributions.size()+2, new Text("ADD "));
     }
 
+
+    /**
+     * Method to bind head of columns (nbMax and choices)
+     */
     private void bindGridViewColumns(){
         /**
          * Set the dates in grid
@@ -232,48 +241,112 @@ public class PollViewController implements Initializable {
         }
     }
 
+    /**
+     * Method to bind the rows (contributions) with data
+     */
     private void bindGridViewRows(){
+        int indexRow = 0;
         for(int i = 0; i < (listContributions.size()+1); i++){
             if(i > 0){
                 Contribution currentContribution = listContributions.get(i-1);
-                TextField txtField = new TextField();
-                txtField.setText(currentContribution.getNameContributor());
-                System.out.println(txtField.getText());
-                System.out.println("adding textfields");
-                gridContributions.addRow(i, txtField);
-                for(int j = 1; j < (listChoices.size()+1); j++){
-                    JFXCheckBox checkbox = new JFXCheckBox();
-                    if(currentContribution.getIdChoice() == listChoices.get(j-1).getIdChoice()){
-                        checkbox.setSelected(true);
+                List<Contribution> contributionListGroupByName;
+                //If the name and matching contribs have not been loaded in view yet
+                if(isNameContributionsAlreadyLoaded(currentContribution.getNameContributor())) {
+                    indexRow++;
+                    TextField txtField = new TextField();
+                    txtField.setText(currentContribution.getNameContributor());
+                    contributionListGroupByName = getContributionForName(currentContribution.getNameContributor());
+                    gridContributions.addRow(indexRow, txtField);
+                    for (Contribution subContribution : contributionListGroupByName) {
+                        for (int j = 1; j < (listChoices.size() + 1); j++) {
+                            JFXCheckBox checkbox = new JFXCheckBox();
+                            if (subContribution.getIdChoice() == listChoices.get(j - 1).getIdChoice()) {
+                                checkbox.setSelected(true);
+                            }
+                            //TODO center checkboxes
+                            gridContributions.add(checkbox, j, indexRow);
+                        }
                     }
-                    //TODO center checkboxes
-                    gridContributions.add(checkbox, j, i);
+                    setNameAlreadyDisplayed(currentContribution.getNameContributor());
                 }
 
             }
         }
     }
 
+    /**
+     * Method to get all contributions per name
+     * @param nameContributor
+     * @return list of contributions
+     */
+    private List<Contribution> getContributionForName(String nameContributor){
+        List<Contribution> lc = new ArrayList<>();
+            if (listContributions != null) {
+                for (Contribution cont : this.listContributions) {
+                    System.out.println(cont);
+                    if (cont.getNameContributor().equals(nameContributor)) {
+                        lc.add(cont);
+                        System.out.println("lc content " + lc.size());
+                    }
+                }
+            }
+        return lc;
+    }
+
+    private boolean isNameContributionsAlreadyLoaded(String nameContributor){
+        if(!namesAlreadyDisplayed.contains(nameContributor))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Method to set a name already displayed and loaded in view
+     * @param nameContributor
+     */
+    private void setNameAlreadyDisplayed(String nameContributor){
+        namesAlreadyDisplayed.add(nameContributor);
+    }
+
+    /**
+     * Method that binds the combobox to define date
+     */
     private void bindDatesComboBox(){
         for (Choice choice: listChoices) {
             choicesComboBox.getItems().add(choice);
         }
     }
 
+    /**
+     * Method to save all the data of the poll
+     * @throws SQLException
+     * @throws PersistanceException
+     */
     private void saveDataPoll() throws SQLException, PersistanceException {
         for(int i = 0; i < listContributions.size(); i++){
             String name = listContributions.get(i).getNameContributor();
+            List<Contribution> contributionsListForSpecificName = getContributionForName(name);
             for(int j = 0; j < listChoices.size(); j++){
                 CheckBox chkBox = (CheckBox) getNodeFromGridPane(gridContributions, j+1, i+1);
-                if(chkBox.isSelected()){
-                    int idChoice = listChoices.get(j).getIdChoice();
-                    ContributionController.save(name, pollToDisplay.getIdPoll(), idChoice);
+                for(Contribution c : contributionsListForSpecificName){
+                    if(c.getIdChoice() == listChoices.get(j).getIdChoice()){
+                        //The choice was already in db -> update
+                    }else{
+                        //The choice is new -> insert
+                    }
                 }
             }
         }
 
     }
 
+    /**
+     * Method to get the node in a specific cell
+     * @param gridPane
+     * @param col
+     * @param row
+     * @return
+     */
     private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
         for (Node node : gridPane.getChildren()) {
             if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
@@ -283,13 +356,18 @@ public class PollViewController implements Initializable {
         return null;
     }
 
+    /**
+     * Method to set up the view and components settings
+     */
     private void setView(){
         /**
          * center value in GridPane
          */
+
         GridPane.setValignment(gridContributions, VPos.CENTER);
         GridPane.setHalignment(gridContributions, HPos.CENTER);
 
+        /*
         ColumnConstraints colConst = new ColumnConstraints();
         colConst.setPercentWidth(100 / (listChoices.size() + 2));
 
@@ -299,13 +377,14 @@ public class PollViewController implements Initializable {
         gridContributions.getColumnConstraints().add(colConst);
         gridContributions.getRowConstraints().add(rowConstraints);
 
+*/
+
         choicesComboBox.setVisible(false);
 
         if(pollToDisplay.isIsLocked()){
             gridContributions.setDisable(true);
         }
     }
-
 
 
     /**
