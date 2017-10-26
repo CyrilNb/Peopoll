@@ -70,7 +70,7 @@
                         <Image url="@../images/002-eye.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="titlePollText" layoutX="90.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="287.13671875">
+                  <Text fx:id="locationPollText" layoutX="90.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="287.13671875">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -80,5 +80,15 @@
             <Font name="Ubuntu Bold" size="18.0" />
          </font>
       </JFXTextField>
+      <Text fx:id="locationPollText" layoutX="90.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="287.13671875">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="infoPollText" layoutX="90.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info" wrappingWidth="287.13671875">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
                </children>
           </AnchorPane>

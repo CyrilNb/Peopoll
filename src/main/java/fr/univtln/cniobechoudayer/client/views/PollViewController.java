@@ -62,6 +62,12 @@ public class PollViewController implements Initializable {
     private Text titlePollText;
 
     @FXML
+    private Text locationPollText;
+
+    @FXML
+    private Text infoPollText;
+
+    @FXML
     private JFXComboBox choicesComboBox;
 
     @FXML
@@ -155,17 +161,20 @@ public class PollViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(pollToDisplay != null){
             titlePollText.setText(pollToDisplay.getTitle());
+            locationPollText.setText(pollToDisplay.getLocation());
+            infoPollText.setText(pollToDisplay.getDescription());
+
             if(pollToDisplay.isIsLocked()){
                 //TODO change image
             }
 
             try {
-                listChoices = ChoiceController.getAllChoicesFor(pollToDisplay.getIdPoll());
+                listChoices = ChoiceController.getAllChoicesByPoll(pollToDisplay.getIdPoll());
             } catch (PersistanceException e) {
                 e.printStackTrace();
             }
             try {
-                listContributions = ContributionController.getAllContributionsFor(pollToDisplay.getIdPoll());
+                listContributions = ContributionController.getAllContributionsByPoll(pollToDisplay.getIdPoll());
             } catch (PersistanceException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
