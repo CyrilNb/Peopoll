@@ -53,7 +53,6 @@ public class MainClient extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
-
         Scene scene = new Scene(root,1200,750);
         scene.getStylesheets().add("/css/custom.css");
         primaryStage.setTitle("Peopoll");

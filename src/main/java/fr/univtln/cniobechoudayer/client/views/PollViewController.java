@@ -229,8 +229,14 @@ public class PollViewController implements Initializable {
     private void initTreeTableViewComments(List<Comment> listComments){
 
         TreeTableColumn<Comment,String> authorColumn = new TreeTableColumn<>("Author");
+        authorColumn.setResizable(false);
+        authorColumn.setMinWidth(50);
         TreeTableColumn<Comment,String> contentColum = new TreeTableColumn<>("Comment");
+        contentColum.setResizable(false);
+        contentColum.setMinWidth(850);
         TreeTableColumn<Comment,Date> dateColumn = new TreeTableColumn<>("Publication date");
+        dateColumn.setResizable(false);
+        dateColumn.setMinWidth(10);
 
         treeTableViewComments.getColumns().addAll(authorColumn,contentColum,dateColumn);
 
@@ -243,9 +249,9 @@ public class PollViewController implements Initializable {
             root.getChildren().add(item);
         }
 
-        authorColumn.setCellValueFactory(new TreeItemPropertyValueFactory<Comment,String>("nameAuthor"));
-        contentColum.setCellValueFactory(new TreeItemPropertyValueFactory<Comment,String>("content"));
-        dateColumn.setCellValueFactory(new TreeItemPropertyValueFactory<Comment,Date>("content"));
+        authorColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("nameAuthor"));
+        contentColum.setCellValueFactory(new TreeItemPropertyValueFactory<>("content"));
+        dateColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("dateComment"));
 
     }
 
