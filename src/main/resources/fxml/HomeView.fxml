@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
+<AnchorPane fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
          <children>
             <Pane layoutX="31.0" layoutY="71.0" prefHeight="297.0" prefWidth="578.0" style="-fx-background-color: #FFFFFF;">
                <children>
@@ -26,7 +26,7 @@
                         </font>
                      </JFXButton>
                   </Pane>
-                  <JFXTextField id="codeTextField" fx:id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" onKeyTyped="#isAccessCodeTextFieldEmpty" prefHeight="65.0" prefWidth="440.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #555555; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
+                  <JFXTextField id="codeTextField" fx:id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" onKeyReleased="#isAccessCodeTextFieldEmpty" onKeyTyped="#isAccessCodeTextFieldEmpty" prefHeight="65.0" prefWidth="440.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #555555; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
                      <font>
                         <Font name="Ubuntu Regular" size="25.0" />
                      </font>

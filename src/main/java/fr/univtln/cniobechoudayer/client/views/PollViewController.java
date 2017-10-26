@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.*;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +22,7 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
@@ -90,7 +92,12 @@ public class PollViewController implements Initializable {
     Save the current state of the poll
      */
     @FXML
-    private void savePoll(){
+    private void savePoll() throws SQLException, PersistanceException {
+        ContributionController.save("Corentin", pollToDisplay.getIdPoll(), 1);
+        Contribution cont = Contribution.findById(1);
+        System.out.println(cont);
+        listContributions = Contribution.findAll();
+        System.out.println(listContributions.size());
 
     }
 
@@ -137,7 +144,12 @@ public class PollViewController implements Initializable {
             if(pollToDisplay.isIsLocked()){
                 //TODO change image
             }
-            bindGridView();
+            try {
+                bindGridView();
+            } catch (PersistanceException e) {
+                e.printStackTrace();
+                System.out.println("cant bind grid view");
+            }
             //TODO bind listContributions from DB
 
         bindDatesComboBox();
@@ -150,8 +162,8 @@ public class PollViewController implements Initializable {
     /**
      * Setting up the view
      */
-    private void bindGridView(){
-        listChoices = pollToDisplay.getChoicesList();
+    private void bindGridView() throws PersistanceException {
+        listChoices = ChoiceController.getAllChoicesFor(pollToDisplay.getIdPoll());
         setGridViewColumns(listChoices.size());
         listContributions = new ArrayList<>();
         listContributions.add(new Contribution(1, "Corentin", pollToDisplay.getIdPoll(), 1));
@@ -249,7 +261,7 @@ public class PollViewController implements Initializable {
         }
     }
 
-    private void saveDataPoll(){
+    private void saveDataPoll() throws SQLException, PersistanceException {
         for(int i = 0; i < listContributions.size(); i++){
             String name = listContributions.get(i).getNameContributor();
             for(int j = 0; j < listChoices.size(); j++){
@@ -283,9 +295,10 @@ public class PollViewController implements Initializable {
         colConst.setPercentWidth(100 / (listChoices.size() + 2));
 
         RowConstraints rowConstraints = new RowConstraints();
-        rowConstraints.setPercentHeight(100 / listContributions.size()+2);
+        rowConstraints.setPercentHeight(100 / listContributions.size() + 2);
 
         gridContributions.getColumnConstraints().add(colConst);
+        gridContributions.getRowConstraints().add(rowConstraints);
 
         choicesComboBox.setVisible(false);
 

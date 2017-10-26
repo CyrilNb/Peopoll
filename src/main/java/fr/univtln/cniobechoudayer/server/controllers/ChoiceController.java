@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class ChoiceController {
+public class ChoiceController{
 
-    public List<Choice> getAllChoicesFor(int idPoll) throws PersistanceException{
+    public static List<Choice> getAllChoicesFor(int idPoll) throws PersistanceException{
         EntityManager entityManager = EntityManager.getInstance();
         List<Choice> listReturnedChoices;
         try{

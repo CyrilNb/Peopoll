@@ -212,6 +212,10 @@ public class Choice implements Entity{
         System.out.println(time);
         String timeString = String.valueOf(time);
         String finalDate = "";
+        if(timeString.toString().length() == 3){
+            timeString = "0"+timeString;
+            System.out.println("changed timeString " + timeString);
+        }
         if(time != 0) {
             String part1 = timeString.substring(0, 2);
             System.out.println(part1);

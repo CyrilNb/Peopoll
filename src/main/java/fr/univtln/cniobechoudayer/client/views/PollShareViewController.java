@@ -44,7 +44,7 @@ public class PollShareViewController implements Initializable{
      */
     @FXML
     private void goBackHome() throws IOException {
-        loadScreen("HomeViewfind");
+        loadScreen("HomeView");
     }
 
     /**
