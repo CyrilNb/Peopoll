@@ -208,7 +208,7 @@ public class Choice implements Entity{
         return sb.toString();
     }
 
-    private String getFormattedDate(int time, boolean isStart){
+    public static String getFormattedDate(int time, boolean isStart){
         System.out.println(time);
         String timeString = String.valueOf(time);
         String finalDate = "";
