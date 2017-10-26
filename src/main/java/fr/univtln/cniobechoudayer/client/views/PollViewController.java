@@ -154,10 +154,10 @@ public class PollViewController implements Initializable {
         listChoices = pollToDisplay.getChoicesList();
         setGridViewColumns(listChoices.size());
         listContributions = new ArrayList<>();
-        listContributions.add(new Contribution("Corentin"));
-        listContributions.add(new Contribution("Cyril"));
-        listContributions.add(new Contribution("Goddamn"));
-        listContributions.add(new Contribution("C'est la merde"));
+        listContributions.add(new Contribution(1, "Corentin", pollToDisplay.getIdPoll(), 1));
+        listContributions.add(new Contribution(1, "Cyril", pollToDisplay.getIdPoll(), 1));
+        listContributions.add(new Contribution(1, "Pélo", pollToDisplay.getIdPoll(), 1));
+        listContributions.add(new Contribution(1, "Corentin", pollToDisplay.getIdPoll(), 2));
         setGridViewRows(listContributions.size() + 1);
         System.out.println("Taille de listChoices : " + listChoices.size());
         System.out.println("Taille de listContributions : " + listContributions.size());
@@ -224,17 +224,20 @@ public class PollViewController implements Initializable {
     private void bindGridViewRows(){
         for(int i = 0; i < (listContributions.size()+1); i++){
             if(i > 0){
-            Contribution currentContribution = listContributions.get(i-1);
-            TextField txtField = new TextField();
-            txtField.setText(currentContribution.getNameContributor());
-            System.out.println(txtField.getText());
-            System.out.println("adding textfields");
-            gridContributions.addRow(i, txtField);
-            for(int j = 1; j < (listChoices.size()+1); j++){
-                JFXCheckBox checkbox = new JFXCheckBox();
-                //TODO center checkboxes
-                gridContributions.add(checkbox, j, i);
-            }
+                Contribution currentContribution = listContributions.get(i-1);
+                TextField txtField = new TextField();
+                txtField.setText(currentContribution.getNameContributor());
+                System.out.println(txtField.getText());
+                System.out.println("adding textfields");
+                gridContributions.addRow(i, txtField);
+                for(int j = 1; j < (listChoices.size()+1); j++){
+                    JFXCheckBox checkbox = new JFXCheckBox();
+                    if(currentContribution.getIdChoice() == listChoices.get(j-1).getIdChoice()){
+                        checkbox.setSelected(true);
+                    }
+                    //TODO center checkboxes
+                    gridContributions.add(checkbox, j, i);
+                }
 
             }
         }
@@ -244,6 +247,29 @@ public class PollViewController implements Initializable {
         for (Choice choice: listChoices) {
             choicesComboBox.getItems().add(choice);
         }
+    }
+
+    private void saveDataPoll(){
+        for(int i = 0; i < listContributions.size(); i++){
+            String name = listContributions.get(i).getNameContributor();
+            for(int j = 0; j < listChoices.size(); j++){
+                CheckBox chkBox = (CheckBox) getNodeFromGridPane(gridContributions, j+1, i+1);
+                if(chkBox.isSelected()){
+                    int idChoice = listChoices.get(j).getIdChoice();
+                    ContributionController.save(name, pollToDisplay.getIdPoll(), idChoice);
+                }
+            }
+        }
+
+    }
+
+    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
     }
 
     private void setView(){
@@ -279,5 +305,18 @@ public class PollViewController implements Initializable {
         System.out.println("Loading : /fxml/" + resource + ".fxml");
         AnchorPane ap = loader.load();
         rootView.getChildren().setAll(ap);
+    }
+
+    /**
+     * Method pour le debug
+     */
+    public void displayLists(){
+        for (Choice choice:listChoices) {
+            System.out.println(choice);
+        }
+
+        for(Contribution contrib : listContributions){
+            System.out.println(contrib);
+        }
     }
 }

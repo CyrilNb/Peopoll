@@ -47,13 +47,32 @@ public class PollShareViewController implements Initializable{
         loadScreen("HomeViewfind");
     }
 
-    /*
+    /**
+     * Method to display pollview
+     */
+    public void displayPoll() throws IOException {
+        loadScreen("PollView", currentPoll);
+    }
+
+    /**
     Method to load a view
      */
     @FXML
     public void loadScreen(String resource) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
         System.out.println("Loading : /fxml/" + resource + ".fxml");
+        AnchorPane ap = loader.load();
+        rootView.getChildren().setAll(ap);
+    }
+
+    /**
+     * Method to load pollview
+     * @param poll
+     */
+    @FXML
+    public void loadScreen(String resource, Poll poll) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
+        loader.setController(new PollViewController(poll));
         AnchorPane ap = loader.load();
         rootView.getChildren().setAll(ap);
     }
