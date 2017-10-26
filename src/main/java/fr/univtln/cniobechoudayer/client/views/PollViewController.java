@@ -14,18 +14,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
-import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 import java.util.List;
 
@@ -33,13 +32,13 @@ public class PollViewController implements Initializable {
 
     private Poll pollToDisplay;
 
-    private PollController pollController = new PollController();
-
-    private ChoiceController choiceController = new ChoiceController();
-
     private List<Choice> listChoices;
 
     private List<Contribution> listContributions;
+
+    private static List<Comment> listComments;
+
+    private int idPoll;
 
     private List<String> namesAlreadyDisplayed = new ArrayList<>();
 
@@ -71,6 +70,7 @@ public class PollViewController implements Initializable {
 
     public PollViewController(Poll pollToDisplay){
         this.pollToDisplay = pollToDisplay;
+        this.idPoll = pollToDisplay.getIdPoll();
     }
     /**
     Method to go back to homeview
@@ -173,6 +173,9 @@ public class PollViewController implements Initializable {
             }
 
             try {
+                listChoices = ChoiceController.getAllChoicesByPoll(idPoll);
+                listContributions = ContributionController.getAllContributionsByPoll(idPoll);
+                listComments = CommentController.getAllCommentsByPoll(idPoll);
                 bindGridView();
             } catch (PersistanceException e) {
                 e.printStackTrace();
@@ -520,5 +523,19 @@ public class PollViewController implements Initializable {
         for(Contribution contrib : listContributions){
             System.out.println(contrib);
         }
+    }
+
+    @FXML
+    public int validateCommentCreation() throws IOException,PersistanceException{
+        try{
+            //TODO modifier hard codé data
+            String str="2015-03-31";
+            Date date=Date.valueOf(str);
+            CommentController.createCommentInDB("Cyril","first comment aah",date,idPoll);
+        }catch (PersistanceException e){
+            e.printStackTrace();
+        }
+
+        return 1;
     }
 }

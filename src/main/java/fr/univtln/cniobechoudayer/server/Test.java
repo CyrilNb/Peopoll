@@ -2,9 +2,13 @@ package fr.univtln.cniobechoudayer.server;
 
 
 import fr.univtln.cniobechoudayer.client.views.HomeViewController;
+import fr.univtln.cniobechoudayer.client.views.PollViewController;
 import fr.univtln.cniobechoudayer.client.views.Step3ViewController;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
+import fr.univtln.cniobechoudayer.model.entities.Comment;
+import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.controllers.ChoiceController;
+import fr.univtln.cniobechoudayer.server.controllers.CommentController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.io.IOException;
@@ -40,8 +44,9 @@ public class Test {
             e.printStackTrace();
         }*/
 
-        /*
-        //test searchById for a poll:
+
+        //test searchById for a poll and creation comment for this poll
+        /*Poll polltest;
         try {
             Class.forName(org.h2.Driver.class.getName());
         } catch (ClassNotFoundException e) {
@@ -49,7 +54,14 @@ public class Test {
         }
         HomeViewController homeViewController = new HomeViewController();
         try {
-            homeViewController.searchPoll();
+            polltest = homeViewController.searchPoll(1);
+            PollViewController pollViewController = new PollViewController(polltest);
+            try {
+                System.out.println("test create comment");
+                pollViewController.validateCommentCreation();
+            } catch (PersistanceException e) {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }*/
@@ -65,6 +77,22 @@ public class Test {
         } catch (PersistanceException e) {
             e.printStackTrace();
         }*/
+
+        //test getAllCommentByPoll
+        try {
+            List<Comment> lisAllComments = CommentController.getAllCommentsByPoll(1);
+            for (Comment item:lisAllComments
+                 ) {
+                System.out.println(item.getIdComment());
+                //test remove comment
+                CommentController.removeCommentInDb(item);
+            }
+        } catch (PersistanceException e) {
+            e.printStackTrace();
+        }
+
+
+
 
     }
 }

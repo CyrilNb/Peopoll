@@ -80,7 +80,6 @@ public class Step3ViewController implements Initializable{
 
     @FXML
     public int validatePollCreation() throws IOException, PersistanceException {
-        System.out.println("entered validatePllCreation");
         int nbMax;
         try {
             nbMax = Integer.parseInt(mapArgsNewPoll.get("NBMAX"));
@@ -88,14 +87,11 @@ public class Step3ViewController implements Initializable{
             nbMax = 0;
         }
         idPollCreated = PollController.createPoll(mapArgsNewPoll.get("Title"), mapArgsNewPoll.get("Location"), mapArgsNewPoll.get("Info"), mapArgsNewPoll.get("Creator"), mapArgsNewPoll.get("Mail"), nbMax,false);
-        System.out.println(idPollCreated);
         try {
             for (Choice choice: staticListCreatedChoices
                  ) {
                 choice.setIdPoll(idPollCreated);
-                System.out.println("before insert");
                 ChoiceController.createChoiceInDB(choice.getDateChoice(), choice.getStartingTime(), choice.getEndingTime(),choice.getIdPoll());
-                System.out.println("after insert");
             }
         } catch (PersistanceException e) {
             e.printStackTrace();

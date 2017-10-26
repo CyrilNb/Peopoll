@@ -2,7 +2,6 @@ package fr.univtln.cniobechoudayer.server.controllers;
 
 import fr.univtln.cniobechoudayer.model.EntityManager;
 import fr.univtln.cniobechoudayer.model.entities.Contribution;
-import fr.univtln.cniobechoudayer.server.database.DatabaseManager;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class ContributionController {
         return idCreatedContribution;
     }
 
-    public static List<Contribution> getAllContributionsFor(int idPoll) throws PersistanceException, SQLException {
+    public static List<Contribution> getAllContributionsByPoll(int idPoll) throws PersistanceException, SQLException {
         EntityManager em = EntityManager.getInstance();
         List<Contribution> lc = new ArrayList<>();
         lc = Contribution.findAllByIdPoll(idPoll);
