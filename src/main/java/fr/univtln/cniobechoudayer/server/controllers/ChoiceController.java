@@ -2,7 +2,6 @@ package fr.univtln.cniobechoudayer.server.controllers;
 
 import fr.univtln.cniobechoudayer.model.EntityManager;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
-import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.util.Collections;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class ChoiceController{
 
-    public static List<Choice> getAllChoicesFor(int idPoll) throws PersistanceException{
+    public static List<Choice> getAllChoicesByPoll(int idPoll) throws PersistanceException{
         EntityManager entityManager = EntityManager.getInstance();
         List<Choice> listReturnedChoices;
         try{
