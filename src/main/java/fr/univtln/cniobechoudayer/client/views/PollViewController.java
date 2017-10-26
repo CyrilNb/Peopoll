@@ -244,7 +244,6 @@ public class PollViewController implements Initializable {
      * Method to bind the rows (contributions) with data
      */
     private void bindGridViewRows(){
-        List<String> namesAlreadyDisplayed = new ArrayList<>();
         int indexRow = 0;
         for(int i = 0; i < (listContributions.size()+1); i++){
             if(i > 0){
@@ -255,9 +254,7 @@ public class PollViewController implements Initializable {
                     indexRow++;
                     TextField txtField = new TextField();
                     txtField.setText(currentContribution.getNameContributor());
-                    System.out.println("Name already loaded : " + namesAlreadyDisplayed);
                     contributionListGroupByName = getContributionForName(currentContribution.getNameContributor());
-                    System.out.println("list contrib for " + currentContribution.getNameContributor() + contributionListGroupByName);
                     gridContributions.addRow(indexRow, txtField);
                     for (Contribution subContribution : contributionListGroupByName) {
                         for (int j = 1; j < (listChoices.size() + 1); j++) {
@@ -302,6 +299,10 @@ public class PollViewController implements Initializable {
             return false;
     }
 
+    /**
+     * Method to set a name already displayed and loaded in view
+     * @param nameContributor
+     */
     private void setNameAlreadyDisplayed(String nameContributor){
         namesAlreadyDisplayed.add(nameContributor);
     }
@@ -323,11 +324,15 @@ public class PollViewController implements Initializable {
     private void saveDataPoll() throws SQLException, PersistanceException {
         for(int i = 0; i < listContributions.size(); i++){
             String name = listContributions.get(i).getNameContributor();
+            List<Contribution> contributionsListForSpecificName = getContributionForName(name);
             for(int j = 0; j < listChoices.size(); j++){
                 CheckBox chkBox = (CheckBox) getNodeFromGridPane(gridContributions, j+1, i+1);
-                if(chkBox.isSelected()){
-                    int idChoice = listChoices.get(j).getIdChoice();
-                    ContributionController.save(name, pollToDisplay.getIdPoll(), idChoice);
+                for(Contribution c : contributionsListForSpecificName){
+                    if(c.getIdChoice() == listChoices.get(j).getIdChoice()){
+                        //The choice was already in db -> update
+                    }else{
+                        //The choice is new -> insert
+                    }
                 }
             }
         }
