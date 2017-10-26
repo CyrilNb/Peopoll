@@ -42,7 +42,7 @@ public class SendEmail {
                 // -- Set the FROM and TO fields --
                 msg.setFrom(new InternetAddress("Peopoll"));
                 msg.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse("houdayer.corentin@gmail.com",false));
+                        InternetAddress.parse(poll.getMailCreator(),false));
                 msg.setSubject("Your codes to manage your new poll : " + poll.getTitle());
                 msg.setText("Hi ! \n Here are your codes, takes care to keep them safe ! \n Access code : " + poll.getIdPoll() + " \n Management code : " + poll.getManagerCode());
                 msg.setSentDate(new Date());
