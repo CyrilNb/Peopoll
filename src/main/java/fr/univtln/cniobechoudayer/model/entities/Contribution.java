@@ -24,6 +24,7 @@ public class Contribution implements Entity {
 
     private static PreparedStatement findById;
     private static PreparedStatement findAll;
+    private static PreparedStatement findAllByIdPoll;
 
     //Init prepared statements
     static{
@@ -31,6 +32,7 @@ public class Contribution implements Entity {
             Connection connection = DatabaseManager.getConnection();
             findById = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE ID_CONTRIBUTION=?");
             findAll = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS ");
+            findAllByIdPoll = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE IDP=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -155,6 +157,20 @@ public class Contribution implements Entity {
             }
             return lc;
         } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+    public static List<Contribution> findAllByIdPoll(int idPoll) throws PersistanceException, SQLException {
+        try{
+            List<Contribution> lc = new ArrayList<>();
+            findAllByIdPoll.setInt(1, idPoll);
+            ResultSet rs = findAllByIdPoll.executeQuery();
+            while (rs.next()){
+                lc.add(createFromResultSet(rs));
+            }
+            return lc;
+        }catch (SQLException e){
             throw new PersistanceException(e);
         }
     }

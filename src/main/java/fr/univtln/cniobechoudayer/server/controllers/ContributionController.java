@@ -6,6 +6,9 @@ import fr.univtln.cniobechoudayer.server.database.DatabaseManager;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ContributionController {
 
@@ -33,6 +36,17 @@ public class ContributionController {
         int idCreatedContribution = em.persist(new Contribution(nameContribution, idPoll, idChoice));
         em.dispose();
         return idCreatedContribution;
+    }
+
+    public static List<Contribution> getAllContributionsFor(int idPoll) throws PersistanceException, SQLException {
+        EntityManager em = EntityManager.getInstance();
+        List<Contribution> lc = new ArrayList<>();
+        lc = Contribution.findAllByIdPoll(idPoll);
+        if(lc == null){
+            return Collections.emptyList();
+        }else{
+            return lc;
+        }
     }
 
 

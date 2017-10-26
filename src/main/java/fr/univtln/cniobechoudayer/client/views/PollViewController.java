@@ -149,6 +149,8 @@ public class PollViewController implements Initializable {
             } catch (PersistanceException e) {
                 e.printStackTrace();
                 System.out.println("cant bind grid view");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
             //TODO bind listContributions from DB
 
@@ -162,14 +164,10 @@ public class PollViewController implements Initializable {
     /**
      * Setting up the view
      */
-    private void bindGridView() throws PersistanceException {
+    private void bindGridView() throws PersistanceException, SQLException {
         listChoices = ChoiceController.getAllChoicesFor(pollToDisplay.getIdPoll());
+        listContributions = ContributionController.getAllContributionsFor(pollToDisplay.getIdPoll());
         setGridViewColumns(listChoices.size());
-        listContributions = new ArrayList<>();
-        listContributions.add(new Contribution(1, "Corentin", pollToDisplay.getIdPoll(), 1));
-        listContributions.add(new Contribution(1, "Cyril", pollToDisplay.getIdPoll(), 1));
-        listContributions.add(new Contribution(1, "Pélo", pollToDisplay.getIdPoll(), 1));
-        listContributions.add(new Contribution(1, "Corentin", pollToDisplay.getIdPoll(), 2));
         setGridViewRows(listContributions.size() + 1);
         System.out.println("Taille de listChoices : " + listChoices.size());
         System.out.println("Taille de listContributions : " + listContributions.size());
