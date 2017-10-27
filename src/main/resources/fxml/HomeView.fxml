@@ -41,9 +41,9 @@
                   </JFXButton>
                </children>
             </Pane>
-            <Pane layoutY="-119.0" prefHeight="184.0" prefWidth="1000.0" style="-fx-background-color: #2980b9;">
+            <Pane layoutY="-3.0" prefHeight="68.0" prefWidth="1000.0" style="-fx-background-color: #2980b9;">
                <children>
-                  <Text id="mainTitle" fill="WHITE" layoutX="230.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PEOPOLL">
+                  <Text id="mainTitle" fill="WHITE" layoutX="411.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PEOPOLL">
                      <font>
                         <Font name="Ubuntu Bold" size="39.0" />
                      </font>
