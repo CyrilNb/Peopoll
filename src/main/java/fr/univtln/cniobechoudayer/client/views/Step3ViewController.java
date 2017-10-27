@@ -93,8 +93,7 @@ public class Step3ViewController implements Initializable{
         }
         idPollCreated = PollController.createPoll(mapArgsNewPoll.get("Title"), mapArgsNewPoll.get("Location"), mapArgsNewPoll.get("Info"), mapArgsNewPoll.get("Creator"), mapArgsNewPoll.get("Mail"), nbMax,false);
         try {
-            for (Choice choice: staticListCreatedChoices
-                 ) {
+            for (Choice choice: staticListCreatedChoices) {
                 choice.setIdPoll(idPollCreated);
                 ChoiceController.createChoiceInDB(choice.getDateChoice(), choice.getStartingTime(), choice.getEndingTime(),choice.getIdPoll());
             }
@@ -104,6 +103,7 @@ public class Step3ViewController implements Initializable{
 
 
         loadScreen("PollShareCodesView", idPollCreated);
+        staticListCreatedChoices.clear();
         return 1;
     }
 
@@ -116,6 +116,7 @@ public class Step3ViewController implements Initializable{
     private void addTimeSlotToPoll(){
         currentStartingTime = getDateFromRawValue(startPollPicker);
         currentEndingTime = getDateFromRawValue(endPollPicker);
+        System.out.println("currentStartingTime" +currentEndingTime + " currentEndingTime" + currentEndingTime);
         LocalDate localDate = dayPollPicker.getValue();
         Instant ins = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date dayDate = Date.from(ins);
@@ -135,6 +136,14 @@ public class Step3ViewController implements Initializable{
         dayPollPicker.getEditor().clear();
         startPollPicker.getEditor().clear();
         endPollPicker.getEditor().clear();
+
+        dayPollPicker.setValue(null);
+        startPollPicker.setValue(null);
+        endPollPicker.setValue(null);
+
+        addTimeSlotButton.setDisable(false);
+        currentStartingTime = -1;
+        currentEndingTime = -1;
     }
 
     public void setView(){
@@ -152,7 +161,7 @@ public class Step3ViewController implements Initializable{
     }
 
     public int getDateFromRawValue(JFXTimePicker picker){
-        int finalValue = 0;
+        int finalValue = -1;
         if(picker.getValue() != null) {
             String date = picker.getValue().toString();
             String dateArray[] = date.split(":");

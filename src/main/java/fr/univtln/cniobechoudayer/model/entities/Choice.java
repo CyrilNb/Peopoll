@@ -209,14 +209,15 @@ public class Choice implements Entity{
     }
 
     public static String getFormattedDate(int time, boolean isStart){
-        System.out.println(time);
-        String timeString = String.valueOf(time);
         String finalDate = "";
-        if(timeString.toString().length() == 3){
-            timeString = "0"+timeString;
-            System.out.println("changed timeString " + timeString);
-        }
-        if(time != 0) {
+        System.out.println(time);
+        if(time != -1 && time != 0) {
+            String timeString = String.valueOf(time);
+            System.out.println("timeString : " + timeString);
+            if(timeString.toString().length() == 3){
+                timeString = "0"+timeString;
+                System.out.println("changed timeString " + timeString);
+            }
             String part1 = timeString.substring(0, 2);
             System.out.println(part1);
             String part2 = timeString.substring(2,4);

@@ -1,18 +1,13 @@
 package fr.univtln.cniobechoudayer.client.views;
 
 import com.jfoenix.controls.*;
-import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.controllers.PollController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +20,7 @@ import java.util.*;
 public class HomeViewController implements Initializable{
 
     @FXML
-    private AnchorPane rootPane;
+    private AnchorPane rootView;
 
     @FXML
     private JFXTextField codeTextField;
@@ -114,7 +109,7 @@ public class HomeViewController implements Initializable{
         System.out.println("Loading : /fxml/" + resource + ".fxml");
         loader.setController(new Step1ViewController());
         AnchorPane ap = loader.load();
-        rootPane.getChildren().setAll(ap);
+        rootView.getChildren().setAll(ap);
     }
 
     /**
@@ -126,11 +121,11 @@ public class HomeViewController implements Initializable{
         System.out.println("Loading : /fxml/" + resource + ".fxml");
         loader.setController(new PollViewController(searchedPoll));
         AnchorPane ap = loader.load();
-        rootPane.getChildren().setAll(ap);
+        rootView.getChildren().setAll(ap);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        errorPollNotFound = new JFXSnackbar(rootPane);
+        errorPollNotFound = new JFXSnackbar(rootView);
     }
 }

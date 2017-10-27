@@ -6,10 +6,7 @@ import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.*;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
-<<<<<<< HEAD
-=======
 import javafx.collections.FXCollections;
->>>>>>> d37cf68af8fc1a7e3c4ceb1e73b46671fcf199e1
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,10 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
-<<<<<<< HEAD
-=======
 import javafx.geometry.Insets;
->>>>>>> d37cf68af8fc1a7e3c4ceb1e73b46671fcf199e1
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -75,16 +69,22 @@ public class PollViewController implements Initializable {
     private Pane managerPane;
 
     @FXML
+    private Pane iconsFormPane;
+
+    @FXML
+    private Pane finalDatePane;
+
+    @FXML
     private GridPane gridContributions;
 
     @FXML
-    private Text titlePollText;
+    private TextField titlePollText;
 
     @FXML
-    private Text locationPollText;
+    private TextField locationPollText;
 
     @FXML
-    private Text infoPollText;
+    private TextArea infoPollText;
 
     @FXML
     private JFXComboBox choicesComboBox;
@@ -93,11 +93,16 @@ public class PollViewController implements Initializable {
     private JFXButton addRowGridPane;
 
     @FXML
+    private Text finalDateText;
+
+    @FXML
     private TreeTableView treeTableViewComments;
 
     private JFXSnackbar infoSnackbar;
 
     private JFXSnackbar successInfoSnackbar;
+
+    private boolean isDefineFinalChoiceMode = false;
 
 
 
@@ -119,14 +124,20 @@ public class PollViewController implements Initializable {
 
     @FXML
     private void defineFinalDate(){
-        if(gridContributions.isVisible()){
+        if(isDefineFinalChoiceMode){
+            isDefineFinalChoiceMode = false;
+        }else
+            isDefineFinalChoiceMode = true;
+        if(isDefineFinalChoiceMode){
             gridContributions.setVisible(false);
             choicesComboBox.setVisible(true);
             addRowGridPane.setVisible(false);
+            displayInfoPoll(false);
         }else{
             gridContributions.setVisible(true);
             choicesComboBox.setVisible(false);
             addRowGridPane.setVisible(true);
+            displayInfoPoll(true);
         }
     }
 
@@ -157,7 +168,7 @@ public class PollViewController implements Initializable {
      */
     @FXML
     private void lockPoll(){
-        infoSnackbar.getStyleClass().add("info-snackbar");
+        //infoSnackbar.getStyleClass().add("info-snackbar");
         if(gridContributions.isDisable()){
             gridContributions.setDisable(false);
             pollToDisplay.setIsLocked(false);
@@ -180,23 +191,56 @@ public class PollViewController implements Initializable {
             managerPane.setVisible(true);
             managerCodeTextField.setVisible(false);
             System.out.println("match");
+            isOrga = true;
+            setViewAsOrga();
         }else{
             managerPane.setVisible(false);
             System.out.println("doesnt match");
+            isOrga = false;
         }
+    }
+
+    private void setViewAsOrga(){
+        titlePollText.setEditable(true);
+        locationPollText.setEditable(true);
+        infoPollText.setEditable(true);
     }
 
     private void setViewPoll(){
         if(pollToDisplay.isIsLocked()){
             gridContributions.setDisable(true);
         }
-        if(pollToDisplay.getFinalDate() != null){
+        Choice tempChoice = null;
+        for(Choice choice : listChoices){
+            if(choice.getIdChoice() == pollToDisplay.getIdFinalChoice()){
+                tempChoice = choice;
+            }
+        }
+
+        if(tempChoice != null){
             gridContributions.setVisible(false);
             addRowGridPane.setVisible(false);
+            
+            finalDatePane.setVisible(true);
+
+            finalDateText.setText(tempChoice.getDateChoice().toString() + " " + Choice.getFormattedDate(tempChoice.getStartingTime(), true) + " " + Choice.getFormattedDate(tempChoice.getEndingTime(), false));
         }
         titlePollText.setText(pollToDisplay.getTitle());
         locationPollText.setText(pollToDisplay.getLocation());
         infoPollText.setText(pollToDisplay.getDescription());
+
+
+        titlePollText.setEditable(false);
+        locationPollText.setEditable(false);
+        infoPollText.setEditable(false);
+
+    }
+
+    private void displayInfoPoll(boolean hide){
+        titlePollText.setVisible(hide);
+        locationPollText.setVisible(hide);
+        infoPollText.setVisible(hide);
+        iconsFormPane.setVisible(hide);
     }
 
     /**
@@ -208,7 +252,6 @@ public class PollViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(pollToDisplay != null){
 
-            setViewPoll();
             successInfoSnackbar = new JFXSnackbar(rootView);
             infoSnackbar = new JFXSnackbar(rootView);
 
@@ -243,6 +286,7 @@ public class PollViewController implements Initializable {
 
         bindFinalDateComboBox();
         setViewGridPane();
+        setViewPoll();
 
         addRowGridPane.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
@@ -517,7 +561,7 @@ public class PollViewController implements Initializable {
                 }
             }
         }
-        successInfoSnackbar.getStyleClass().add("success-snackbar");
+        //successInfoSnackbar.getStyleClass().add("success-snackbar");
         successInfoSnackbar.show("Poll is saved !", 3500);
     }
 
@@ -526,6 +570,7 @@ public class PollViewController implements Initializable {
      * @throws PersistanceException
      */
     private void saveStatePoll() throws PersistanceException {
+        System.out.println("saveStatePoll");
         PollController.lockPoll(pollToDisplay);
 
         if(choicesComboBox.getSelectionModel().getSelectedItem() != null){
@@ -534,6 +579,16 @@ public class PollViewController implements Initializable {
         }else{
             System.out.println("final date null");
         }
+        bindDataInPoll();
+        PollController.updatePoll(pollToDisplay);
+    }
+
+    @FXML
+    private void bindDataInPoll(){
+        System.out.println("bindDataInPoll");
+        pollToDisplay.setTitle(titlePollText.getText());
+        pollToDisplay.setLocation(locationPollText.getText());
+        pollToDisplay.setDescription(infoPollText.getText());
     }
 
     /**

@@ -28,7 +28,7 @@ public class Poll implements Entity {
     private String nameCreator;
     private boolean isLocked;
     private int nbMaxContributor;
-    private Date finalDate;
+    private int idFinalChoice;
 
     private List<Choice> choicesList;
     private List<Comment> commentsList;
@@ -44,9 +44,9 @@ public class Poll implements Entity {
     static {
         try {
             Connection connection = DatabaseManager.getConnection();
-            findByID = connection.prepareStatement("select ID_POLL, TITLE, MANAGER_CODE, LOCATION, DESCRIPTION, MAIL_CREATOR, NAME_CREATOR, IS_LOCKED, NB_MAX_CONTRIBUTOR, FINAL_DATE from PEOPOLL.POLLS where ID_POLL=?");
+            findByID = connection.prepareStatement("select ID_POLL, TITLE, MANAGER_CODE, LOCATION, DESCRIPTION, MAIL_CREATOR, NAME_CREATOR, IS_LOCKED, NB_MAX_CONTRIBUTOR, ID_FINAL_CHOICE from PEOPOLL.POLLS where ID_POLL=?");
             findAll = connection.prepareStatement("select ID_POLL, TITLE from PEOPOLL.POLLS");
-            setFinalChoice = connection.prepareStatement("UPDATE PEOPOLL.POLLS SET FINAL_DATE = ? WHERE ID_POLL = ?");
+            setFinalChoice = connection.prepareStatement("UPDATE PEOPOLL.POLLS SET ID_FINAL_CHOICE = ? WHERE ID_POLL = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,14 +66,14 @@ public class Poll implements Entity {
         this.choicesList = pb.choicesList;
         this.commentsList = pb.commentsList;
         this.nbMaxContributor = pb.nbMaxContributor;
-        this.finalDate = pb.finalDate;
+        this.idFinalChoice = pb.idFinalChoice;
         this.managerCode = pb.managerCode;
         this.isLocked = pb.isLocked;
     }
 
 
     //Ce constructeur est utilisé en privé quand un poll est extrait de la BD
-    private Poll(int ID, String title, String managerCode, String location, String description, String mailCreator, String nameCreator, boolean isLocked, int nbMaxContributor, Date finalDate) {
+    private Poll(int ID, String title, String managerCode, String location, String description, String mailCreator, String nameCreator, boolean isLocked, int nbMaxContributor, int idFinalChoice) {
         this.idPoll = ID;
         this.title = title;
         this.managerCode = managerCode;
@@ -83,7 +83,7 @@ public class Poll implements Entity {
         this.nameCreator = nameCreator;
         this.isLocked = isLocked;
         this.nbMaxContributor = nbMaxContributor;
-        this.finalDate = finalDate;
+        this.idFinalChoice = idFinalChoice;
     }
 
     private Poll(int ID, String title){
@@ -106,7 +106,7 @@ public class Poll implements Entity {
         private String nameCreator;
         private boolean isLocked;
         private int nbMaxContributor;
-        private Date finalDate;
+        private int idFinalChoice;
         private List<Choice> choicesList;
         private List<Comment> commentsList;
 
@@ -176,8 +176,8 @@ public class Poll implements Entity {
             return this;
         }
 
-        public PollBuilder setFinalDate(Date finalDate){
-            this.finalDate = finalDate;
+        public PollBuilder setIdFinalChoice(int idFinalChoice){
+            this.idFinalChoice = idFinalChoice;
             return this;
         }
 
@@ -274,15 +274,6 @@ public class Poll implements Entity {
     }
 
     /**
-     * Gets finalDate.
-     *
-     * @return Value of finalDate.
-     */
-    public Date getFinalDate() {
-        return finalDate;
-    }
-
-    /**
      * Sets new mailCreator.
      *
      * @param mailCreator New value of mailCreator.
@@ -336,13 +327,12 @@ public class Poll implements Entity {
         this.location = location;
     }
 
-    /**
-     * Sets new finalDate.
-     *
-     * @param finalDate New value of finalDate.
-     */
-    public void setFinalDate(Date finalDate) {
-        this.finalDate = finalDate;
+    public int getIdFinalChoice() {
+        return idFinalChoice;
+    }
+
+    public void setIdFinalChoice(int idFinalChoice) {
+        this.idFinalChoice = idFinalChoice;
     }
 
     /**
@@ -384,7 +374,7 @@ public class Poll implements Entity {
                 .append(" nameCreator: ").append(this.nameCreator)
                 .append(" isLocked: ").append(this.isLocked)
                 .append(" nbmax: ").append(this.nbMaxContributor)
-                .append("final date: ").append(this.finalDate);
+                .append("id Final Choice: ").append(this.idFinalChoice);
         return sb.toString();
     }
 
@@ -437,7 +427,7 @@ public class Poll implements Entity {
 
     //method to create a poll object from the result of the database
     private static Poll createFromResultSet(ResultSet result) throws SQLException {
-        return new Poll(result.getInt("ID_POLL"),result.getString("TITLE"),result.getString("MANAGER_CODE"),result.getString("LOCATION"),result.getString("DESCRIPTION"),result.getString("MAIL_CREATOR"),result.getString("NAME_CREATOR"),result.getBoolean("IS_LOCKED"),result.getInt("NB_MAX_CONTRIBUTOR"),result.getDate("FINAL_DATE"));
+        return new Poll(result.getInt("ID_POLL"),result.getString("TITLE"),result.getString("MANAGER_CODE"),result.getString("LOCATION"),result.getString("DESCRIPTION"),result.getString("MAIL_CREATOR"),result.getString("NAME_CREATOR"),result.getBoolean("IS_LOCKED"),result.getInt("NB_MAX_CONTRIBUTOR"),result.getInt("ID_FINAL_CHOICE"));
 
     }
 
@@ -486,8 +476,8 @@ public class Poll implements Entity {
 
     public void setFinalChoice() throws PersistanceException {
         try{
-            setFinalChoice.setDate(1, Utils.convertUtilDateToSqlDate(finalDate));
-            System.out.println("date : " + finalDate);
+            setFinalChoice.setInt(1, idFinalChoice);
+            System.out.println("date : " + idFinalChoice);
             setFinalChoice.setInt(2, idPoll);
             setFinalChoice.executeUpdate();
         }catch (Exception e) {
@@ -507,6 +497,7 @@ public class Poll implements Entity {
 
         try{
             Statement statement = connection.createStatement();
+            System.out.println("INSERT INTO PEOPOLL.POLLS(MANAGER_CODE,LOCATION,DESCRIPTION,TITLE,MAIL_CREATOR,NAME_CREATOR,IS_LOCKED,NB_MAX_CONTRIBUTOR) VALUES ('" + managerCode + "','" + location + "','" + description + "','" + title + "','" + mailCreator + "','" + nameCreator + "','" + isLocked + "','" + nbMaxContributor + "')");
             statement.executeUpdate("INSERT INTO PEOPOLL.POLLS(MANAGER_CODE,LOCATION,DESCRIPTION,TITLE,MAIL_CREATOR,NAME_CREATOR,IS_LOCKED,NB_MAX_CONTRIBUTOR) VALUES ('" + managerCode + "','" + location + "','" + description + "','" + title + "','" + mailCreator + "','" + nameCreator + "','" + isLocked + "','" + nbMaxContributor + "')", Statement.RETURN_GENERATED_KEYS);
             //statement.executeUpdate("INSERT INTO PEOPOLL.POLLS(MANAGER_CODE,LOCATION,DESCRIPTION,TITLE,MAIL_CREATOR,NAME_CREATOR,IS_LOCKED,NB_MAX_CONTRIBUTOR,FINAL_DATE) VALUES ('MANAGE2','VICHY','DESCIRPTION','TITRE','cyril@gmail.com','cyril',0,4,'2017-10-23')", Statement.RETURN_GENERATED_KEYS);
             ResultSet resultSet = statement.getGeneratedKeys();
@@ -531,7 +522,7 @@ public class Poll implements Entity {
     @Override
     public void merge(Connection connection) throws PersistanceException {
         try {
-            String query = "UPDATE PEOPOLL.POLLS SET IS_LOCKED='"+isLocked+"' WHERE ID_POLL='"+idPoll+"';";
+            String query = "UPDATE PEOPOLL.POLLS SET TITLE='"+title+"', LOCATION='"+location+"', DESCRIPTION='"+description+"', IS_LOCKED='"+isLocked+"' WHERE ID_POLL='"+idPoll+"';";
             System.out.println(query);
             connection.createStatement().executeUpdate(query);
             logger.info("merge of the poll : " + this);
@@ -539,6 +530,8 @@ public class Poll implements Entity {
             throw new PersistanceException(e);
         }
     }
+
+
 
     /**
      * Update the instance from the database data

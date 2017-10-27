@@ -38,6 +38,12 @@ public class PollController {
         return returnedID;
     }
 
+    public static void updatePoll(Poll poll) throws PersistanceException {
+        EntityManager entityManager = EntityManager.getInstance();
+        entityManager.merge(poll);
+        entityManager.dispose();
+    }
+
     public static void lockPoll(Poll poll) throws PersistanceException {
         EntityManager entityManager = EntityManager.getInstance();
         entityManager.merge(poll);
@@ -46,7 +52,7 @@ public class PollController {
 
     public static void setFinalDate(Poll poll, Choice choice) throws PersistanceException {
         EntityManager entityManager = EntityManager.getInstance();
-        poll.setFinalDate(choice.getDateChoice());
+        poll.setIdFinalChoice(choice.getIdChoice());
         poll.setFinalChoice();
         entityManager.dispose();
     }

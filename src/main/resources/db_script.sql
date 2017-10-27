@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS peopoll.POLLS (
   name_creator VARCHAR2(25),
   is_locked BIT CONSTRAINT constraint_notnull_is_locked NOT NULL,
   nb_max_contributor INT,
-  final_date DATE,
+  id_final_choice INT,
 
 );
 
