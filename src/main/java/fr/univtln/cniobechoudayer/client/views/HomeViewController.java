@@ -7,6 +7,7 @@ import fr.univtln.cniobechoudayer.server.controllers.PollController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -14,16 +15,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.net.URL;
+import java.util.*;
 
 /**
  * Controller of the HomeView
  * Created by Corentin on 21/10/2017.
  */
-public class HomeViewController {
+public class HomeViewController implements Initializable{
 
     @FXML
     private AnchorPane rootPane;
@@ -40,6 +39,8 @@ public class HomeViewController {
     private JFXButton pollCreateButton;
     @FXML
     private JFXButton searchCodeButton;
+
+    private JFXSnackbar errorPollNotFound;
 
 
     public HomeViewController(){
@@ -61,7 +62,7 @@ public class HomeViewController {
             }
 
         }else{
-            //error msg
+            System.out.println("POLL NOT FOUND");
         }
         if(pollToDisplay != null){
             try {
@@ -69,6 +70,8 @@ public class HomeViewController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else{
+            errorPollNotFound.show("Poll not found, try again.", 3500);
         }
     }
 
@@ -124,5 +127,10 @@ public class HomeViewController {
         loader.setController(new PollViewController(searchedPoll));
         AnchorPane ap = loader.load();
         rootPane.getChildren().setAll(ap);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        errorPollNotFound = new JFXSnackbar(rootPane);
     }
 }
