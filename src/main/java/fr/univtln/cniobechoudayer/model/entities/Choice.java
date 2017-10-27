@@ -19,7 +19,7 @@ public class Choice implements Entity{
 
     /* private fields */
     private int idChoice;
-    private int idPoll;
+    private int idPoll; //foreign key
     private Date dateChoice;
     private int startingTime;
     private int endingTime;

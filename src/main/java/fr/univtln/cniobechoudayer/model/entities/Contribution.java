@@ -17,8 +17,8 @@ public class Contribution implements Entity {
     /** private fields**/
     private int idContribution;
     private String nameContributor;
-    private int idPoll;
-    private int idChoice;
+    private int idPoll; //foreign key
+    private int idChoice; //foreign key
 
     private static Logger logger = Logger.getLogger(Contribution.class.getName());
 
