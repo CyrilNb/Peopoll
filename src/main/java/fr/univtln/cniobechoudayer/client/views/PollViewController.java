@@ -7,10 +7,7 @@ import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.*;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
-<<<<<<< HEAD
-=======
 import javafx.collections.FXCollections;
->>>>>>> d37cf68af8fc1a7e3c4ceb1e73b46671fcf199e1
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,10 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
-<<<<<<< HEAD
-=======
 import javafx.geometry.Insets;
->>>>>>> d37cf68af8fc1a7e3c4ceb1e73b46671fcf199e1
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
