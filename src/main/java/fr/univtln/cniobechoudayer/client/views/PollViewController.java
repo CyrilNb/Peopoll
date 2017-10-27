@@ -1,5 +1,6 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+
 import com.jfoenix.controls.*;
 import fr.univtln.cniobechoudayer.client.MainClient;
 import fr.univtln.cniobechoudayer.model.entities.*;
@@ -38,6 +39,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PollViewController implements Initializable {
 
@@ -96,7 +98,7 @@ public class PollViewController implements Initializable {
     private Text finalDateText;
 
     @FXML
-    private TreeTableView treeTableViewComments;
+    private TreeTableView<Comment> treeTableViewComments;
 
     private JFXSnackbar infoSnackbar;
 
@@ -732,19 +734,6 @@ public class PollViewController implements Initializable {
         }
     }
 
-    @FXML
-    public int validateCommentCreation() throws IOException,PersistanceException{
-        try{
-            //TODO modifier hard codé data
-            String str="2015-03-31";
-            Date date=Date.valueOf(str);
-            CommentController.createCommentInDB("Cyril","first comment aah",date,idPoll);
-        }catch (PersistanceException e){
-            e.printStackTrace();
-        }
-
-        return 1;
-    }
 
     @FXML
     private void showAddCommentDialog() {
@@ -809,5 +798,29 @@ public class PollViewController implements Initializable {
         dialog.setScene(new Scene(layout));
         dialog.show();
     }
+
+    @FXML
+    private void onClickDeleteComment(){
+        System.out.println("size"+listComments.size());
+        if(!listComments.isEmpty()){
+
+        TreeItem<Comment> treeItem = treeTableViewComments.getSelectionModel().getSelectedItem();
+        Comment commentToBeDeleted = treeItem.getValue();
+            if(commentToBeDeleted != null){
+                try {
+                    listComments.remove(commentToBeDeleted);
+                    CommentController.removeCommentInDb(commentToBeDeleted);
+                    try {
+                        loadScreen("PollView",this.pollToDisplay);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (PersistanceException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
 }
