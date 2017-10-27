@@ -1,28 +1,41 @@
 package fr.univtln.cniobechoudayer.client.views;
 
 import com.jfoenix.controls.*;
+import fr.univtln.cniobechoudayer.client.MainClient;
 import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.*;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
@@ -75,6 +88,7 @@ public class PollViewController implements Initializable {
 
     @FXML
     private TreeTableView treeTableViewComments;
+
 
 
     public PollViewController(Poll pollToDisplay){
@@ -227,6 +241,7 @@ public class PollViewController implements Initializable {
     }
 
     private void initTreeTableViewComments(List<Comment> listComments){
+        ObservableList<Comment> observableListComments = FXCollections.observableList(listComments);
 
         TreeTableColumn<Comment,String> authorColumn = new TreeTableColumn<>("Author");
         authorColumn.setResizable(false);
@@ -612,5 +627,68 @@ public class PollViewController implements Initializable {
         return 1;
     }
 
+    @FXML
+    private void showAddCommentDialog() {
+        // initialize the dialog.
+        final Stage dialog = new Stage();
+        dialog.setTitle("New Comment");
+        dialog.initOwner(rootView.getScene().getWindow());
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.initStyle(StageStyle.UTILITY);
+        dialog.setX(800);
+        dialog.setY(350);
+
+
+        // create a grid for the data entry.
+        GridPane grid = new GridPane();
+        final TextField authorField = new TextField();
+        final TextField commentField = new TextField();
+        grid.addRow(0, new Label("Author"), authorField);
+        grid.addRow(1, new Label("Comment"), commentField);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        GridPane.setHgrow(authorField, Priority.ALWAYS);
+        GridPane.setHgrow(commentField, Priority.ALWAYS);
+
+        // create action buttons for the dialog.
+        Button ok = new Button("Add");
+        ok.setDefaultButton(true);
+        Button cancel = new Button("Cancel");
+        cancel.setCancelButton(true);
+
+        // only enable the ok button when there has been some text entered.
+        ok.disableProperty().bind(authorField.textProperty().isEqualTo("").or(commentField.textProperty().isEqualTo("")));
+
+        // add action handlers for the dialog buttons.
+        ok.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent actionEvent) {
+                int nextIndex = treeTableViewComments.getSelectionModel().getSelectedIndex() + 1;
+                java.util.Date date = java.sql.Date.valueOf(LocalDate.now());
+                Comment newComment = new Comment(authorField.getText(),commentField.getText(),date,idPoll);
+                TreeItem<Comment> item = new TreeItem<>(newComment);
+                try {
+                    CommentController.createCommentInDB(newComment.getNameAuthor(),newComment.getContent(),newComment.getDateComment(),newComment.getIdPoll());
+                } catch (PersistanceException e) {
+                    e.printStackTrace();
+                }
+                treeTableViewComments.getRoot().getChildren().add(item);
+                treeTableViewComments.getSelectionModel().select(nextIndex);
+                dialog.close();
+            }
+        });
+        cancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent actionEvent) {
+                dialog.close();
+            }
+        });
+
+        // layout the dialog.
+        HBox buttons = HBoxBuilder.create().spacing(10).children(ok, cancel).alignment(Pos.CENTER_RIGHT).build();
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(grid, buttons);
+        layout.setPadding(new Insets(5));
+        dialog.setScene(new Scene(layout));
+        dialog.show();
+    }
 
 }

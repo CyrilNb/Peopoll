@@ -69,6 +69,14 @@
                         </ImageView>
                     </children>
                 </Pane>
+            <ImageView fitHeight="37.0" fitWidth="45.0" layoutX="16.0" layoutY="504.0" onMouseClicked="#showAddCommentDialog" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/004-save.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
             </children>
          <cursor>
             <Cursor fx:constant="HAND" />
