@@ -9,21 +9,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="624.0" prefWidth="1001.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
                <children>
-                  <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
+                  <Pane layoutX="133.0" layoutY="100.0" prefHeight="450.0" prefWidth="735.0">
                      <children>
-                        <Text layoutX="186.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCESS CODE">
+                        <Text layoutX="256.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCESS CODE">
                            <font>
-                              <Font name="Ubuntu Regular" size="26.0" />
+                              <Font size="33.0" />
                            </font>
                         </Text>
-                        <Text layoutX="142.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MANAGEMENT CODE">
+                        <Text layoutX="220.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MANAGEMENT CODE">
                            <font>
-                              <Font name="Ubuntu Regular" size="26.0" />
+                              <Font size="33.0" />
                            </font>
                         </Text>
-                        <Pane layoutX="73.0" layoutY="37.0" prefHeight="70.0" prefWidth="393.0" style="-fx-background-color: #FFFFFF;">
+                        <Pane layoutX="163.0" layoutY="80.0" prefHeight="70.0" prefWidth="393.0" style="-fx-background-color: #FFFFFF;">
                            <children>
                               <Text id="accessCodeText" fx:id="accessCodeText" layoutX="156.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                                  <font>
@@ -32,7 +32,7 @@
                               </Text>
                            </children>
                         </Pane>
-                        <Pane layoutX="74.0" layoutY="157.0" prefHeight="70.0" prefWidth="393.0" style="-fx-background-color: #FFFFFF;">
+                        <Pane layoutX="165.0" layoutY="247.0" prefHeight="70.0" prefWidth="393.0" style="-fx-background-color: #FFFFFF;">
                            <children>
                               <Text id="managementCodeText" fx:id="managementCodeText" layoutX="156.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                                  <font>
@@ -41,7 +41,7 @@
                               </Text>
                            </children>
                         </Pane>
-                        <ImageView id="sendCodeMailButton" fitHeight="43.0" fitWidth="40.0" layoutX="222.0" layoutY="245.0" onMouseClicked="#sendEmailToUser" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="sendCodeMailButton" fitHeight="62.0" fitWidth="54.0" layoutX="308.0" layoutY="378.0" onMouseClicked="#sendEmailToUser" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/mail.png" />
                            </image>
@@ -49,7 +49,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                         </ImageView>
-                        <ImageView id="viewPollButton" fitHeight="43.0" fitWidth="40.0" layoutX="280.0" layoutY="245.0" onMouseClicked="#displayPoll" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="viewPollButton" fitHeight="62.0" fitWidth="73.0" layoutX="389.0" layoutY="374.0" onMouseClicked="#displayPoll" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/002-eye.png" />
                            </image>
@@ -59,7 +59,7 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #2980b9; -fx-padding: 10px;">
+                  <Pane prefHeight="55.0" prefWidth="1001.0" style="-fx-background-color: #2980b9; -fx-padding: 10px;">
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -69,7 +69,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Text fill="WHITE" layoutX="171.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Share your poll" textAlignment="CENTER" wrappingWidth="297.13671875">
+                        <Text fill="WHITE" layoutX="352.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Share your poll" textAlignment="CENTER" wrappingWidth="297.13671875">
                            <font>
                               <Font name="Ubuntu Regular" size="38.0" />
                            </font>

@@ -10,23 +10,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="624.0" prefWidth="1000.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.HomeViewController">
          <children>
-            <Pane layoutX="31.0" layoutY="71.0" prefHeight="273.0" prefWidth="578.0" style="-fx-background-color: #FFFFFF;">
+            <Pane layoutX="-2.0" layoutY="65.0" prefHeight="559.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <Pane id="pollCreateActionPoll" layoutX="204.0" layoutY="118.0" prefHeight="148.0" prefWidth="170.0" style="-fx-background-color: #2980b9;">
-                      <Label id="titlePollCreateAction" alignment="CENTER" contentDisplay="CENTER" layoutY="-10.0" prefHeight="48.0" prefWidth="170.0" style="-fx-padding:10;" text="CREATE A POLL" textFill="WHITE">
+                  <Pane id="pollCreateActionPoll" layoutX="383.0" layoutY="246.0" prefHeight="228.0" prefWidth="264.0" style="-fx-background-color: #2980b9;">
+                      <Label id="titlePollCreateAction" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="28.0" prefHeight="48.0" prefWidth="170.0" style="-fx-padding:10;" text="CREATE A POLL" textFill="WHITE">
                         <font>
                            <Font name="Ubuntu Bold" size="18.0" />
                         </font>
                      </Label>
-                     <JFXButton id="pollCreateButton" fx:id="pollCreateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="53.0" onMouseClicked="#displayPollCreationView" prefHeight="81.0" prefWidth="156.0" style="-fx-background-color: #3498db;" text="+" textFill="WHITE">
+                     <JFXButton id="pollCreateButton" fx:id="pollCreateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="85.0" onMouseClicked="#displayPollCreationView" prefHeight="112.0" prefWidth="184.0" style="-fx-background-color: #3498db;" text="+" textFill="WHITE">
                         <font>
                            <Font name="System Bold" size="38.0" />
                         </font>
                      </JFXButton>
                   </Pane>
-                  <JFXTextField id="codeTextField" fx:id="codeTextField" alignment="CENTER" layoutX="25.0" layoutY="24.0" onKeyReleased="#isAccessCodeTextFieldEmpty" onKeyTyped="#isAccessCodeTextFieldEmpty" prefHeight="65.0" prefWidth="440.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #2980b9; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
+                  <JFXTextField id="codeTextField" fx:id="codeTextField" alignment="CENTER" layoutX="193.0" layoutY="71.0" onKeyReleased="#isAccessCodeTextFieldEmpty" onKeyTyped="#isAccessCodeTextFieldEmpty" prefHeight="99.0" prefWidth="517.0" promptText="Access a poll" style="-fx-background-color: #F2F2F2; -fx-border-color: #2980b9; -fx-border-width: 2px; -jfx-focus-color: #FFFFFF;" unFocusColor="#ffffff00">
                      <font>
                         <Font name="Ubuntu Regular" size="25.0" />
                      </font>
@@ -34,14 +34,14 @@
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </JFXTextField>
-                  <JFXButton id="searchCodeButton" fx:id="searchCodeButton" disable="true" layoutX="464.0" layoutY="24.0" onMouseClicked="#displayPollView" prefHeight="65.0" prefWidth="89.0" style="-fx-background-color: #2980b9;" text="GO" textFill="WHITE">
+                  <JFXButton id="searchCodeButton" fx:id="searchCodeButton" disable="true" layoutX="710.0" layoutY="71.0" onMouseClicked="#displayPollView" prefHeight="99.0" prefWidth="170.0" style="-fx-background-color: #2980b9;" text="GO" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </JFXButton>
                </children>
             </Pane>
-            <Pane prefHeight="65.0" prefWidth="640.0" style="-fx-background-color: #2980b9;">
+            <Pane layoutY="-119.0" prefHeight="184.0" prefWidth="1000.0" style="-fx-background-color: #2980b9;">
                <children>
                   <Text id="mainTitle" fill="WHITE" layoutX="230.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PEOPOLL">
                      <font>
