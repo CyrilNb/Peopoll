@@ -9,6 +9,7 @@ import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.ChoiceController;
 import fr.univtln.cniobechoudayer.server.controllers.PollController;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
+import fr.univtln.cniobechoudayer.server.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -118,7 +119,7 @@ public class Step3ViewController implements Initializable{
         LocalDate localDate = dayPollPicker.getValue();
         Instant ins = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date dayDate = Date.from(ins);
-        choiceSqlDate = convertUtilDateToSqlDate(dayDate);
+        choiceSqlDate = Utils.convertUtilDateToSqlDate(dayDate);
 
         Choice addedChoice = new Choice(choiceSqlDate,currentStartingTime,currentEndingTime);
         System.out.println("addedchoice: " + addedChoice);

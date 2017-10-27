@@ -2,6 +2,7 @@ package fr.univtln.cniobechoudayer.server.controllers;
 
 import fr.univtln.cniobechoudayer.model.Entity;
 import fr.univtln.cniobechoudayer.model.EntityManager;
+import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
@@ -40,6 +41,13 @@ public class PollController {
     public static void lockPoll(Poll poll) throws PersistanceException {
         EntityManager entityManager = EntityManager.getInstance();
         entityManager.merge(poll);
+        entityManager.dispose();
+    }
+
+    public static void setFinalDate(Poll poll, Choice choice) throws PersistanceException {
+        EntityManager entityManager = EntityManager.getInstance();
+        poll.setFinalDate(choice.getDateChoice());
+        poll.setFinalChoice();
         entityManager.dispose();
     }
 
