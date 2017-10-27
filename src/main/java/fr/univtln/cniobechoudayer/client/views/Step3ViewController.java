@@ -1,9 +1,6 @@
 package fr.univtln.cniobechoudayer.client.views;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTimePicker;
+import com.jfoenix.controls.*;
 import fr.univtln.cniobechoudayer.client.net.SendEmail;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.ChoiceController;
@@ -59,6 +56,7 @@ public class Step3ViewController implements Initializable{
 
     @FXML
     private JFXButton addTimeSlotButton;
+
 
 
     private int idPollCreated;
@@ -219,6 +217,7 @@ public class Step3ViewController implements Initializable{
         titlePollText.setText(mapArgsNewPoll.get("Title"));
         timeSlotsListView.getItems().removeAll();
         addTimeSlotButton.setDisable(true);
+        envoiMailSnackBar = new JFXSnackbar(rootView);
         for (Choice item:
              staticListCreatedChoices) {
             bindListViewChoices(item);

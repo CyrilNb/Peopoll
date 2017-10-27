@@ -1,5 +1,6 @@
 package fr.univtln.cniobechoudayer.client.views;
 
+import com.jfoenix.controls.JFXSnackbar;
 import fr.univtln.cniobechoudayer.client.net.SendEmail;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
 import fr.univtln.cniobechoudayer.server.controllers.PollController;
@@ -32,6 +33,9 @@ public class PollShareViewController implements Initializable{
 
     @FXML
     private ImageView viewPollButton;
+
+    private JFXSnackbar envoiMailSnackBar;
+
 
     private Poll currentPoll;
 
@@ -83,10 +87,12 @@ public class PollShareViewController implements Initializable{
             accessCodeText.setText(String.valueOf(currentPoll.getIdPoll()));
             managementCodeText.setText(String.valueOf(currentPoll.getManagerCode()));
         }
+        envoiMailSnackBar = new JFXSnackbar(rootView);
     }
 
     @FXML
     public void sendEmailToUser(){
         SendEmail.sendEmail(currentPoll);
+        envoiMailSnackBar.show("E-mail sent !", 3500);
     }
 }

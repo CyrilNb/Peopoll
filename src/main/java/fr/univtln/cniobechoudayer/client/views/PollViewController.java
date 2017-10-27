@@ -3,6 +3,7 @@ package fr.univtln.cniobechoudayer.client.views;
 
 import com.jfoenix.controls.*;
 import fr.univtln.cniobechoudayer.client.MainClient;
+import fr.univtln.cniobechoudayer.client.net.SendEmail;
 import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.*;
@@ -103,7 +104,7 @@ public class PollViewController implements Initializable {
     private JFXSnackbar infoSnackbar;
 
     private JFXSnackbar successInfoSnackbar;
-
+    
     private boolean isDefineFinalChoiceMode = false;
 
 
@@ -578,6 +579,7 @@ public class PollViewController implements Initializable {
         if(choicesComboBox.getSelectionModel().getSelectedItem() != null){
             System.out.println(choicesComboBox.getSelectionModel().getSelectedItem() + " as final date");
             PollController.setFinalDate(pollToDisplay, (Choice) choicesComboBox.getSelectionModel().getSelectedItem());
+            SendEmail.sendEmail(pollToDisplay);
         }else{
             System.out.println("final date null");
         }
