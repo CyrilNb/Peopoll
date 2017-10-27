@@ -7,7 +7,10 @@ import fr.univtln.cniobechoudayer.model.entities.*;
 import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.server.controllers.*;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
+<<<<<<< HEAD
+=======
 import javafx.collections.FXCollections;
+>>>>>>> d37cf68af8fc1a7e3c4ceb1e73b46671fcf199e1
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +18,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+<<<<<<< HEAD
+=======
 import javafx.geometry.Insets;
+>>>>>>> d37cf68af8fc1a7e3c4ceb1e73b46671fcf199e1
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -91,6 +97,10 @@ public class PollViewController implements Initializable {
     @FXML
     private TreeTableView<Comment> treeTableViewComments;
 
+    private JFXSnackbar infoSnackbar;
+
+    private JFXSnackbar successInfoSnackbar;
+
 
 
     public PollViewController(Poll pollToDisplay){
@@ -139,6 +149,7 @@ public class PollViewController implements Initializable {
         System.out.println(listContributions.size());*/
         saveDataPoll();
         saveStatePoll();
+
         //loadScreen("PollView", pollToDisplay);
 
     }
@@ -148,12 +159,15 @@ public class PollViewController implements Initializable {
      */
     @FXML
     private void lockPoll(){
+        infoSnackbar.getStyleClass().add("info-snackbar");
         if(gridContributions.isDisable()){
             gridContributions.setDisable(false);
             pollToDisplay.setIsLocked(false);
+            infoSnackbar.show("Save to set the poll as unlocked", 3500);
         }else{
             gridContributions.setDisable(true);
             pollToDisplay.setIsLocked(true);
+            infoSnackbar.show("Save to set the poll as locked", 3500);
         }
     }
 
@@ -178,6 +192,10 @@ public class PollViewController implements Initializable {
         if(pollToDisplay.isIsLocked()){
             gridContributions.setDisable(true);
         }
+        if(pollToDisplay.getFinalDate() != null){
+            gridContributions.setVisible(false);
+            addRowGridPane.setVisible(false);
+        }
         titlePollText.setText(pollToDisplay.getTitle());
         locationPollText.setText(pollToDisplay.getLocation());
         infoPollText.setText(pollToDisplay.getDescription());
@@ -193,6 +211,8 @@ public class PollViewController implements Initializable {
         if(pollToDisplay != null){
 
             setViewPoll();
+            successInfoSnackbar = new JFXSnackbar(rootView);
+            infoSnackbar = new JFXSnackbar(rootView);
 
             try {
                 listChoices = ChoiceController.getAllChoicesByPoll(pollToDisplay.getIdPoll());
@@ -499,7 +519,8 @@ public class PollViewController implements Initializable {
                 }
             }
         }
-
+        successInfoSnackbar.getStyleClass().add("success-snackbar");
+        successInfoSnackbar.show("Poll is saved !", 3500);
     }
 
     /**
@@ -508,6 +529,13 @@ public class PollViewController implements Initializable {
      */
     private void saveStatePoll() throws PersistanceException {
         PollController.lockPoll(pollToDisplay);
+
+        if(choicesComboBox.getSelectionModel().getSelectedItem() != null){
+            System.out.println(choicesComboBox.getSelectionModel().getSelectedItem() + " as final date");
+            PollController.setFinalDate(pollToDisplay, (Choice) choicesComboBox.getSelectionModel().getSelectedItem());
+        }else{
+            System.out.println("final date null");
+        }
     }
 
     /**
@@ -559,23 +587,59 @@ public class PollViewController implements Initializable {
 
         GridPane.setValignment(gridContributions, VPos.CENTER);
         GridPane.setHalignment(gridContributions, HPos.CENTER);
+        gridContributions.setAlignment(Pos.CENTER);
 
         /*
-        ColumnConstraints colContruest = new ColumnConstraints();
-        colConst.setPercentWidth(100 / (listChoices.size() + 2));
-
-        RowConstraints rowConstraints = new RowConstraints();
-        rowConstraints.setPercentHeight(100 / listContributions.size() + 2);
-
-        gridContributions.getColumnConstraints().add(colConst);
-        gridContributions.getRowConstraints().add(rowConstraints);
-
-*/
+        for(int i = 0 ; i < listContributions.size(); i ++){
+            for(int j = 0 ; j < listChoices.size(); j ++){
+                setElementsGridPaneCenter(i,j,gridContributions);
+            }
+        }
+        */
 
         choicesComboBox.setVisible(false);
 
         if(pollToDisplay.isIsLocked()){
             gridContributions.setDisable(true);
+        }
+    }
+
+    public void setElementsGridPaneCenter (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            System.out.println("set align of " + node.getId());
+            if(node.getId() != null) {
+                if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                    result = node;
+                    try {
+                        CheckBox checkBox = (CheckBox) result;
+                        final HBox hbox = new HBox(checkBox);
+                        hbox.setFillHeight(true);
+                        hbox.setAlignment(Pos.CENTER_LEFT);
+                    } catch (Exception e) {
+
+                    }
+                    try {
+                        Text txt = (Text) result;
+                        final HBox hbox = new HBox(txt);
+                        hbox.setFillHeight(true);
+                        hbox.setAlignment(Pos.CENTER_LEFT);
+                    } catch (Exception e) {
+
+                    }
+                    try {
+                        TextField txtField = (TextField) result;
+                        final HBox hbox = new HBox(txtField);
+                        hbox.setFillHeight(true);
+                        hbox.setAlignment(Pos.CENTER_LEFT);
+                    } catch (Exception e) {
+
+                    }
+
+                }
+            }
         }
     }
 

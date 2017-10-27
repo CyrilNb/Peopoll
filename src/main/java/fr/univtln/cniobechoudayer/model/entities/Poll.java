@@ -4,6 +4,7 @@ package fr.univtln.cniobechoudayer.model.entities;
 import fr.univtln.cniobechoudayer.model.Entity;
 import fr.univtln.cniobechoudayer.server.database.DatabaseManager;
 import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
+import fr.univtln.cniobechoudayer.server.utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,12 +38,15 @@ public class Poll implements Entity {
     private static PreparedStatement findByID;
     private static PreparedStatement findAll;
 
+    private static PreparedStatement setFinalChoice;
+
     //L'initialisation des preparedstatments.
     static {
         try {
             Connection connection = DatabaseManager.getConnection();
             findByID = connection.prepareStatement("select ID_POLL, TITLE, MANAGER_CODE, LOCATION, DESCRIPTION, MAIL_CREATOR, NAME_CREATOR, IS_LOCKED, NB_MAX_CONTRIBUTOR, FINAL_DATE from PEOPOLL.POLLS where ID_POLL=?");
             findAll = connection.prepareStatement("select ID_POLL, TITLE from PEOPOLL.POLLS");
+            setFinalChoice = connection.prepareStatement("UPDATE PEOPOLL.POLLS SET FINAL_DATE = ? WHERE ID_POLL = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -476,6 +480,18 @@ public class Poll implements Entity {
                 return null;
             }
         }catch (Exception e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+    public void setFinalChoice() throws PersistanceException {
+        try{
+            setFinalChoice.setDate(1, Utils.convertUtilDateToSqlDate(finalDate));
+            System.out.println("date : " + finalDate);
+            setFinalChoice.setInt(2, idPoll);
+            setFinalChoice.executeUpdate();
+        }catch (Exception e) {
+            System.out.println(e);
             throw new PersistanceException(e);
         }
     }
