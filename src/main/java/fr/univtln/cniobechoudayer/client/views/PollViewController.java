@@ -104,7 +104,7 @@ public class PollViewController implements Initializable {
     private JFXSnackbar infoSnackbar;
 
     private JFXSnackbar successInfoSnackbar;
-
+    
     private boolean isDefineFinalChoiceMode = false;
 
 
