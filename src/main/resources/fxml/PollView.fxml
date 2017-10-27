@@ -38,12 +38,12 @@
                <font>
                   <Font name="Ubuntu Regular" size="35.0" />
                </font></JFXButton>
-            <Pane fx:id="finalDatePane" prefHeight="432.0" prefWidth="1094.0">
-                <Text fx:id="finalDateText" layoutX="259.0" layoutY="313.0" text="ddd">
+            <Pane fx:id="finalDatePane" layoutY="191.0" prefHeight="241.0" prefWidth="1094.0">
+                <Text fx:id="finalDateText" layoutX="259.0" layoutY="131.0" text="ddd">
                   <font>
                      <Font name="Ubuntu Bold" size="40.0" />
                   </font></Text>
-                <ImageView fitHeight="211.0" fitWidth="196.0" layoutX="53.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="211.0" fitWidth="196.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/001-calendar.png" />
                     </image>

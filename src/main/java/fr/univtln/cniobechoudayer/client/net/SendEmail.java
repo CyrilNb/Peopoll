@@ -4,7 +4,9 @@ package fr.univtln.cniobechoudayer.client.net;
  * Créé par Corentin le 25/10/2017
  */
 
+import fr.univtln.cniobechoudayer.model.entities.Choice;
 import fr.univtln.cniobechoudayer.model.entities.Poll;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
 import java.util.*;
 import javax.mail.*;
@@ -43,12 +45,20 @@ public class SendEmail {
                 msg.setFrom(new InternetAddress("Peopoll"));
                 msg.setRecipients(Message.RecipientType.TO,
                         InternetAddress.parse(poll.getMailCreator(),false));
-                msg.setSubject("Your codes to manage your new poll : " + poll.getTitle());
-                msg.setText("Hi !\nHere are your codes, take care to keep them safe !\nAccess code : " + poll.getIdPoll() + "\n<b>Management code : " + poll.getManagerCode());
+                if(poll.getIdFinalChoice() != 0) {
+                    Choice choice = Choice.findById(poll.getIdPoll());
+                    msg.setSubject("The final date has been chosen for : " + poll.getTitle());
+                    msg.setText("Set a reminder for the " + choice.getDateChoice() + " " + Choice.getFormattedDate(choice.getStartingTime(), true) + " " + Choice.getFormattedDate(choice.getEndingTime(), false) + "\nLocation : " + poll.getLocation() + "\nDescription : " +poll.getDescription());
+                }else{
+                    msg.setSubject("Your codes to manage your new poll : " + poll.getTitle());
+                    msg.setText("Hi !\nHere are your codes, take care to keep them safe !\nAccess code : " + poll.getIdPoll() + "\nManagement code : " + poll.getManagerCode());
+                }
                 msg.setSentDate(new Date());
                 Transport.send(msg);
                 System.out.println("Message sent.");
-            }catch (MessagingException e){ System.out.println("Erreur d'envoi, cause: " + e);}
-        }
+            }catch (MessagingException e){ System.out.println("Erreur d'envoi, cause: " + e);} catch (PersistanceException e) {
+                e.printStackTrace();
+            }
+    }
 
 }
