@@ -54,7 +54,7 @@
                                  <Cursor fx:constant="TEXT" />
                              </cursor>
                          </JFXTextField>
-                        <ImageView fitHeight="80.0" fitWidth="78.0" layoutX="26.0" layoutY="251.0" onMouseClicked="#goToPreviousStep" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="30.0" layoutY="217.0" onMouseClicked="#goToPreviousStep" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/001-left-arrow.png" />
                            </image>
@@ -62,8 +62,8 @@
                      <Cursor fx:constant="HAND" />
                   </cursor>
                         </ImageView>
-                        <Pane fx:id="nextStepArrow" layoutX="897.0" layoutY="236.0" prefHeight="78.0" prefWidth="89.0" visible="false">
-                        <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="17.0" layoutY="15.0" onMouseClicked="#goToNextStep" pickOnBounds="true" preserveRatio="true">
+                        <Pane fx:id="nextStepArrow" layoutX="872.0" layoutY="228.0" prefHeight="78.0" prefWidth="89.0" visible="false">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="-4.0" layoutY="1.0" onMouseClicked="#goToNextStep" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/002-right-arrow.png" />
                            </image>

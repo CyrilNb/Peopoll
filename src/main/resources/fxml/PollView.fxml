@@ -38,21 +38,12 @@
                <font>
                   <Font name="Ubuntu Regular" size="35.0" />
                </font></JFXButton>
-<<<<<<< HEAD
-            <Pane fx:id="finalDatePane" prefHeight="432.0" prefWidth="1094.0" visible="false">
-                <Text fx:id="finalDateText" layoutX="259.0" layoutY="313.0" text="ddd">
-=======
-            <Pane fx:id="finalDatePane" layoutY="191.0" prefHeight="241.0" prefWidth="1094.0">
-                <Text fx:id="finalDateText" layoutX="259.0" layoutY="131.0" text="ddd">
->>>>>>> a35b8b4755541e233db19c47463a3b8eb2baf7ba
+            <Pane fx:id="finalDatePane" layoutY="191.0" prefHeight="160.0" prefWidth="1094.0" visible="false">
+                <Text fx:id="finalDateText" layoutX="224.0" layoutY="138.0" text="ddd">
                   <font>
                      <Font size="35.0" />
                   </font></Text>
-<<<<<<< HEAD
-                <ImageView fitHeight="139.0" fitWidth="161.0" layoutX="29.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
-=======
-                <ImageView fitHeight="211.0" fitWidth="196.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> a35b8b4755541e233db19c47463a3b8eb2baf7ba
+                <ImageView fitHeight="121.0" fitWidth="131.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/001-calendar.png" />
                     </image>
@@ -169,7 +160,8 @@
                 <Text fill="#2980b9" layoutX="364.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMMENTS" textAlignment="CENTER" wrappingWidth="161.00830078125">
                <font>
                   <Font name="System Bold" size="18.0" />
-               </font></Text>
+               </font>
+            </Text>
             </children>
         </Pane>
     </children>

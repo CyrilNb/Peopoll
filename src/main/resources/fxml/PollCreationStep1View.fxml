@@ -54,8 +54,8 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
                         </JFXTextField>
-                        <Pane fx:id="nextStepArrow" layoutX="873.0" layoutY="195.0" onMouseClicked="#nextStep" prefHeight="95.0" prefWidth="113.0" visible="false">
-                           <ImageView fitHeight="126.0" fitWidth="127.0" layoutX="20.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                        <Pane fx:id="nextStepArrow" layoutX="863.0" layoutY="195.0" onMouseClicked="#nextStep" prefHeight="95.0" prefWidth="113.0" visible="false">
+                           <ImageView fitHeight="95.0" fitWidth="113.0" layoutX="3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                  <Image url="@../images/002-right-arrow.png" />
                               </image>

@@ -217,7 +217,6 @@ public class Step3ViewController implements Initializable{
         titlePollText.setText(mapArgsNewPoll.get("Title"));
         timeSlotsListView.getItems().removeAll();
         addTimeSlotButton.setDisable(true);
-        envoiMailSnackBar = new JFXSnackbar(rootView);
         for (Choice item:
              staticListCreatedChoices) {
             bindListViewChoices(item);

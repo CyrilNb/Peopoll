@@ -82,7 +82,7 @@
                         </Text>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="70.0" fitWidth="91.0" layoutX="14.0" layoutY="278.0" onMouseClicked="#goToPreviousStep" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="278.0" onMouseClicked="#goToPreviousStep" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/001-left-arrow.png" />
                      </image>
@@ -92,7 +92,7 @@
                   </ImageView>
       <Pane fx:id="validationCreationArrow" layoutX="910.0" layoutY="253.0" prefHeight="78.0" prefWidth="70.0" visible="false">
          <children>
-                        <ImageView id="nextStepArrow" fitHeight="36.0" fitWidth="35.0" layoutX="18.0" layoutY="19.0" onMouseClicked="#validatePollCreation" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="nextStepArrow" fitHeight="50.0" fitWidth="50.0" layoutX="18.0" layoutY="19.0" onMouseClicked="#validatePollCreation" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/checked.png" />
                            </image>
@@ -102,7 +102,7 @@
                         </ImageView>
          </children>
       </Pane>
-                  <Text fx:id="titlePollText" fill="#3498db" layoutX="645.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TITLE" wrappingWidth="98.00001403689384">
+                  <Text fx:id="titlePollText" fill="#3498db" layoutX="597.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TITLE" wrappingWidth="227.00001403689384">
                      <font>
                         <Font size="32.0" />
                      </font>
