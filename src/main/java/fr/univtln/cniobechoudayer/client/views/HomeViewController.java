@@ -1,86 +1,131 @@
 package fr.univtln.cniobechoudayer.client.views;
 
 import com.jfoenix.controls.*;
+import fr.univtln.cniobechoudayer.model.entities.Poll;
+import fr.univtln.cniobechoudayer.server.controllers.PollController;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.*;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.*;
 
 /**
+ * Controller of the HomeView
  * Created by Corentin on 21/10/2017.
  */
-public class HomeViewController extends VBox {
+public class HomeViewController implements Initializable{
 
     @FXML
-    private AnchorPane rootPane;
+    private AnchorPane rootView;
 
     @FXML
     private JFXTextField codeTextField;
-
+    @FXML
+    private JFXTextField titlePollTextField;
+    @FXML
+    private JFXTextField nameCreatorTextField;
+    @FXML
+    private JFXTextField mailCreatorTextField;
     @FXML
     private JFXButton pollCreateButton;
-
     @FXML
     private JFXButton searchCodeButton;
+
+    private JFXSnackbar errorPollNotFound;
+
 
     public HomeViewController(){
 
     }
 
-    /*
-    Method to search a poll using a code when users click
+     /**
+     * Method to display a poll using a code
      */
     @FXML
-    private void searchPoll() throws IOException {
+    public void displayPollView() throws IOException{
+        Poll pollToDisplay = null;
         if(codeTextField.getText().length() != 0 || codeTextField.getText() != null){
-            loadScreen("PollCreationStep1View");
-        }else{
+            try {
+                pollToDisplay = PollController.searchPollByCode(Integer.parseInt(codeTextField.getText()));
+                System.out.println(pollToDisplay);
+            } catch (PersistanceException e) {
+                e.printStackTrace();
+            }
 
+        }else{
+            System.out.println("POLL NOT FOUND");
+        }
+        if(pollToDisplay != null){
+            try {
+                loadScreen("PollView", pollToDisplay);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            errorPollNotFound.show("Poll not found, try again.", 3500);
         }
     }
 
-    /*
-    Method to display poll creation view
+
+    /**
+     * Method to display poll creation view
      */
     @FXML
-    private void createPoll() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/PollCreationStep1View.fxml"));
-        Pane cmdPane = fxmlLoader.load();
-        try {
-            rootPane.getChildren().clear();
-            rootPane.getChildren().add(cmdPane);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void displayPollCreationView() throws IOException {
+        loadScreen("PollCreationStep1View");
     }
 
-    /*
+
+    /**
     Method to check if access code text field is empty
     Enable - Disable access button
      */
     @FXML
     private void isAccessCodeTextFieldEmpty(){
         if(codeTextField.getText().length() > 0){
-            searchCodeButton.setDisable(false);
+            try{
+                Integer.parseInt(codeTextField.getText());
+                searchCodeButton.setDisable(false);
+            }catch(Exception e){
+            }
+
         }else{
             searchCodeButton.setDisable(true);
         }
     }
 
+    /**
+     * Method to load a new view
+     * @param resource
+     * @throws IOException
+     */
     @FXML
     public void loadScreen(String resource) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
         System.out.println("Loading : /fxml/" + resource + ".fxml");
+        loader.setController(new Step1ViewController());
         AnchorPane ap = loader.load();
-        rootPane.getChildren().setAll(ap);
+        rootView.getChildren().setAll(ap);
     }
 
+    /**
+     * Method to display a searched poll
+     */
+    @FXML
+    public void loadScreen(String resource, Poll searchedPoll) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + resource + ".fxml"));
+        System.out.println("Loading : /fxml/" + resource + ".fxml");
+        loader.setController(new PollViewController(searchedPoll));
+        AnchorPane ap = loader.load();
+        rootView.getChildren().setAll(ap);
+    }
 
-
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        errorPollNotFound = new JFXSnackbar(rootView);
+    }
 }

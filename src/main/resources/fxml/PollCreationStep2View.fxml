@@ -11,21 +11,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.cniobechoudayer.client.views.Step2ViewController">
+<AnchorPane fx:id="rootView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="625.0" prefWidth="1000.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
                <children>
-                  <Pane layoutX="50.0" layoutY="70.0" prefHeight="291.0" prefWidth="540.0">
+                  <Pane layoutY="55.0" prefHeight="566.0" prefWidth="1000.0">
                      <children>
-                        <Label layoutX="52.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Name" textFill="WHITE">
+                        <Label layoutX="236.0" layoutY="101.0" prefHeight="95.0" prefWidth="161.0" style="-fx-background-color: #3498db; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Name" textFill="WHITE">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="52.0" layoutY="118.0" prefHeight="55.0" prefWidth="107.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Mail" textAlignment="CENTER" textFill="WHITE">
+                        <Label layoutX="236.0" layoutY="219.0" prefHeight="95.0" prefWidth="161.0" style="-fx-background-color: #3498db; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Mail" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
                         </Label>
-                        <JFXTextField id="nameCreatorTextField" fx:id="nameCreatorTextField" layoutX="134.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="nameCreatorTextField" fx:id="nameCreatorTextField" layoutX="372.0" layoutY="101.0" onKeyTyped="#checkFields" prefHeight="95.0" prefWidth="467.0" promptText="Required" style="-fx-border-color: #3498db; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -33,7 +33,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
                         </JFXTextField>
-                        <JFXTextField id="mailCreatorTextField" fx:id="mailCreatorTextField" layoutX="134.0" layoutY="118.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="355.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                        <JFXTextField id="mailCreatorTextField" fx:id="mailCreatorTextField" layoutX="372.0" layoutY="219.0" onKeyTyped="#checkFields" prefHeight="95.0" prefWidth="467.0" promptText="Required" style="-fx-border-color: #3498db; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                            <font>
                               <Font name="Ubuntu Regular" size="24.0" />
                            </font>
@@ -41,12 +41,12 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
                         </JFXTextField>
-                         <Label layoutX="52.0" layoutY="229.0" prefHeight="55.0" prefWidth="150.0" style="-fx-background-color: #555555; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Nb People" textAlignment="CENTER" textFill="WHITE">
+                         <Label layoutX="236.0" layoutY="340.0" prefHeight="95.0" prefWidth="202.0" style="-fx-background-color: #3498db; -fx-padding: 10px; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Nb People" textAlignment="CENTER" textFill="WHITE">
                              <font>
                                  <Font name="Ubuntu Regular" size="24.0" />
                              </font>
                          </Label>
-                         <JFXTextField id="nbMaxPeopleField" fx:id="nbMaxPeopleField" layoutX="184.0" layoutY="229.0" onKeyTyped="#checkFields" prefHeight="55.0" prefWidth="305.0" promptText="Required" style="-fx-border-color: #555555; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
+                         <JFXTextField id="nbMaxPeopleField" fx:id="nbMaxPeopleField" layoutX="372.0" layoutY="340.0" onKeyTyped="#checkFields" prefHeight="95.0" prefWidth="467.0" promptText="Optional" style="-fx-border-color: #3498db; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-background-color: #FFFFFF; -fx-padding: 5px;" unFocusColor="#4d4d4d00">
                              <font>
                                  <Font name="Ubuntu Regular" size="24.0" />
                              </font>
@@ -54,9 +54,27 @@
                                  <Cursor fx:constant="TEXT" />
                              </cursor>
                          </JFXTextField>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="30.0" layoutY="217.0" onMouseClicked="#goToPreviousStep" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/001-left-arrow.png" />
+                           </image>
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                        </ImageView>
+                        <Pane fx:id="nextStepArrow" layoutX="872.0" layoutY="228.0" prefHeight="78.0" prefWidth="89.0" visible="false">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="-4.0" layoutY="1.0" onMouseClicked="#goToNextStep" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/002-right-arrow.png" />
+                           </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+                        </ImageView>
+                        </Pane>
                      </children>
                   </Pane>
-                  <Pane prefHeight="55.0" prefWidth="640.0" style="-fx-background-color: #555555; -fx-padding: 10px;">
+                  <Pane prefHeight="55.0" prefWidth="1000.0" style="-fx-background-color: #2980b9; -fx-padding: 10px;">
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="5.0" onMouseClicked="#goBackHome" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -66,30 +84,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                         </ImageView>
-                        <Text fill="WHITE" layoutX="244.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2/3" wrappingWidth="150.13671875">
+                        <Text fill="WHITE" layoutX="399.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2/3" wrappingWidth="202.13671875">
                            <font>
                               <Font name="Ubuntu Regular" size="38.0" />
                            </font>
                         </Text>
                      </children>
-                  </Pane>
-                  <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="14.0" layoutY="198.0" onMouseClicked="#goToPreviousStep" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/001-left-arrow.png" />
-                     </image>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-                  </ImageView>
-                  <Pane fx:id="nextStepArrow" layoutX="579.0" layoutY="183.0" prefHeight="65.0" prefWidth="68.0" visible="false">
-                  <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="17.0" layoutY="15.0" onMouseClicked="#goToNextStep" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/002-right-arrow.png" />
-                     </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-                  </ImageView>
                   </Pane>
                </children>
             </AnchorPane>

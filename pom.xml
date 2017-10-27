@@ -10,10 +10,9 @@
         <!-- utln login for nexus (maven and docker ) repository on lsis -->
         <lsisnexus.login>cyril-niobe@etud.univ-tln.fr</lsisnexus.login>
         <!-- the default Main class -->
-        <app.main.class>fr.univtln.cniobechoudayer.App</app.main.class>
+        <app.main.class>fr.univtln.cniobechoudayer.server.Test</app.main.class>
     </properties>
     <!-- ADAPTER LES PROPRIETES SUIVANTES -->
-
     <repositories>
         <repository>
             <snapshots>
@@ -95,7 +94,7 @@
                 <configuration>
                     <filters>
                         <filter>
-                            <artifact>fr.univtln.bruno.test.helloworld:app</artifact>
+                            <artifact>fr.univtln.cniobechoudayer.server.Test</artifact>
                             <includes>
                                 <include>**</include>
                             </includes>
@@ -160,13 +159,18 @@
             <version>1.9.1</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.196</version>
-            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
         </dependency>
 
     </dependencies>

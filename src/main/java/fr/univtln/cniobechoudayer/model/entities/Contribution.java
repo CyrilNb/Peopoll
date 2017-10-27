@@ -1,17 +1,46 @@
 package fr.univtln.cniobechoudayer.model.entities;
 
-import fr.univtln.cniobechoudayer.model.interfaces.ContributionDAO;
+import fr.univtln.cniobechoudayer.model.Entity;
+import fr.univtln.cniobechoudayer.server.database.DatabaseManager;
+import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Class which represent a contribution made by someone
  * Created by Cyril on 16/10/2017.
  */
-public class Contribution implements ContributionDAO {
+public class Contribution implements Entity {
     /** private fields**/
     private int idContribution;
     private String nameContributor;
+    private int idPoll; //foreign key
+    private int idChoice; //foreign key
+
+    private static Logger logger = Logger.getLogger(Contribution.class.getName());
+
+    private static PreparedStatement findById;
+    private static PreparedStatement findAll;
+    private static PreparedStatement findAllByIdPoll;
+    private static PreparedStatement findByParams;
+
+    //Init prepared statements
+    static{
+        try {
+            Connection connection = DatabaseManager.getConnection();
+            findById = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE ID_CONTRIBUTION=?");
+            findAll = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS ");
+            findAllByIdPoll = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE IDP=?");
+            findByParams = connection.prepareStatement("SELECT * FROM PEOPOLL.CONTRIBUTIONS WHERE NAME_CONTRIBUTOR = ? AND IDP = ? AND IDC = ? ");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     /** Constructor **/
     public Contribution(String nameContributor) {
@@ -22,6 +51,21 @@ public class Contribution implements ContributionDAO {
     public Contribution(int idContribution, String nameContributor) {
         this.idContribution = idContribution;
         this.nameContributor = nameContributor;
+    }
+
+    /** Constructor **/
+    public Contribution(String nameContributor, int idPoll, int idChoice) {
+        this.nameContributor = nameContributor;
+        this.idPoll = idPoll;
+        this.idChoice = idChoice;
+    }
+
+    /** Constructor **/
+    public Contribution(int idContribution, String nameContributor, int idPoll, int idChoice) {
+        this.idContribution = idContribution;
+        this.nameContributor = nameContributor;
+        this.idPoll = idPoll;
+        this.idChoice = idChoice;
     }
 
     /** Default constructor **/
@@ -65,6 +109,22 @@ public class Contribution implements ContributionDAO {
         return idContribution;
     }
 
+    public int getIdPoll() {
+        return idPoll;
+    }
+
+    public void setIdPoll(int idPoll) {
+        this.idPoll = idPoll;
+    }
+
+    public int getIdChoice() {
+        return idChoice;
+    }
+
+    public void setIdChoice(int idChoice) {
+        this.idChoice = idChoice;
+    }
+
 
     @Override
     public String toString() {
@@ -74,29 +134,118 @@ public class Contribution implements ContributionDAO {
         return sb.toString();
     }
 
+    public static Contribution findById(int idContribution) throws PersistanceException {
+        try{
+            Contribution cont;
+            findById.setInt(1, idContribution);
+            ResultSet rs = findById.executeQuery();
+            if(rs.next()){
+                cont = createFromResultSet(rs);
+                return cont;
+            }else{
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+    public static List<Contribution> findAll() throws PersistanceException {
+        try{
+            List<Contribution> lc = new ArrayList<>();
+            ResultSet rs = findAll.executeQuery();
+            while(rs.next()){
+                lc.add(createFromResultSet(rs));
+            }
+            return lc;
+        } catch (SQLException e) {
+            throw new PersistanceException(e);
+        }
+    }
+
+    public static List<Contribution> findAllByIdPoll(int idPoll) throws PersistanceException, SQLException {
+        try{
+            List<Contribution> lc = new ArrayList<>();
+            findAllByIdPoll.setInt(1, idPoll);
+            ResultSet rs = findAllByIdPoll.executeQuery();
+            while (rs.next()){
+                lc.add(createFromResultSet(rs));
+            }
+            return lc;
+        }catch (SQLException e){
+            throw new PersistanceException(e);
+        }
+    }
+
+    public static Contribution findByParams(String nameContributor, int IDP, int IDC) throws SQLException, PersistanceException {
+        try{
+            Contribution c;
+            findByParams.setString(1, nameContributor);
+            findByParams.setInt(2, IDP);
+            findByParams.setInt(3, IDC);
+            ResultSet rs = findByParams.executeQuery();
+            if (rs.next()){
+                c = createFromResultSet(rs);
+            }else{
+                c = new Contribution();
+            }
+            return c;
+        }catch (SQLException e){
+            throw new PersistanceException(e);
+        }
+    }
+
+    private static Contribution createFromResultSet(ResultSet result) throws SQLException {
+        return new Contribution(result.getInt("ID_CONTRIBUTION"), result.getString("NAME_CONTRIBUTOR"), result.getInt("IDP"), result.getInt("IDC"));
+
+    }
+
+
     @Override
-    public List<Contribution> findAll() {
-        return null;
+    public int persist(Connection connection) throws PersistanceException {
+        int idContributionPersisted;
+
+        try{
+            Statement st = connection.createStatement();
+            String query = "INSERT INTO PEOPOLL.CONTRIBUTIONS(NAME_CONTRIBUTOR, IDP, IDC) VALUES ('"+ this.nameContributor +"','" + this.idPoll + "','" + this.idChoice +"')";
+            System.out.println(query);
+            st.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = st.getGeneratedKeys();
+            if(rs.next()){
+                idContributionPersisted = rs.getInt(1);
+                setIdContribution(idContributionPersisted);
+                logger.info("Contribution created " + this);
+                return idContributionPersisted;
+            }else{
+                throw new PersistanceException("Contribution non created");
+            }
+
+        }catch(Exception e){
+            throw new PersistanceException(e);
+        }
+
     }
 
     @Override
-    public Contribution findById() {
-        return null;
+    public void merge(Connection connection) throws PersistanceException {
+        //No need
     }
 
     @Override
-    public boolean insertContribution(Contribution contribution) {
-        return false;
+    public void update(Connection connection) throws PersistanceException {
+        //No need
     }
 
     @Override
-    public boolean updateContribution(Contribution contribution) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteContribution(Contribution contribution) {
-        return false;
+    public void remove(Connection connection) throws PersistanceException {
+        try{
+            String query = "DELETE FROM PEOPOLL.CONTRIBUTIONS WHERE ID_CONTRIBUTION=\'" + idContribution + "\'";
+            System.out.println(query);
+            connection.createStatement().executeUpdate(query);
+            logger.info(this + " delete");
+        }catch (SQLException e){
+            throw new PersistanceException(e);
+        }
     }
 }
 
