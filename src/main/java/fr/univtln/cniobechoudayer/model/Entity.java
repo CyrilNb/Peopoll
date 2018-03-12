@@ -5,6 +5,7 @@ import fr.univtln.cniobechoudayer.server.exceptions.PersistanceException;
 import java.sql.Connection;
 
 /**
+ * Interface to use CRUD methods
  * Created by Cyril on 24/10/2017.
  */
 public interface Entity {

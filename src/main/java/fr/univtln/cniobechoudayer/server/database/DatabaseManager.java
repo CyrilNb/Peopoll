@@ -22,6 +22,8 @@ public class DatabaseManager {
      */
     private static final int numberOfInitialConnections = 5;
 
+    //Values come from config file
+
     /**
      * The Constant url.
      */
